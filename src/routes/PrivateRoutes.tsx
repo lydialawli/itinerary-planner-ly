@@ -1,5 +1,5 @@
 import { Route, Switch } from 'react-router-dom'
-import { Welcome, About, NotFound } from '../views'
+import { Welcome, About, NotFound, Home } from '../views'
 import { PrivateLayout } from './Layout'
 
 /**
@@ -10,7 +10,7 @@ const PrivateRoutes = () => {
   return (
     <PrivateLayout>
       <Switch>
-        <Route path="/" exact component={Welcome} />
+        <Route path="/" exact component={Home} />
         <Route path="/welcome" component={Welcome} />
         <Route path="/about" component={About} />,
         <Route component={NotFound} />
