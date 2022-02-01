@@ -1,11 +1,9 @@
 import { Card, CardHeader, Grid } from '@mui/material'
 import MainPaper from './MainPaper'
 /**
- * Renders "Home" view
- * Main graph sbould be shown here
- * url: /*
+ * Renders "About" view
+ * url: /about/*
  */
-
 const HomeView = () => {
   return (
     <Grid container spacing={2}>
