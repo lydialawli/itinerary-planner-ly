@@ -13,7 +13,7 @@ export interface IAppState {
 }
 const initialAppState: IAppState = {
   darkMode: false, // Overridden by useMediaQuery('(prefers-color-scheme: dark)') in AppStore
-  isAuthenticated: false, // Overridden in AppStore by checking auth token
+  isAuthenticated: true, // Overridden in AppStore by checking auth token
 }
 
 /**
