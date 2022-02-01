@@ -24,6 +24,7 @@
     "@mui/icons-material": "latest",
     "@mui/material": "latest",
     "@mui/styles": "latest",
+    "axios": "^0.25.0",
     "date-fns": "latest",
     "react": "latest",
     "react-dom": "latest",

@@ -1,5 +1,5 @@
-import { Card, CardContent, CardHeader, Grid } from '@mui/material'
-
+import { Card, CardHeader, Grid } from '@mui/material'
+import MainPaper from './MainPaper'
 /**
  * Renders "Home" view
  * Main graph sbould be shown here
@@ -12,7 +12,7 @@ const HomeView = () => {
       <Grid item xs={12} md={3}>
         <Card>
           <CardHeader title="Hi, Susan" />
-          <CardContent>Here goes the dashboard</CardContent>
+          <MainPaper />
         </Card>
       </Grid>
     </Grid>
