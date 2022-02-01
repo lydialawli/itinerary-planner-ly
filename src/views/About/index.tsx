@@ -1,5 +1,5 @@
-import { Route, Switch } from 'react-router-dom';
-import AboutView from './About';
+import { Route, Switch } from 'react-router-dom'
+import AboutView from './About'
 
 /**
  * Routes for "About" view
@@ -10,7 +10,7 @@ const AboutRoutes = () => {
     <Switch>
       <Route component={AboutView} />
     </Switch>
-  );
-};
+  )
+}
 
-export default AboutRoutes;
+export default AboutRoutes

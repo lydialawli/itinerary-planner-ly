@@ -1,7 +1,7 @@
-import { AppStore } from './store';
-import { AppRouter, Routes } from './routes';
-import { ErrorBoundary } from './components';
-import { AppThemeProvider } from './theme';
+import { AppStore } from './store'
+import { AppRouter, Routes } from './routes'
+import { ErrorBoundary } from './components'
+import { AppThemeProvider } from './theme'
 
 /**
  * Root Application Component
@@ -18,7 +18,7 @@ const App = () => {
         </AppThemeProvider>
       </AppStore>
     </ErrorBoundary>
-  );
-};
+  )
+}
 
-export default App;
+export default App

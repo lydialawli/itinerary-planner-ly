@@ -1,6 +1,6 @@
-import { Card, CardActions, CardContent, CardHeader, Divider, Grid, Typography } from '@mui/material';
-import { AppButton, AppLink, AppIconButton } from '../../components';
-import DialogsSection from './DialogsSection';
+import { Card, CardActions, CardContent, CardHeader, Divider, Grid, Typography } from '@mui/material'
+import { AppButton, AppLink, AppIconButton } from '../../components'
+import DialogsSection from './DialogsSection'
 
 /**
  * Renders "About" view
@@ -134,7 +134,7 @@ const AboutView = () => {
         </Card>
       </Grid>
     </Grid>
-  );
-};
+  )
+}
 
-export default AboutView;
+export default AboutView

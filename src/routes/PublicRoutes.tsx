@@ -1,8 +1,8 @@
-import { Route, Switch } from 'react-router-dom';
-import AuthRoutes from '../views/Auth';
-import { About, NotFound } from '../views';
-import { PublicLayout } from './Layout';
-import LoginEmailView from '../views/Auth/Login/Email';
+import { Route, Switch } from 'react-router-dom'
+import AuthRoutes from '../views/Auth'
+import { About, NotFound } from '../views'
+import { PublicLayout } from './Layout'
+import LoginEmailView from '../views/Auth/Login/Email'
 
 /**
  * List of routes available only for anonymous users
@@ -18,7 +18,7 @@ const PublicRoutes = () => {
         <Route component={NotFound} />
       </Switch>
     </PublicLayout>
-  );
-};
+  )
+}
 
-export default PublicRoutes;
+export default PublicRoutes

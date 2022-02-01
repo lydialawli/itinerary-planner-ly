@@ -1,4 +1,4 @@
-import PublicLayout from './PublicLayout';
-import PrivateLayout from './PrivateLayout';
+import PublicLayout from './PublicLayout'
+import PrivateLayout from './PrivateLayout'
 
-export { PublicLayout, PrivateLayout };
+export { PublicLayout, PrivateLayout }

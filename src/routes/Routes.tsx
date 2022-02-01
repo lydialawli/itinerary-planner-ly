@@ -1,7 +1,7 @@
 // import { useEffect } from 'react';
-import { useAppStore } from '../store';
-import PublicRoutes from './PublicRoutes';
-import PrivateRoutes from './PrivateRoutes';
+import { useAppStore } from '../store'
+import PublicRoutes from './PublicRoutes'
+import PrivateRoutes from './PrivateRoutes'
 // import { isUserStillLoggedIn } from '../api/auth/utils';
 // import { api } from '../api';
 
@@ -9,7 +9,7 @@ import PrivateRoutes from './PrivateRoutes';
  * Renders routes depending on Authenticated or Anonymous users
  */
 const Routes = () => {
-  const [state /*, dispatch*/] = useAppStore();
+  const [state /*, dispatch*/] = useAppStore()
 
   // Re-login or logout the user if needed
   // useEffect(() => {
@@ -33,7 +33,7 @@ const Routes = () => {
   //   }
   // }, [state.isAuthenticated, dispatch]); // Effect for every state.isAuthenticated change actually
 
-  console.log('Routes() - isAuthenticated:', state.isAuthenticated);
-  return state.isAuthenticated ? <PrivateRoutes /> : <PublicRoutes />;
-};
-export default Routes;
+  console.log('Routes() - isAuthenticated:', state.isAuthenticated)
+  return state.isAuthenticated ? <PrivateRoutes /> : <PublicRoutes />
+}
+export default Routes

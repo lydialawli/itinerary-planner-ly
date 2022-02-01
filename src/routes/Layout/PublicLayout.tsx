@@ -1,14 +1,14 @@
-import { useCallback, useState } from 'react';
-import { useHistory } from 'react-router-dom';
-import { Theme } from '@mui/material/styles';
-import makeStyles from '@mui/styles/makeStyles';
-import { AppBar, Toolbar, Typography, BottomNavigation, BottomNavigationAction, Grid } from '@mui/material/';
-import { useAppStore } from '../../store/AppStore';
-import { ErrorBoundary, AppIconButton, AppIcon } from '../../components';
-import SideBar from '../../components/SideBar/SideBar';
-import { LinkToPage } from '../../utils/type';
+import { useCallback, useState } from 'react'
+import { useHistory } from 'react-router-dom'
+import { Theme } from '@mui/material/styles'
+import makeStyles from '@mui/styles/makeStyles'
+import { AppBar, Toolbar, Typography, BottomNavigation, BottomNavigationAction, Grid } from '@mui/material/'
+import { useAppStore } from '../../store/AppStore'
+import { ErrorBoundary, AppIconButton, AppIcon } from '../../components'
+import SideBar from '../../components/SideBar/SideBar'
+import { LinkToPage } from '../../utils/type'
 
-const TITLE_PUBLIC = 'Some App';
+const TITLE_PUBLIC = 'Some App'
 
 const useStyles = makeStyles((theme: Theme) => ({
   root: {
@@ -35,7 +35,7 @@ const useStyles = makeStyles((theme: Theme) => ({
     padding: theme.spacing(1),
   },
   footer: {},
-}));
+}))
 
 /**
  * "Link to Page" items in Sidebar
@@ -56,39 +56,39 @@ const SIDE_BAR_PUBLIC_ITEMS: Array<LinkToPage> = [
     path: '/about',
     icon: 'info',
   },
-];
+]
 
 /**
  * Renders "Public Layout" composition
  */
 const PublicLayout: React.FC = ({ children }) => {
-  const classes = useStyles();
-  const [openSideBar, setOpenSideBar] = useState(false);
-  const [state, dispatch] = useAppStore();
-  const history = useHistory();
+  const classes = useStyles()
+  const [openSideBar, setOpenSideBar] = useState(false)
+  const [state, dispatch] = useAppStore()
+  const history = useHistory()
 
-  const title = TITLE_PUBLIC;
-  document.title = title; // Also Update Tab Title
+  const title = TITLE_PUBLIC
+  document.title = title // Also Update Tab Title
 
   const handleSwitchDarkMode = useCallback(() => {
     dispatch({
       type: 'DARK_MODE',
       darkMode: !state.darkMode,
       payload: !state.darkMode,
-    });
-  }, [state, dispatch]);
+    })
+  }, [state, dispatch])
 
   const handleSideBarOpen = useCallback(() => {
-    if (!openSideBar) setOpenSideBar(true);
-  }, [openSideBar]);
+    if (!openSideBar) setOpenSideBar(true)
+  }, [openSideBar])
 
   const handleSideBarClose = useCallback(() => {
-    if (openSideBar) setOpenSideBar(false);
-  }, [openSideBar]);
+    if (openSideBar) setOpenSideBar(false)
+  }, [openSideBar])
 
   const handleBottomNavigationChange = (event: React.SyntheticEvent<{}>, value: any) => {
-    history.push(value);
-  };
+    history.push(value)
+  }
 
   return (
     <Grid container direction="column" className={classes.root}>
@@ -131,7 +131,7 @@ const PublicLayout: React.FC = ({ children }) => {
         </BottomNavigation>
       </Grid>
     </Grid>
-  );
-};
+  )
+}
 
-export default PublicLayout;
+export default PublicLayout

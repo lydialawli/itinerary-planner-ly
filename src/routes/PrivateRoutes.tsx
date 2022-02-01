@@ -1,6 +1,6 @@
-import { Route, Switch } from 'react-router-dom';
-import { Welcome, About, NotFound } from '../views';
-import { PrivateLayout } from './Layout';
+import { Route, Switch } from 'react-router-dom'
+import { Welcome, About, NotFound } from '../views'
+import { PrivateLayout } from './Layout'
 
 /**
  * List of routes available only for authenticated users
@@ -16,7 +16,7 @@ const PrivateRoutes = () => {
         <Route component={NotFound} />
       </Switch>
     </PrivateLayout>
-  );
-};
+  )
+}
 
-export default PrivateRoutes;
+export default PrivateRoutes

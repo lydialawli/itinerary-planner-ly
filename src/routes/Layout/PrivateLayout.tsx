@@ -1,19 +1,19 @@
-import { useState, useCallback } from 'react';
-import { useHistory } from 'react-router-dom';
-import clsx from 'clsx';
-import { Theme, useTheme } from '@mui/material/styles';
-import makeStyles from '@mui/styles/makeStyles';
-import { Grid, useMediaQuery } from '@mui/material';
-import { useAppStore } from '../../store';
-import TopBar from '../../components/TopBar';
-import { ErrorBoundary } from '../../components';
-import SideBar from '../../components/SideBar/SideBar';
-import { LinkToPage } from '../../utils/type';
+import { useState, useCallback } from 'react'
+import { useHistory } from 'react-router-dom'
+import clsx from 'clsx'
+import { Theme, useTheme } from '@mui/material/styles'
+import makeStyles from '@mui/styles/makeStyles'
+import { Grid, useMediaQuery } from '@mui/material'
+import { useAppStore } from '../../store'
+import TopBar from '../../components/TopBar'
+import { ErrorBoundary } from '../../components'
+import SideBar from '../../components/SideBar/SideBar'
+import { LinkToPage } from '../../utils/type'
 
-const TITLE_PRIVATE = 'Private Web App';
-const MOBILE_SIDEBAR_ANCHOR = 'left'; // 'right';
-const DESKTOP_SIDEBAR_ANCHOR = 'left'; // 'right';
-export const SIDEBAR_WIDTH = 240; // 240px
+const TITLE_PRIVATE = `Lydia's Vitamin Challenge app`
+const MOBILE_SIDEBAR_ANCHOR = 'left' // 'right'
+const DESKTOP_SIDEBAR_ANCHOR = 'left' // 'right'
+export const SIDEBAR_WIDTH = 240 // 240px
 
 const useStyles = makeStyles((theme: Theme) => ({
   root: {
@@ -35,7 +35,7 @@ const useStyles = makeStyles((theme: Theme) => ({
     paddingTop: theme.spacing(1),
   },
   footer: {},
-}));
+}))
 
 /**
  * Centralized place in the App to update document.title
@@ -43,11 +43,11 @@ const useStyles = makeStyles((theme: Theme) => ({
 
 function updateDocumentTitle(title = '') {
   if (title) {
-    document.title = `${title} - ${TITLE_PRIVATE}`;
+    document.title = `${title} - ${TITLE_PRIVATE}`
   } else {
-    document.title = TITLE_PRIVATE;
+    document.title = TITLE_PRIVATE
   }
-  return document.title;
+  return document.title
 }
 
 /**
@@ -74,38 +74,38 @@ const SIDE_BAR_PRIVATE_ITEMS: Array<LinkToPage> = [
     path: '/dev',
     icon: 'settings',
   },
-];
+]
 
 /**
  * Renders "Private Layout" composition
  */
 const PrivateLayout: React.FC = ({ children }) => {
-  const [state] = useAppStore();
-  const [openSideBar, setOpenSideBar] = useState(false);
-  const theme = useTheme();
-  const classes = useStyles();
-  const isDesktop = useMediaQuery(theme.breakpoints.up('md'), { defaultMatches: true });
-  const history = useHistory();
+  const [state] = useAppStore()
+  const [openSideBar, setOpenSideBar] = useState(false)
+  const theme = useTheme()
+  const classes = useStyles()
+  const isDesktop = useMediaQuery(theme.breakpoints.up('md'), { defaultMatches: true })
+  const history = useHistory()
 
   const handleLogoClick = useCallback(() => {
     // Navigate to '/' when clicking on Logo/Menu icon when the SideBar is already visible
-    history.push('/');
-  }, [history]);
+    history.push('/')
+  }, [history])
 
   const handleSideBarOpen = useCallback(() => {
-    if (!openSideBar) setOpenSideBar(true);
-  }, [openSideBar]);
+    if (!openSideBar) setOpenSideBar(true)
+  }, [openSideBar])
 
   const handleSideBarClose = useCallback(() => {
-    if (openSideBar) setOpenSideBar(false);
-  }, [openSideBar]);
+    if (openSideBar) setOpenSideBar(false)
+  }, [openSideBar])
 
   const classRoot = clsx({
     [classes.root]: true,
     [classes.shiftContent]: isDesktop,
-  });
-  const title = updateDocumentTitle();
-  const shouldOpenSideBar = isDesktop ? true : openSideBar;
+  })
+  const title = updateDocumentTitle()
+  const shouldOpenSideBar = isDesktop ? true : openSideBar
 
   return (
     <Grid container direction="column" className={classRoot}>
@@ -129,7 +129,7 @@ const PrivateLayout: React.FC = ({ children }) => {
         <ErrorBoundary name="Content">{children}</ErrorBoundary>
       </Grid>
     </Grid>
-  );
-};
+  )
+}
 
-export default PrivateLayout;
+export default PrivateLayout
