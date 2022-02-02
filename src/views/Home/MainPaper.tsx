@@ -1,4 +1,4 @@
-import React, { ReactElement, useEffect, useState } from 'react'
+import React, { ReactElement, useEffect, useState, useCallback } from 'react'
 import { styled, Box, Paper, Typography } from '@mui/material'
 import axios from 'axios'
 import Portfolios from '../../portfolios.json'
@@ -10,64 +10,22 @@ type OnceMonthType = {
 }
 
 type ResultType = {
-  eatTotalShares: number
-  eatTotalGain: number
+  ticker: string
+  totalShares: number
+  totalGain: number
 }
 
 const MainPaper = (): ReactElement => {
   const { data, loading } = useFetchData()
-  // const [result, setResult] = useState<ResultType>({ eatTotalShares: 0, eatTotalGain: 0 })
 
-  console.log(data)
-  // // TODO: user input + get data from portfolio.json
-  // const salary = 3000
-  // const monthlyTotalContribution = (salary * 15) / 100
-  // const monthyEATContrib = monthlyTotalContribution * 0.15 // the weight found in potfolio
-
-  // const roundNumTwoDec = (num: number) => {
-  //   return Math.round((num + Number.EPSILON) * 100) / 100
-  // }
-
-  // useEffect(() => {
-  //   if (data && data.historical) {
-  //     let sales: any = {}
-  //     const yearsToCalculate = [2017, 2018, 2019, 2020, 2021]
-  //     let totalEatShares: number = 0
-
-  //     yearsToCalculate.map((year: number) => {
-  //       const stocksPerYear = data.historical.filter((d: any) => {
-  //         return new Date(d.date).getFullYear() === year
-  //       })
-  //       const stocksPerMonth: OnceMonthType[] = [...Array(12).keys()].map((_month, index) => {
-  //         const eachMonth = stocksPerYear.filter((d: any) => {
-  //           return new Date(d.date).getMonth() === index
-  //         })
-  //         const closing = eachMonth[eachMonth.length - 1]?.close
-  //         const sharesBought = roundNumTwoDec(monthyEATContrib / closing)
-
-  //         totalEatShares += (year === 2021 && index >= 6) === false ? sharesBought : 0
-
-  //         return {
-  //           month: index + 1,
-  //           close: closing,
-  //           shares: sharesBought,
-  //         }
-  //       })
-  //       sales[year] = stocksPerMonth
-  //     })
-
-  //     setResult({
-  //       eatTotalGain: roundNumTwoDec(totalEatShares * monthyEATContrib),
-  //       eatTotalShares: roundNumTwoDec(totalEatShares),
-  //     })
-  //   }
-  // }, [data, monthyEATContrib])
-
+  console.log({ data })
+  const cake = data?.cake
+  const pzza = data?.pzza
   return (
     <Paper>
       <Box minHeight="300px">
-        <Typography>total EAT shares: {data?.eatTotalShares}</Typography>
-        <Typography>total EAT gain: $ {data?.eatTotalGain}</Typography>
+        <Typography>{`total ${cake?.ticker} shares: ${cake?.totalShares}`}</Typography>
+        <Typography>{`total ${cake?.ticker} gain: $ ${cake?.totalGain}`}</Typography>
       </Box>
     </Paper>
   )
@@ -82,25 +40,26 @@ const useFetchData = () => {
   const URL_PZZA = `https://financialmodelingprep.com/api/v3/historical-price-full/PZZA?from=2017-01-01&to=2021-06-03&apikey=${process.env.REACT_APP_API_KEY}`
   const URL_EAT = `https://financialmodelingprep.com/api/v3/historical-price-full/EAT?from=2017-01-01&to=2021-06-03&apikey=${process.env.REACT_APP_API_KEY}`
 
-  // TODO: user input + get data from portfolio.json
+  // TODO: make questionnaire + save in AppContext
   const riskTolerance = 5
   const salary = 3000
   const weights = Portfolios.filter(
     (p) => p.riskToleranceLowerBound === riskTolerance || p.riskToleranceUpperBound === riskTolerance,
   )[0].portfolio
-
   const monthlyTotalContribution = (salary * 15) / 100
-  const monthyEATContrib = monthlyTotalContribution * 0.15 // the weight found in potfolio
 
   const roundNumTwoDec = (num: number) => {
     return Math.round((num + Number.EPSILON) * 100) / 100
   }
 
   useEffect(() => {
-    const filterData = (data: any) => {
+    const filterData = (data: any, query: string) => {
+      const weight = weights.filter((w) => w.ticker === query)[0].weight
+      const monthlyContribution = monthlyTotalContribution * weight
+
       let sales: any = {}
       const yearsToCalculate = [2017, 2018, 2019, 2020, 2021]
-      let totalEatShares: number = 0
+      let totalShares: number = 0
 
       yearsToCalculate.map((year: number) => {
         const stocksPerYear = data.historical.filter((d: any) => {
@@ -111,9 +70,9 @@ const useFetchData = () => {
             return new Date(d.date).getMonth() === index
           })
           const closing = eachMonth[eachMonth.length - 1]?.close
-          const sharesBought = roundNumTwoDec(monthyEATContrib / closing)
+          const sharesBought = roundNumTwoDec(monthlyContribution / closing)
 
-          totalEatShares += (year === 2021 && index >= 6) === false ? sharesBought : 0
+          totalShares += (year === 2021 && index >= 6) === false ? sharesBought : 0
 
           return {
             month: index + 1,
@@ -125,8 +84,9 @@ const useFetchData = () => {
       })
 
       return {
-        eatTotalGain: roundNumTwoDec(totalEatShares * monthyEATContrib),
-        eatTotalShares: roundNumTwoDec(totalEatShares),
+        ticker: query,
+        totalGain: roundNumTwoDec(totalShares * monthlyContribution),
+        totalShares: roundNumTwoDec(totalShares),
       }
     }
 
@@ -134,18 +94,18 @@ const useFetchData = () => {
       try {
         const requestOne = axios.get(URL_CAKE)
         const requestTwo = axios.get(URL_PZZA)
-        // const requestThree = axios.get(URL_EAT)
+        const requestThree = axios.get(URL_EAT)
 
         axios
           .all([requestOne, requestTwo])
           .then(
             axios.spread((...responses) => {
-              const responseOne = filterData(responses[0].data)
-              const responseTwo = filterData(responses[1].data)
-              // const responseThree = filterData(responses[2].data)
+              const cake = filterData(responses[0].data, 'CAKE')
+              const pzza = filterData(responses[1].data, 'PZZA')
+              // const eat = filterData(responses[2].data, 'EAT')
               // use/access the results
 
-              console.log({ responseOne, responseTwo })
+              setData({ cake, pzza })
             }),
           )
           .catch((errors) => {
