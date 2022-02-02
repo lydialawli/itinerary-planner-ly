@@ -16,36 +16,36 @@ const MainPaper = (): ReactElement => {
     eat: { ticker: 'EAT', totalGain: 6346.35, totalShares: 94.02 },
   }
 
-  const finalData = data !== undefined ? data : mockData
+  const finalData = mockData
 
-  const totalPrice = finalData.cake.totalGain + finalData.pzza.totalGain + finalData.eat.totalGain
-  const totalShares = finalData.cake.totalShares + finalData.pzza.totalShares + finalData.eat.totalShares
+  const totalPrice = data?.cake?.totalGain + data?.pzza?.totalGain + data?.eat?.totalGain || '126128.47'
+  const totalShares = data?.cake?.totalShares + data?.pzza?.totalShares + data?.eat?.totalShares || '557.67'
 
   const donutData = useMemo(
     () => [
       {
         label: 'cake',
-        value: finalData.cake?.totalShares || 30,
+        value: data?.cake?.totalShares || mockData.cake.totalShares,
         color: '#2F80ED',
-        dollars: finalData.cake?.totalGain,
+        dollars: data?.cake?.totalGain || mockData.cake.totalGain,
         emoji: '🍰',
       },
       {
         label: 'pzza',
-        value: finalData.pzza?.totalShares || 20,
+        value: data?.pzza?.totalShares || mockData.pzza.totalShares,
         color: '#F8D348',
-        dollars: finalData.pzza?.totalGain,
+        dollars: data?.pzza?.totalGain || mockData.pzza.totalGain,
         emoji: '🍕',
       },
       {
         label: 'eat',
-        value: finalData.eat?.totalShares || 10,
+        value: data?.eat?.totalShares || mockData.eat.totalShares,
         color: '#cd2fed',
-        dollars: finalData.eat?.totalGain,
+        dollars: data?.eat?.totalGain || mockData.eat.totalGain,
         emoji: '😋',
       },
     ],
-    [data],
+    [finalData],
   )
 
   return (
@@ -55,7 +55,7 @@ const MainPaper = (): ReactElement => {
           <Grid item>
             <Donut values={donutData} title={'$' + totalPrice} subtitle={totalShares + ' shares'} />
             <Grid container justifyContent="center" alignItems="center" spacing={3}>
-              {donutData.map(({ value, label, dollars }) => (
+              {donutData.map(({ label, dollars }) => (
                 <Grid item key={label} className={classes.centered}>
                   <Typography variant="h6">{`$ ${dollars}`}</Typography>
                   <Typography variant="h6" className={classes.grey}>
