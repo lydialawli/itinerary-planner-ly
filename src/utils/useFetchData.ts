@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useCallback } from 'react'
+import React, { useEffect, useState } from 'react'
 import axios from 'axios'
 import Portfolios from '../portfolios.json'
 
@@ -11,6 +11,7 @@ type OnceMonthType = {
 export const useFetchData = () => {
   const [data, setData] = useState<any>({})
   const [loading, setLoading] = useState(false)
+  const [errors, setErrors] = useState()
   const URL_CAKE = `https://financialmodelingprep.com/api/v3/historical-price-full/CAKE?from=2017-01-01&to=2021-06-03&apikey=${process.env.REACT_APP_API_KEY}`
   const URL_PZZA = `https://financialmodelingprep.com/api/v3/historical-price-full/PZZA?from=2017-01-01&to=2021-06-03&apikey=${process.env.REACT_APP_API_KEY}`
   const URL_EAT = `https://financialmodelingprep.com/api/v3/historical-price-full/EAT?from=2017-01-01&to=2021-06-03&apikey=${process.env.REACT_APP_API_KEY}`
@@ -69,34 +70,33 @@ export const useFetchData = () => {
       try {
         const requestOne = axios.get(URL_CAKE)
         const requestTwo = axios.get(URL_PZZA)
-        // const requestThree = axios.get(URL_EAT)
+        const requestThree = axios.get(URL_EAT)
 
         axios
-          .all([requestOne, requestTwo])
+          .all([requestOne, requestTwo, requestThree])
           .then(
             axios.spread((...responses) => {
               const cake = filterData(responses[0].data, 'CAKE')
               const pzza = filterData(responses[1].data, 'PZZA')
-              // const eat = filterData(responses[2].data, 'EAT')
-              // use/access the results
-
-              setData({ cake, pzza })
+              const eat = filterData(responses[2].data, 'EAT')
+              setData({ cake, pzza, eat })
             }),
           )
           .catch((errors) => {
-            // react on errors.
+            console.error(errors)
           })
       } catch (error) {
-        console.error(error)
+        setErrors(errors)
       }
       setLoading(false)
     }
 
     fetchData()
-  }, [URL_CAKE, URL_PZZA, monthlyTotalContribution, weights])
+  }, [URL_CAKE, URL_EAT, URL_PZZA, errors, monthlyTotalContribution, weights])
 
   return {
     data,
     loading,
+    errors,
   }
 }

@@ -49,7 +49,7 @@ export default function Donut({ values, title, subtitle }: DonutProps): JSX.Elem
         <text
           x="50%"
           y="50%"
-          fontSize="7px"
+          fontSize="4px"
           fontFamily={theme.typography.fontFamily}
           textAnchor="middle"
           fill={theme.palette.text.primary}
