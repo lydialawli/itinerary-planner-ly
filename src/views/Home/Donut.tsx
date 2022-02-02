@@ -80,8 +80,8 @@ const useStyles = makeStyles((theme) => ({
     animationFillMode: 'forwards',
   },
   svg: {
-    maxWidth: '250px',
-    maxHeight: '250px',
+    maxWidth: '300px',
+    maxHeight: '300px',
     margin: '0 auto',
     display: 'block',
   },

@@ -1,6 +1,6 @@
 import React, { ReactElement, useEffect, useState, useMemo } from 'react'
-import { styled, Box, Paper, Typography, Grid, Skeleton, Chip, emphasize } from '@mui/material'
-import { Theme } from '@mui/material/styles'
+import { styled, Box, Paper, Typography, Grid, Skeleton, Chip, emphasize, useMediaQuery } from '@mui/material'
+import { Theme, useTheme } from '@mui/material/styles'
 import makeStyles from '@mui/styles/makeStyles'
 import axios from 'axios'
 import Portfolios from '../../portfolios.json'
@@ -8,6 +8,8 @@ import { useFetchData } from '../../utils/useFetchData'
 import Donut from './Donut'
 
 const MainPaper = (): ReactElement => {
+  const theme = useTheme()
+  const isMdScreen = useMediaQuery(theme.breakpoints.down('md'))
   const classes = useStyles()
   // const { data, loading } = useFetchData()
   const data = {
@@ -16,9 +18,8 @@ const MainPaper = (): ReactElement => {
     eat: { ticker: 'EAT', totalGain: 6346.35, totalShares: 94.02 },
   }
 
-  console.log({ data })
-  const cake = data?.cake
-  const pzza = data?.pzza
+  const totalPrice = data?.cake?.totalGain + data?.pzza?.totalGain + data?.eat?.totalGain
+  const totalShares = data?.cake?.totalShares + data?.pzza?.totalShares + data?.eat?.totalShares
 
   const donutData = useMemo(
     () => [
@@ -26,46 +27,68 @@ const MainPaper = (): ReactElement => {
         label: 'cake',
         value: data?.cake?.totalShares || 0,
         color: '#2F80ED',
+        dollars: data?.cake?.totalGain,
+        emoji: '🍰',
       },
       {
         label: 'pzza',
         value: data?.pzza?.totalShares || 20,
         color: '#F8D348',
+        dollars: data?.pzza?.totalGain,
+        emoji: '🍕',
       },
       {
         label: 'eat',
         value: data?.eat?.totalShares || 10,
         color: '#cd2fed',
+        dollars: data?.eat?.totalGain,
+        emoji: '😋',
       },
     ],
     [data],
   )
 
   return (
-    <Paper>
+    <Paper className={classes.paper}>
       <Grid container justifyContent="space-evenly" alignItems="center">
-        <Donut values={donutData} title={'$12345'} subtitle={'total shares'} />
-        <Grid item className={classes.centered}>
-          <Typography variant="h6">{`$ ${cake?.totalGain}`}</Typography>
-          <Typography variant="h6" className={classes.grey}>
-            {cake?.ticker}
-          </Typography>
+        <Grid container justifyContent="center" alignItems="flex-start" spacing={2}>
+          <Grid item>
+            <Donut values={donutData} title={'$12345'} subtitle={'total earned'} />
+            <Grid container justifyContent="center" alignItems="center" spacing={3}>
+              {donutData.map(({ value, label, dollars }) => (
+                <Grid item key={label} className={classes.centered}>
+                  <Typography variant="h6">{`$ ${dollars}`}</Typography>
+                  <Typography variant="h6" className={classes.grey}>
+                    {label}
+                  </Typography>
+                </Grid>
+              ))}
+            </Grid>
+          </Grid>
+          <Grid item lg={1}>
+            <Grid container spacing={2} justifyContent="center" alignItems="center">
+              {!isMdScreen && <Typography variant="h6">Shares</Typography>}
+              {donutData.map(({ value, label, emoji, color }) => (
+                <Grid item key={label}>
+                  <Chip
+                    key={label}
+                    label={`${value} ${emoji} `}
+                    style={{ background: color, color: emphasize(color, 0.8) }}
+                  />
+                </Grid>
+              ))}
+            </Grid>
+          </Grid>
         </Grid>
       </Grid>
-      <Box paddingBottom={2}>
-        <Grid container justifyContent="center">
-          {donutData.map(({ value, label, color }) => (
-            <Grid item key={label}>
-              <Chip label={value + ' ' + label} style={{ background: color, color: emphasize(color, 0.8) }} />
-            </Grid>
-          ))}
-        </Grid>
-      </Box>
     </Paper>
   )
 }
 
 const useStyles = makeStyles((theme: Theme) => ({
+  paper: {
+    padding: theme.spacing(4),
+  },
   centered: {
     textAlign: 'center',
   },
