@@ -1,6 +1,7 @@
 import React, { ReactElement, useEffect, useState } from 'react'
 import { styled, Box, Paper, Typography } from '@mui/material'
 import axios from 'axios'
+import Portfolios from '../../portfolios.json'
 
 type OnceMonthType = {
   month: number
@@ -82,7 +83,12 @@ const useFetchData = () => {
   const URL_EAT = `https://financialmodelingprep.com/api/v3/historical-price-full/EAT?from=2017-01-01&to=2021-06-03&apikey=${process.env.REACT_APP_API_KEY}`
 
   // TODO: user input + get data from portfolio.json
+  const riskTolerance = 5
   const salary = 3000
+  const weights = Portfolios.filter(
+    (p) => p.riskToleranceLowerBound === riskTolerance || p.riskToleranceUpperBound === riskTolerance,
+  )[0].portfolio
+
   const monthlyTotalContribution = (salary * 15) / 100
   const monthyEATContrib = monthlyTotalContribution * 0.15 // the weight found in potfolio
 
