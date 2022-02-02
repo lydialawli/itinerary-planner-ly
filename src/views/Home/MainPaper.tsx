@@ -93,6 +93,8 @@ const MainPaper = (): ReactElement => {
 const useStyles = makeStyles((theme: Theme) => ({
   paper: {
     padding: theme.spacing(4),
+    boxShadow: 'rgba(99, 99, 99, 0.2) 0px 2px 8px 0px',
+    margin: theme.spacing(2),
   },
   centered: {
     textAlign: 'center',
