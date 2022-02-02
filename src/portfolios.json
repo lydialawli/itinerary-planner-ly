@@ -1,0 +1,92 @@
+[
+  {
+    "riskToleranceLowerBound": 1,
+    "riskToleranceUpperBound": 2,
+    "portfolio": [
+      {
+        "weight": 0.2,
+        "ticker": "CAKE"
+      },
+      {
+        "weight": 0.5,
+        "ticker": "PZZA"
+      },
+      {
+        "weight": 0.3,
+        "ticker": "EAT"
+      }
+    ]
+  },
+  {
+    "riskToleranceLowerBound": 3,
+    "riskToleranceUpperBound": 4,
+    "portfolio": [
+      {
+        "weight": 0.4,
+        "ticker": "CAKE"
+      },
+      {
+        "weight": 0.35,
+        "ticker": "PZZA"
+      },
+      {
+        "weight": 0.25,
+        "ticker": "EAT"
+      }
+    ]
+  },
+  {
+    "riskToleranceLowerBound": 5,
+    "riskToleranceUpperBound": 6,
+    "portfolio": [
+      {
+        "weight": 0.65,
+        "ticker": "CAKE"
+      },
+      {
+        "weight": 0.2,
+        "ticker": "PZZA"
+      },
+      {
+        "weight": 0.15,
+        "ticker": "EAT"
+      }
+    ]
+  },
+  {
+    "riskToleranceLowerBound": 7,
+    "riskToleranceUpperBound": 8,
+    "portfolio": [
+      {
+        "weight": 0.8,
+        "ticker": "CAKE"
+      },
+      {
+        "weight": 0.1,
+        "ticker": "PZZA"
+      },
+      {
+        "weight": 0.1,
+        "ticker": "EAT"
+      }
+    ]
+  },
+  {
+    "riskToleranceLowerBound": 9,
+    "riskToleranceUpperBound": 10,
+    "portfolio": [
+      {
+        "weight": 1,
+        "ticker": "CAKE"
+      },
+      {
+        "weight": 0,
+        "ticker": "PZZA"
+      },
+      {
+        "weight": 0,
+        "ticker": "EAT"
+      }
+    ]
+  }
+]
