@@ -1,9 +1,9 @@
-import clsx from 'clsx';
-import Avatar from '@mui/material/Avatar';
-import Typography from '@mui/material/Typography';
-import { Theme } from '@mui/material/styles';
-import makeStyles from '@mui/styles/makeStyles';
-import AppLink from '../AppLink';
+import clsx from 'clsx'
+import Avatar from '@mui/material/Avatar'
+import Typography from '@mui/material/Typography'
+import { Theme } from '@mui/material/styles'
+import makeStyles from '@mui/styles/makeStyles'
+import AppLink from '../AppLink'
 
 const useStyles = makeStyles((theme: Theme) => ({
   root: {
@@ -20,12 +20,12 @@ const useStyles = makeStyles((theme: Theme) => ({
   name: {
     marginTop: theme.spacing(1),
   },
-}));
+}))
 
 interface UserInfoProps {
-  className?: string;
-  showAvatar?: boolean;
-  user?: any;
+  className?: string
+  showAvatar?: boolean
+  user?: any
 }
 
 /**
@@ -35,11 +35,11 @@ interface UserInfoProps {
  * @param {object} [user] - logged user data {name, email, avatar...}
  */
 const UserInfo = ({ className, showAvatar = false, user, ...restOfProps }: UserInfoProps) => {
-  const classes = useStyles();
+  const classes = useStyles()
 
-  const fullName = user?.name || [user?.nameFirst || '', user?.nameLast || ''].join(' ').trim();
-  const srcAvatar = user?.avatar ? user?.avatar : undefined;
-  const userPhoneOrEmail = user?.phone || (user?.email as string);
+  const fullName = user?.name || [user?.nameFirst || '', user?.nameLast || ''].join(' ').trim()
+  const srcAvatar = user?.avatar ? user?.avatar : undefined
+  const userPhoneOrEmail = user?.phone || (user?.email as string)
 
   return (
     <div {...restOfProps} className={clsx(classes.root, className)}>
@@ -49,11 +49,11 @@ const UserInfo = ({ className, showAvatar = false, user, ...restOfProps }: UserI
         </AppLink>
       ) : null}
       <Typography className={classes.name} variant="h6">
-        {fullName || 'Current User'}
+        {fullName || 'Susan Fox'}
       </Typography>
       <Typography variant="body2">{userPhoneOrEmail || 'Loading...'}</Typography>
     </div>
-  );
-};
+  )
+}
 
-export default UserInfo;
+export default UserInfo

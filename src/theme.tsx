@@ -3,9 +3,9 @@
  * See for details: https://material-ui.com/customization/default-theme/?expand-path=$.palette
  * Martial Color tool: https://material.io/resources/color
  */
-import { createTheme, ThemeProvider, Theme, StyledEngineProvider, ThemeOptions } from '@mui/material/styles';
-import CssBaseline from '@mui/material/CssBaseline';
-import { useAppStore } from './store/AppStore';
+import { createTheme, ThemeProvider, Theme, StyledEngineProvider, ThemeOptions } from '@mui/material/styles'
+import CssBaseline from '@mui/material/CssBaseline'
+import { useAppStore } from './store/AppStore'
 
 // Note: Added by CodeMod when migrate form MUI 4.x to 5x
 declare module '@mui/styles/defaultTheme' {
@@ -26,7 +26,7 @@ const FRONT_COLORS = {
     main: '#EF9A9A',
     contrastText: '#000000',
   },
-};
+}
 
 /**
  * Material UI theme config for "Light Mode"
@@ -40,7 +40,7 @@ const LIGHT_THEME: ThemeOptions = {
     // },
     ...FRONT_COLORS,
   },
-};
+}
 
 /**
  * Material UI theme config for "Dark Mode"
@@ -54,15 +54,40 @@ const DARK_THEME: ThemeOptions = {
     // },
     ...FRONT_COLORS,
   },
-};
+  typography: {
+    h1: {
+      fontSize: '3rem',
+    },
+    h2: {
+      fontSize: '2.5rem',
+    },
+    h3: {
+      fontSize: '1.8rem',
+    },
+    h4: {
+      fontSize: '1.6rem',
+    },
+    h5: {
+      fontSize: '1.3rem',
+    },
+    h6: {
+      fontSize: '1.25rem',
+    },
+    fontWeightRegular: 400,
+    fontWeightLight: 300,
+    fontWeightBold: 900,
+    fontWeightMedium: 700,
+    fontFamily: 'Lato',
+  },
+}
 
 /**
  * Material UI Provider with Light and Dark themes depending on global "state.darkMode"
  */
 const AppThemeProvider: React.FunctionComponent = ({ children }) => {
-  const [state] = useAppStore();
+  const [state] = useAppStore()
   // const theme = useMemo(() => (state.darkMode ? createTheme(DARK_THEME) : createTheme(LIGHT_THEME)));
-  const theme = state.darkMode ? createTheme(DARK_THEME) : createTheme(LIGHT_THEME);
+  const theme = state.darkMode ? createTheme(DARK_THEME) : createTheme(LIGHT_THEME)
 
   return (
     <StyledEngineProvider injectFirst>
@@ -71,7 +96,7 @@ const AppThemeProvider: React.FunctionComponent = ({ children }) => {
         {children}
       </ThemeProvider>
     </StyledEngineProvider>
-  );
-};
+  )
+}
 
-export { AppThemeProvider, LIGHT_THEME, DARK_THEME };
+export { AppThemeProvider, LIGHT_THEME, DARK_THEME }

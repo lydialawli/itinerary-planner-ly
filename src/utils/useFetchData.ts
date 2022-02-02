@@ -68,19 +68,19 @@ export const useFetchData = () => {
     const fetchData = async () => {
       try {
         const requestOne = axios.get(URL_CAKE)
-        // const requestTwo = axios.get(URL_PZZA)
+        const requestTwo = axios.get(URL_PZZA)
         // const requestThree = axios.get(URL_EAT)
 
         axios
-          .all([requestOne])
+          .all([requestOne, requestTwo])
           .then(
             axios.spread((...responses) => {
               const cake = filterData(responses[0].data, 'CAKE')
-              // const pzza = filterData(responses[1].data, 'PZZA')
+              const pzza = filterData(responses[1].data, 'PZZA')
               // const eat = filterData(responses[2].data, 'EAT')
               // use/access the results
 
-              setData({ cake })
+              setData({ cake, pzza })
             }),
           )
           .catch((errors) => {
@@ -93,7 +93,7 @@ export const useFetchData = () => {
     }
 
     fetchData()
-  }, [URL_CAKE, monthlyTotalContribution, weights])
+  }, [URL_CAKE, URL_PZZA, monthlyTotalContribution, weights])
 
   return {
     data,
