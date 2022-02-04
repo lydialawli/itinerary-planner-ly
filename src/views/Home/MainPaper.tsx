@@ -16,8 +16,6 @@ const MainPaper = (): ReactElement => {
     eat: { ticker: 'EAT', totalGain: 6346.35, totalShares: 94.02 },
   }
 
-  const finalData = mockData
-
   const totalPrice = data?.cake?.totalGain + data?.pzza?.totalGain + data?.eat?.totalGain || '126128.47'
   const totalShares = data?.cake?.totalShares + data?.pzza?.totalShares + data?.eat?.totalShares || '557.67'
 
@@ -45,7 +43,20 @@ const MainPaper = (): ReactElement => {
         emoji: '😋',
       },
     ],
-    [finalData],
+    [
+      data?.cake?.totalShares,
+      data?.cake?.totalGain,
+      data?.pzza?.totalShares,
+      data?.pzza?.totalGain,
+      data?.eat?.totalShares,
+      data?.eat?.totalGain,
+      mockData.cake.totalShares,
+      mockData.cake.totalGain,
+      mockData.pzza.totalShares,
+      mockData.pzza.totalGain,
+      mockData.eat.totalShares,
+      mockData.eat.totalGain,
+    ],
   )
 
   return (
