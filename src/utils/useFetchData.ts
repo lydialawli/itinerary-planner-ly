@@ -63,6 +63,7 @@ export const useFetchData = () => {
         ticker: query,
         totalGain: roundNumTwoDec(totalShares * monthlyContribution),
         totalShares: roundNumTwoDec(totalShares),
+        data: sales,
       }
     }
 
