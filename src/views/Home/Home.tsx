@@ -8,7 +8,7 @@ const HomeView = () => {
         <Typography variant="h2">Hi, Susan</Typography>
         <MainPaper />
         <Grid container alignItems="center" alignContent="flex-end">
-          <Typography variant="h5">This is your portfolio from Jan 2017 to Jan 2021</Typography>
+          <Typography variant="h5">This is your portfolio from Jan 2017 to June 2021</Typography>
         </Grid>
       </Grid>
     </Grid>
