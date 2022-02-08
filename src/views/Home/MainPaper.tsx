@@ -1,4 +1,4 @@
-import React, { ReactElement, useEffect, useState, useMemo } from 'react'
+import React, { ReactElement, useMemo } from 'react'
 import { Box, Paper, Typography, Grid, Skeleton, Chip, emphasize, useMediaQuery, Alert } from '@mui/material'
 import { Theme, useTheme } from '@mui/material/styles'
 import makeStyles from '@mui/styles/makeStyles'
@@ -10,36 +10,31 @@ const MainPaper = (): ReactElement => {
   const isMdScreen = useMediaQuery(theme.breakpoints.down('md'))
   const classes = useStyles()
   const { data, loading, errors } = useFetchData()
-  const mockData = {
-    cake: { ticker: 'CAKE', totalGain: 112744.12, totalShares: 385.45 },
-    pzza: { ticker: 'PZZA', totalGain: 7038, totalShares: 78.2 },
-    eat: { ticker: 'EAT', totalGain: 6346.35, totalShares: 94.02 },
-  }
 
-  const totalPrice = data?.cake?.totalGain + data?.pzza?.totalGain + data?.eat?.totalGain || '126128.47'
-  const totalShares = data?.cake?.totalShares + data?.pzza?.totalShares + data?.eat?.totalShares || '557.67'
+  const totalPrice = data?.cake?.totalGain + data?.pzza?.totalGain + data?.eat?.totalGain || ''
+  const totalShares = data?.cake?.totalShares + data?.pzza?.totalShares + data?.eat?.totalShares || ''
 
   const donutData = useMemo(
     () => [
       {
         label: 'cake',
-        value: data?.cake?.totalShares || mockData.cake.totalShares,
+        value: data?.cake?.totalShares,
         color: '#2F80ED',
-        dollars: data?.cake?.totalGain || mockData.cake.totalGain,
+        dollars: data?.cake?.totalGain,
         emoji: '🍰',
       },
       {
         label: 'pzza',
-        value: data?.pzza?.totalShares || mockData.pzza.totalShares,
+        value: data?.pzza?.totalShares,
         color: '#F8D348',
-        dollars: data?.pzza?.totalGain || mockData.pzza.totalGain,
+        dollars: data?.pzza?.totalGain,
         emoji: '🍕',
       },
       {
         label: 'eat',
-        value: data?.eat?.totalShares || mockData.eat.totalShares,
+        value: data?.eat?.totalShares,
         color: '#cd2fed',
-        dollars: data?.eat?.totalGain || mockData.eat.totalGain,
+        dollars: data?.eat?.totalGain,
         emoji: '😋',
       },
     ],
@@ -50,12 +45,6 @@ const MainPaper = (): ReactElement => {
       data?.pzza?.totalGain,
       data?.eat?.totalShares,
       data?.eat?.totalGain,
-      mockData.cake.totalShares,
-      mockData.cake.totalGain,
-      mockData.pzza.totalShares,
-      mockData.pzza.totalGain,
-      mockData.eat.totalShares,
-      mockData.eat.totalGain,
     ],
   )
 
@@ -68,7 +57,11 @@ const MainPaper = (): ReactElement => {
             <Grid container justifyContent="center" alignItems="center" spacing={3}>
               {donutData.map(({ label, dollars }) => (
                 <Grid item key={label} className={classes.centered}>
-                  <Typography variant="h6">{`$ ${dollars}`}</Typography>
+                  {loading ? (
+                    <Skeleton width={50} variant="text" />
+                  ) : (
+                    <Typography variant="h6">{`$ ${dollars}`}</Typography>
+                  )}
                   <Typography variant="h6" className={classes.grey}>
                     {label}
                   </Typography>
@@ -81,11 +74,15 @@ const MainPaper = (): ReactElement => {
               {!isMdScreen && <Typography variant="h6">Shares</Typography>}
               {donutData.map(({ value, label, emoji, color }) => (
                 <Grid item key={label}>
-                  <Chip
-                    key={label}
-                    label={`${value} ${emoji} `}
-                    style={{ background: color, color: emphasize(color, 0.8) }}
-                  />
+                  {loading ? (
+                    <Skeleton width={50} variant="text" />
+                  ) : (
+                    <Chip
+                      key={label}
+                      label={`${value} ${emoji} `}
+                      style={{ background: color, color: emphasize(color, 0.8) }}
+                    />
+                  )}
                 </Grid>
               ))}
             </Grid>

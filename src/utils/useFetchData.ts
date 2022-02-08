@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import axios from 'axios'
+import axios, { AxiosInstance } from 'axios'
 import Portfolios from '../portfolios.json'
 
 type OnceMonthType = {
@@ -12,9 +12,6 @@ export const useFetchData = () => {
   const [data, setData] = useState<any>({})
   const [loading, setLoading] = useState(false)
   const [errors, setErrors] = useState()
-  const URL_CAKE = `https://financialmodelingprep.com/api/v3/historical-price-full/CAKE?from=2017-01-01&to=2021-06-03&apikey=${process.env.REACT_APP_API_KEY}`
-  const URL_PZZA = `https://financialmodelingprep.com/api/v3/historical-price-full/PZZA?from=2017-01-01&to=2021-06-03&apikey=${process.env.REACT_APP_API_KEY}`
-  const URL_EAT = `https://financialmodelingprep.com/api/v3/historical-price-full/EAT?from=2017-01-01&to=2021-06-03&apikey=${process.env.REACT_APP_API_KEY}`
 
   // TODO: make questionnaire + save in AppContext
   const riskTolerance = 5
@@ -29,8 +26,8 @@ export const useFetchData = () => {
   }
 
   useEffect(() => {
-    const filterData = (data: any, query: string) => {
-      const weight = weights.filter((w) => w.ticker === query)[0].weight
+    const filterData = (data: any) => {
+      const weight = weights.filter((w) => w.ticker === data.symbol)[0].weight
       const monthlyContribution = monthlyTotalContribution * weight
 
       let sales: any = {}
@@ -60,40 +57,65 @@ export const useFetchData = () => {
       })
 
       return {
-        ticker: query,
+        ticker: data.symbol,
         totalGain: roundNumTwoDec(totalShares * monthlyContribution),
         totalShares: roundNumTwoDec(totalShares),
         data: sales,
       }
     }
 
-    const fetchData = async () => {
-      try {
-        const requestOne = axios.get(URL_CAKE)
-        const requestTwo = axios.get(URL_PZZA)
-        const requestThree = axios.get(URL_EAT)
+    const scheduleRequests = (axiosInstance: AxiosInstance, intervalMs: number) => {
+      let lastInvocationTime: number | undefined = undefined
 
-        axios
-          .all([requestOne, requestTwo, requestThree])
-          .then(
-            axios.spread((...responses) => {
-              const cake = filterData(responses[0].data, 'CAKE')
-              const pzza = filterData(responses[1].data, 'PZZA')
-              const eat = filterData(responses[2].data, 'EAT')
-              setData({ cake, pzza, eat })
-            }),
-          )
-          .catch((errors) => {
-            console.error(errors)
-          })
+      const scheduler = (config: unknown) => {
+        const now = Date.now()
+        if (lastInvocationTime) {
+          lastInvocationTime += intervalMs
+          const waitPeriodForThisRequest = lastInvocationTime - now
+          if (waitPeriodForThisRequest > 0) {
+            return new Promise((resolve) => {
+              setTimeout(() => resolve(config), waitPeriodForThisRequest)
+            })
+          }
+        }
+
+        lastInvocationTime = now
+        return config
+      }
+
+      axiosInstance.interceptors.request.use(scheduler)
+    }
+
+    const fetchData = async () => {
+      setLoading(true)
+
+      const financialService = axios.create({
+        baseURL: 'https://financialmodelingprep.com/api/v3/historical-price-full',
+      })
+      scheduleRequests(financialService, 500)
+      const URL_CAKE = `/CAKE?from=2017-01-01&to=2021-06-03&apikey=${process.env.REACT_APP_API_KEY}`
+      const URL_PZZA = `/PZZA?from=2017-01-01&to=2021-06-03&apikey=${process.env.REACT_APP_API_KEY}`
+      const URL_EAT = `/EAT?from=2017-01-01&to=2021-06-03&apikey=${process.env.REACT_APP_API_KEY}`
+
+      try {
+        const urls = [URL_CAKE, URL_PZZA, URL_EAT]
+        const urlRequests = urls.map((url) => financialService.get(url).then((result) => result.data))
+        return axios.all(urlRequests).then(
+          axios.spread((...responses) => {
+            const cake = filterData(responses[0])
+            const pzza = filterData(responses[1])
+            const eat = filterData(responses[2])
+            setData({ cake, pzza, eat })
+            setLoading(false)
+          }),
+        )
       } catch (error) {
         setErrors(errors)
       }
-      setLoading(false)
     }
 
     fetchData()
-  }, [URL_CAKE, URL_EAT, URL_PZZA, errors, monthlyTotalContribution, weights])
+  }, [errors, monthlyTotalContribution, weights, setLoading])
 
   return {
     data,
