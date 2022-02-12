@@ -31,3 +31,7 @@ https://github.com/karpolan/react-typescript-material-ui-with-auth-starter
 
 ~~Please let me know if you need my **api key** from the financial market site.
 I put it inside an .env file for common practice.~~
+
+## Screenshot
+
+![screenshot](screenshot.png)
