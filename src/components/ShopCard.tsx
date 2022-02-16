@@ -17,15 +17,12 @@ const ShopCard = (shop: Store): ReactElement => {
   const history = useHistory()
   const theme = useTheme()
   const { shopId } = useParams<ParamTypes>()
+  console.log({ shopId })
 
   return (
     <Grid item xs={8} sm={4}>
       <Link to={`/dashboard/${shop.id}`} component={RouterLink}>
-        <Card
-          onClick={() => console.log('yo')}
-          elevation={0}
-          sx={{ display: 'flex', maxWidth: '250px', padding: theme.spacing(1) }}
-        >
+        <Card elevation={0} sx={{ display: 'flex', maxWidth: '250px', padding: theme.spacing(1) }}>
           <Box sx={{ display: 'flex', flexDirection: 'column' }}>
             <CardMedia component="img" sx={{ width: 60 }} image={storePng} alt="shop" />
             <CardContent sx={{ flex: '1 0 auto' }}>
