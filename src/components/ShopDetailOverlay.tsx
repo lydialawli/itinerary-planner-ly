@@ -4,8 +4,6 @@ import { useMediaQuery, Paper, Link, Drawer, Typography, Grid, Box, Divider, Ico
 import { Theme, useTheme } from '@mui/material/styles'
 import makeStyles from '@mui/styles/makeStyles'
 import { Close as CloseIcon } from '@mui/icons-material'
-import storePng from '../assets/store-icon.png'
-import recipient1 from '../assets/Container-format-1.png'
 import ContainerCard from '../components/ContainerCard'
 
 const transitionDuration = 1000

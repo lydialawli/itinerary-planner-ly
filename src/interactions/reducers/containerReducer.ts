@@ -1,4 +1,4 @@
-import { Action } from '../actions/actions'
+import { Action } from '../actions'
 import BikeStock from '../bikeStock.json'
 import Shops from '../storeDb.json'
 
@@ -11,6 +11,7 @@ export type Container = {
 export interface StoreState {
   bikeStock: Container[]
   stores: Store[]
+  selectedStore: string
 }
 
 export type Store = {
@@ -25,11 +26,15 @@ const initialState = {
   stores: Shops.stores.map((shop) => {
     return { ...shop, containers: [] }
   }),
+  selectedStore: '',
 }
 
 export const containerReducer = (state: StoreState = initialState, action: Action) => {
   switch (action.type) {
-    case 'MOVE_TO_STORE': {
+    case 'selectStore': {
+      return { ...state, selectedStore: action.payload }
+    }
+    case 'transferToStore': {
       const newBikeStock = state.bikeStock.filter((b) => b.id !== action.payload.container.id)
       const newStores = state.stores.map((shop) => {
         if (shop.id === action.payload.shopId) {
@@ -40,6 +45,10 @@ export const containerReducer = (state: StoreState = initialState, action: Actio
         return shop
       })
       return { ...state, bikeStock: newBikeStock, stores: newStores }
+    }
+    case 'backToBikeStock': {
+      // TODO: add logic
+      return { ...state }
     }
     default:
       return state

@@ -15,7 +15,7 @@ const ContainerCard = (container: Container): ReactElement => {
   const dispatch = useDispatch()
   const recipientSrc = container.format === '1' ? recipient1 : container.format === '5' ? recipient5 : recipient6
   const moveContainer = (container: Container, shopId?: string) => {
-    dispatch({ type: 'MOVE_TO_STORE', payload: { container, shopId } })
+    dispatch({ type: 'transferToStore', payload: { container, shopId } })
   }
 
   return (
