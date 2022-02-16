@@ -17,12 +17,14 @@ const Home = (): ReactElement => {
   console.log(bikeStock, stores)
 
   return (
-    <Grid container>
+    <Grid container spacing={theme.spacing(1)}>
       <Box margin={theme.spacing(2)}>
         <Typography variant="h6">BIKE STOCK ({bikeStock.length || 0})</Typography>
 
-        <Grid container>
-          {bikeStock && bikeStock.length > 0 && bikeStock.map((container) => <ContainerCard {...container} />)}
+        <Grid container spacing={2}>
+          {bikeStock &&
+            bikeStock.length > 0 &&
+            bikeStock.map((container) => <ContainerCard {...container} key={container.id} />)}
         </Grid>
       </Box>
       <Box margin={theme.spacing(2)}>
