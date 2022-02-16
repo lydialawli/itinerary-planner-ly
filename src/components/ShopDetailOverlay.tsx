@@ -1,21 +1,6 @@
 import React, { ReactElement } from 'react'
 import { Store } from '../interactions/reducers/containerReducer'
-import {
-  useMediaQuery,
-  Paper,
-  Link,
-  Drawer,
-  Typography,
-  Grid,
-  Box,
-  Card,
-  CardContent,
-  CardMedia,
-  Avatar,
-  Chip,
-  Divider,
-  IconButton,
-} from '@mui/material'
+import { useMediaQuery, Paper, Link, Drawer, Typography, Grid, Box, Divider, IconButton } from '@mui/material'
 import { Theme, useTheme } from '@mui/material/styles'
 import makeStyles from '@mui/styles/makeStyles'
 import { Close as CloseIcon } from '@mui/icons-material'
@@ -48,21 +33,26 @@ const ShopOverlay = ({ shop, onClose }: ShopOverlayProps): ReactElement => {
       onClose={onClose}
       open={true}
     >
-      <div className={classes.root} style={{ minWidth: isDesktop ? '40vw' : 300 }}>
-        <Grid container alignItems="center">
-          <IconButton>
-            <CloseIcon fontSize="small" />
-          </IconButton>
-
-          <Typography variant="h4">{shop.name}</Typography>
-        </Grid>
+      <Box padding={theme.spacing(2)} minWidth={isDesktop ? '40vw' : 300}>
+        <Box padding={theme.spacing(1)}>
+          <Grid container alignItems="center" justifyContent="flex-start">
+            <IconButton>
+              <CloseIcon fontSize="small" />
+            </IconButton>
+            <Typography variant="h4">{shop.name}</Typography>
+          </Grid>
+        </Box>
         <Divider />
 
-        <Typography variant="h6">containers ({shop.containers.length}):</Typography>
-        {shop.containers.map((container) => (
-          <ContainerCard {...container} key={container.id} />
-        ))}
-      </div>
+        <Typography variant="h6">Containers ({shop.containers.length}):</Typography>
+        <Box padding={theme.spacing(2)} bgcolor={theme.palette.background.default}>
+          {shop.containers.map((container) => (
+            <Box padding={theme.spacing(1)}>
+              <ContainerCard {...container} key={container.id} />
+            </Box>
+          ))}
+        </Box>
+      </Box>
     </Drawer>
   )
 }
@@ -72,12 +62,6 @@ const useStyles = makeStyles((theme: Theme) => ({
     '& .MuiBackdrop-root': {
       backgroundColor: 'rgba(0,0,0,0.2)',
     },
-  },
-  root: {
-    display: 'flex',
-    flexDirection: 'column',
-    height: '100%',
-    padding: theme.spacing(2),
   },
 }))
 

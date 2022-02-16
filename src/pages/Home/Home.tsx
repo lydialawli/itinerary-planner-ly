@@ -15,14 +15,18 @@ const Home = (): ReactElement => {
   const stores = useSelector<StoreState, Store[]>((state) => state.stores)
 
   return (
-    <Grid container spacing={theme.spacing(1)}>
-      <Box margin={theme.spacing(2)}>
+    <Grid container spacing={theme.spacing(1)} overflow="none">
+      <Box margin={theme.spacing(2)} width="90vw">
         <Typography variant="h6">BIKE STOCK ({bikeStock.length || 0})</Typography>
 
         <Grid container spacing={2}>
           {bikeStock &&
             bikeStock.length > 0 &&
-            bikeStock.map((container) => <ContainerCard {...container} key={container.id} />)}
+            bikeStock.map((container) => (
+              <Grid item xs={8} md={3}>
+                <ContainerCard {...container} key={container.id} />
+              </Grid>
+            ))}
         </Grid>
       </Box>
       <Box margin={theme.spacing(2)}>
