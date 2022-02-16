@@ -18,7 +18,7 @@ const ContainerCard = (container: Container): ReactElement => {
   }
 
   return (
-    <Card elevation={0} sx={{ display: 'flex', padding: theme.spacing(1) }}>
+    <Card elevation={0} sx={{ display: 'flex', padding: theme.spacing(1), borderRadius: theme.spacing(1) }}>
       <Box sx={{ display: 'flex' }} justifyContent="center" alignItems="center">
         <Avatar src={recipientSrc} sizes="30px" />
         <CardContent sx={{ flex: '1 0 auto' }}>

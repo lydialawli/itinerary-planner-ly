@@ -1,6 +1,6 @@
 import React, { ReactElement } from 'react'
 import { useSelector } from 'react-redux'
-import { Paper, Typography, Grid, Button, Box } from '@mui/material'
+import { Paper, Typography, Grid, Button, Box, Divider } from '@mui/material'
 import { Theme, useTheme } from '@mui/material/styles'
 import makeStyles from '@mui/styles/makeStyles'
 import { StoreState, Container, Store } from '../../interactions/reducers/containerReducer'
@@ -16,7 +16,7 @@ const Home = (): ReactElement => {
 
   return (
     <Grid container spacing={theme.spacing(1)} overflow="none">
-      <Box margin={theme.spacing(2)} width="90vw">
+      <Box margin={theme.spacing(2)} width="80vw">
         <Typography variant="h6">BIKE STOCK ({bikeStock.length || 0})</Typography>
 
         <Grid container spacing={2}>
@@ -28,11 +28,17 @@ const Home = (): ReactElement => {
               </Grid>
             ))}
         </Grid>
-      </Box>
-      <Box margin={theme.spacing(2)}>
+        <Box paddingY={theme.spacing(4)}></Box>
+
         <Typography variant="h6">SHOPS</Typography>
-        <Grid container spacing={1} justifyContent="flex-start">
-          {stores && stores.length > 0 && stores.map((shop) => <ShopCard {...shop} key={shop.id} />)}
+        <Grid container spacing={2} justifyContent="flex-start">
+          {stores &&
+            stores.length > 0 &&
+            stores.map((shop) => (
+              <Grid item xs={8} md={4}>
+                <ShopCard {...shop} key={shop.id} />{' '}
+              </Grid>
+            ))}
         </Grid>
       </Box>
     </Grid>

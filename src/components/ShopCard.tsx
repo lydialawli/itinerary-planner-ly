@@ -23,11 +23,11 @@ const ShopCard = (shop: Store): ReactElement => {
   const getRecipient = (format: string) => {
     return format === '1' ? recipient1 : format === '5' ? recipient5 : recipient6
   }
-  console.log(shop)
+
   return (
-    <Grid item xs={8} sm={4}>
+    <>
       <Link to={`/dashboard/${shop.id}`} component={RouterLink} underline="none">
-        <Card elevation={0} sx={{ display: 'flex', maxWidth: '250px', padding: theme.spacing(1) }}>
+        <Card elevation={0} sx={{ display: 'flex', padding: theme.spacing(1) }}>
           <Box justifyContent="center">
             <CardMedia component="img" sx={{ width: 60 }} image={storePng} alt="shop" />
             <CardContent sx={{ flex: '1 0 auto' }}>
@@ -48,7 +48,7 @@ const ShopCard = (shop: Store): ReactElement => {
         </Card>
       </Link>
       {!!shopId && shopId === shop.id && <ShopOverlay shop={shop} onClose={() => history.push('/dashboard')} />}
-    </Grid>
+    </>
   )
 }
 

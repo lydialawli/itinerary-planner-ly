@@ -45,7 +45,7 @@ const ShopOverlay = ({ shop, onClose }: ShopOverlayProps): ReactElement => {
         <Divider />
 
         <Typography variant="h6">Containers ({shop.containers.length}):</Typography>
-        <Box padding={theme.spacing(2)} bgcolor={theme.palette.background.default}>
+        <Box padding={theme.spacing(2)} bgcolor={theme.palette.background.default} borderRadius={theme.spacing(1)}>
           {shop.containers.map((container) => (
             <Box padding={theme.spacing(1)}>
               <ContainerCard {...container} key={container.id} />
