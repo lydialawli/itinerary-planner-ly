@@ -21,6 +21,7 @@
   "dependencies": {
     "@emotion/react": "latest",
     "@emotion/styled": "latest",
+    "@material-ui/core": "^4.12.3",
     "@mui/icons-material": "latest",
     "@mui/material": "latest",
     "@mui/styles": "latest",
@@ -28,6 +29,7 @@
     "date-fns": "latest",
     "react": "latest",
     "react-dom": "latest",
+    "react-redux": "^7.2.6",
     "react-router-dom": "latest",
     "react-scripts": "latest",
     "typescript": "latest",

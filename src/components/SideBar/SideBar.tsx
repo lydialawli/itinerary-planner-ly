@@ -7,9 +7,7 @@ import Switch from '@mui/material/Switch'
 import Tooltip from '@mui/material/Tooltip'
 import { Theme } from '@mui/material/styles'
 import makeStyles from '@mui/styles/makeStyles'
-import { useAppStore } from '../../store/AppStore'
-import { AppIconButton } from '../../components'
-import UserInfo from '../UserInfo/UserInfo'
+import { useAppStore } from '../../appContext/AppStore'
 import SideBarNavigation from './SideBarNavigation'
 import { SIDEBAR_WIDTH } from '../../routes/Layout/PrivateLayout'
 import { LinkToPage } from '../../utils/type'
@@ -67,10 +65,10 @@ const SideBar: React.FC<Props> = ({ anchor, className, open, variant, items, onC
     })
   }, [state, dispatch])
 
-  const handleOnLogout = useCallback(async () => {
-    // await api.auth.logout();
-    dispatch({ type: 'LOG_OUT' })
-  }, [dispatch])
+  // const handleOnLogout = useCallback(async () => {
+  //   // await api.auth.logout();
+  //   dispatch({ type: 'LOG_OUT' })
+  // }, [dispatch])
 
   const handleAfterLinkClick = useCallback(
     (event: React.MouseEvent) => {

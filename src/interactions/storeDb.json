@@ -1,0 +1,32 @@
+{
+  "stores": [
+    {
+      "id": "store_001",
+      "name": "Noodle Dreams"
+    },
+    {
+      "id": "store_002",
+      "name": "Chez Jojo"
+    },
+    {
+      "id": "store_003",
+      "name": "Texas BBQ"
+    },
+    {
+      "id": "store_004",
+      "name": "Der Adler"
+    },
+    {
+      "id": "store_005",
+      "name": "Coco Chicken"
+    },
+    {
+      "id": "store_006",
+      "name": "Hot Salsa"
+    },
+    {
+      "id": "store_007",
+      "name": "Fatty Burger"
+    }
+  ]
+}

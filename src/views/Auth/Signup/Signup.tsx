@@ -1,5 +1,5 @@
-import { SyntheticEvent, useCallback, useState, useEffect } from 'react';
-import { useHistory } from 'react-router-dom';
+import { SyntheticEvent, useCallback, useState, useEffect } from 'react'
+import { useHistory } from 'react-router-dom'
 import {
   Grid,
   TextField,
@@ -10,10 +10,10 @@ import {
   FormControlLabel,
   InputAdornment,
   LinearProgress,
-} from '@mui/material';
-import { useAppStore } from '../../../store';
-import { AppButton, AppIconButton, AppAlert, AppForm } from '../../../components';
-import { useAppForm, SHARED_CONTROL_PROPS, eventPreventDefault } from '../../../utils/form';
+} from '@mui/material'
+import { useAppStore } from '../../../appContext'
+import { AppButton, AppIconButton, AppAlert, AppForm } from '../../../components'
+import { useAppForm, SHARED_CONTROL_PROPS, eventPreventDefault } from '../../../utils/form'
 
 const VALIDATE_FORM_SIGNUP = {
   email: {
@@ -55,21 +55,21 @@ const VALIDATE_FORM_SIGNUP = {
       message: 'must be between 8 and 32 characters',
     },
   },
-};
+}
 
 const VALIDATE_EXTENSION = {
   confirmPassword: {
     equality: 'password',
   },
-};
+}
 
 interface FormStateValues {
-  firstName: string;
-  lastName: string;
-  email: string;
-  phone: string;
-  password: string;
-  confirmPassword?: string;
+  firstName: string
+  lastName: string
+  email: string
+  phone: string
+  password: string
+  confirmPassword?: string
 }
 
 /**
@@ -77,12 +77,12 @@ interface FormStateValues {
  * url: /auth/signup
  */
 const SignupView = () => {
-  const history = useHistory();
-  const [, dispatch] = useAppStore();
+  const history = useHistory()
+  const [, dispatch] = useAppStore()
   const [validationSchema, setValidationSchema] = useState<any>({
     ...VALIDATE_FORM_SIGNUP,
     ...VALIDATE_EXTENSION,
-  });
+  })
   const [formState, , /* setFormState */ onFieldChange, fieldGetError, fieldHasError] = useAppForm({
     validationSchema: validationSchema, // the state value, so could be changed in time
     initialValues: {
@@ -93,71 +93,71 @@ const SignupView = () => {
       password: '',
       confirmPassword: '',
     } as FormStateValues,
-  });
-  const [showPassword, setShowPassword] = useState(false);
-  const [agree, setAgree] = useState(false);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState<string>();
-  const values = formState.values as FormStateValues; // Typed alias to formState.values as the "Source of Truth"
+  })
+  const [showPassword, setShowPassword] = useState(false)
+  const [agree, setAgree] = useState(false)
+  const [loading, setLoading] = useState(true)
+  const [error, setError] = useState<string>()
+  const values = formState.values as FormStateValues // Typed alias to formState.values as the "Source of Truth"
 
   useEffect(() => {
     // Component Mount
-    let componentMounted = true;
+    let componentMounted = true
 
     async function fetchData() {
       //TODO: Call any Async API here
-      if (!componentMounted) return; // Component was unmounted during the API call
+      if (!componentMounted) return // Component was unmounted during the API call
       //TODO: Verify API call here
 
-      setLoading(false); // Reset "Loading..." indicator
+      setLoading(false) // Reset "Loading..." indicator
     }
-    fetchData(); // Call API asynchronously
+    fetchData() // Call API asynchronously
 
     return () => {
       // Component Un-mount
-      componentMounted = false;
-    };
-  }, []);
+      componentMounted = false
+    }
+  }, [])
 
   useEffect(() => {
     // Update Validation Schema when Show/Hide password changed
-    let newSchema;
+    let newSchema
     if (showPassword) {
-      newSchema = VALIDATE_FORM_SIGNUP; // Validation without .confirmPassword
+      newSchema = VALIDATE_FORM_SIGNUP // Validation without .confirmPassword
     } else {
-      newSchema = { ...VALIDATE_FORM_SIGNUP, ...VALIDATE_EXTENSION }; // Full validation
+      newSchema = { ...VALIDATE_FORM_SIGNUP, ...VALIDATE_EXTENSION } // Full validation
     }
-    setValidationSchema(newSchema);
-  }, [showPassword]);
+    setValidationSchema(newSchema)
+  }, [showPassword])
 
   const handleShowPasswordClick = useCallback(() => {
-    setShowPassword((oldValue) => !oldValue);
-  }, []);
+    setShowPassword((oldValue) => !oldValue)
+  }, [])
 
   const handleAgreeClick = useCallback(() => {
-    setAgree((oldValue) => !oldValue);
-  }, []);
+    setAgree((oldValue) => !oldValue)
+  }, [])
 
   const handleFormSubmit = useCallback(
     async (event: SyntheticEvent) => {
-      event.preventDefault();
+      event.preventDefault()
 
-      const apiResult = true; // await api.auth.signup(values);
+      const apiResult = true // await api.auth.signup(values);
 
       if (!apiResult) {
-        setError('Can not create user for given email, if you already have account please sign in');
-        return; // Unsuccessful signup
+        setError('Can not create user for given email, if you already have account please sign in')
+        return // Unsuccessful signup
       }
 
-      dispatch({ type: 'SIGN_UP' });
-      return history.replace('/');
+      dispatch({ type: 'SIGN_UP' })
+      return history.replace('/')
     },
-    [dispatch, /*values,*/ history]
-  );
+    [dispatch, /*values,*/ history],
+  )
 
-  const handleCloseError = useCallback(() => setError(undefined), []);
+  const handleCloseError = useCallback(() => setError(undefined), [])
 
-  if (loading) return <LinearProgress />;
+  if (loading) return <LinearProgress />
 
   return (
     <AppForm onSubmit={handleFormSubmit}>
@@ -260,7 +260,7 @@ const SignupView = () => {
         </CardContent>
       </Card>
     </AppForm>
-  );
-};
+  )
+}
 
-export default SignupView;
+export default SignupView

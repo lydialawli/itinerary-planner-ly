@@ -1,5 +1,5 @@
 // import { useEffect } from 'react';
-import { useAppStore } from '../store'
+import { useAppStore } from '../appContext'
 import PublicRoutes from './PublicRoutes'
 import PrivateRoutes from './PrivateRoutes'
 // import { isUserStillLoggedIn } from '../api/auth/utils';
@@ -33,7 +33,7 @@ const Routes = () => {
   //   }
   // }, [state.isAuthenticated, dispatch]); // Effect for every state.isAuthenticated change actually
 
-  console.log('Routes() - isAuthenticated:', state.isAuthenticated)
+  // console.log('Routes() - isAuthenticated:', state.isAuthenticated)
   return state.isAuthenticated ? <PrivateRoutes /> : <PublicRoutes />
 }
 export default Routes

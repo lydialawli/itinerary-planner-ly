@@ -5,7 +5,7 @@
  */
 import { createTheme, ThemeProvider, Theme, StyledEngineProvider, ThemeOptions } from '@mui/material/styles'
 import CssBaseline from '@mui/material/CssBaseline'
-import { useAppStore } from './store/AppStore'
+import { useAppStore } from './appContext/AppStore'
 
 // Note: Added by CodeMod when migrate form MUI 4.x to 5x
 declare module '@mui/styles/defaultTheme' {

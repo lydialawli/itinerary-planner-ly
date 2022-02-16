@@ -1,0 +1,34 @@
+{
+  "containers": [
+    {
+      "id": "container_001",
+      "format": "1",
+      "name": "Jacqueline"
+    },
+    {
+      "id": "container_002",
+      "format": "5",
+      "name": "Jean"
+    },
+    {
+      "id": "container_003",
+      "format": "1",
+      "name": "Paul"
+    },
+    {
+      "id": "container_004",
+      "format": "5",
+      "name": "Hubert"
+    },
+    {
+      "id": "container_005",
+      "format": "6",
+      "name": "Clémentine"
+    },
+    {
+      "id": "container_006",
+      "format": "6",
+      "name": "Maurice"
+    }
+  ]
+}

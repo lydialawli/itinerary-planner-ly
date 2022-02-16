@@ -1,9 +1,9 @@
-import { SyntheticEvent, useCallback, useState } from 'react';
-import { useHistory } from 'react-router-dom';
-import { Button, Grid, TextField, Card, CardHeader, CardContent, InputAdornment } from '@mui/material';
-import { useAppStore } from '../../../store';
-import { AppButton, AppLink, AppIconButton, AppAlert, AppForm } from '../../../components';
-import { useAppForm, SHARED_CONTROL_PROPS, eventPreventDefault } from '../../../utils/form';
+import { SyntheticEvent, useCallback, useState } from 'react'
+import { useHistory } from 'react-router-dom'
+import { Button, Grid, TextField, Card, CardHeader, CardContent, InputAdornment } from '@mui/material'
+import { useAppStore } from '../../../appContext'
+import { AppButton, AppLink, AppIconButton, AppAlert, AppForm } from '../../../components'
+import { useAppForm, SHARED_CONTROL_PROPS, eventPreventDefault } from '../../../utils/form'
 
 const VALIDATE_FORM_LOGIN_EMAIL = {
   email: {
@@ -18,11 +18,11 @@ const VALIDATE_FORM_LOGIN_EMAIL = {
       message: 'must be between 8 and 32 characters',
     },
   },
-};
+}
 
 interface FormStateValues {
-  email: string;
-  password: string;
+  email: string
+  password: string
 }
 
 /**
@@ -30,37 +30,37 @@ interface FormStateValues {
  * url: /auth/login/email/*
  */
 const LoginEmailView = () => {
-  const history = useHistory();
-  const [, dispatch] = useAppStore();
+  const history = useHistory()
+  const [, dispatch] = useAppStore()
   const [formState, , /* setFormState */ onFieldChange, fieldGetError, fieldHasError] = useAppForm({
     validationSchema: VALIDATE_FORM_LOGIN_EMAIL,
     initialValues: { email: '', password: '' } as FormStateValues,
-  });
-  const [showPassword, setShowPassword] = useState(false);
-  const [error, setError] = useState<string>();
-  const values = formState.values as FormStateValues; // Typed alias to formState.values as the "Source of Truth"
+  })
+  const [showPassword, setShowPassword] = useState(false)
+  const [error, setError] = useState<string>()
+  const values = formState.values as FormStateValues // Typed alias to formState.values as the "Source of Truth"
 
   const handleShowPasswordClick = useCallback(() => {
-    setShowPassword((oldValue) => !oldValue);
-  }, []);
+    setShowPassword((oldValue) => !oldValue)
+  }, [])
 
   const handleFormSubmit = useCallback(
     async (event: SyntheticEvent) => {
-      event.preventDefault();
+      event.preventDefault()
 
-      const result = true; // await api.auth.loginWithEmail(values);
+      const result = true // await api.auth.loginWithEmail(values);
       if (!result) {
-        setError('Please check email and password');
-        return;
+        setError('Please check email and password')
+        return
       }
 
-      dispatch({ type: 'LOG_IN' });
-      history.replace('/');
+      dispatch({ type: 'LOG_IN' })
+      history.replace('/')
     },
-    [dispatch, /*values,*/ history]
-  );
+    [dispatch, /*values,*/ history],
+  )
 
-  const handleCloseError = useCallback(() => setError(undefined), []);
+  const handleCloseError = useCallback(() => setError(undefined), [])
 
   return (
     <AppForm onSubmit={handleFormSubmit}>
@@ -117,7 +117,7 @@ const LoginEmailView = () => {
         </CardContent>
       </Card>
     </AppForm>
-  );
-};
+  )
+}
 
-export default LoginEmailView;
+export default LoginEmailView
