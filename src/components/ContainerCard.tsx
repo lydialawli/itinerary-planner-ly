@@ -7,6 +7,7 @@ import { Container } from '../interactions/reducers/containerReducer'
 import recipient1 from '../assets/Container-format-1.png'
 import recipient5 from '../assets/Container-format-5.png'
 import recipient6 from '../assets/Container-format-6.png'
+import Confirmation from './Confirmation'
 
 const ContainerCard = (container: Container): ReactElement => {
   const classes = useStyles()
@@ -18,16 +19,25 @@ const ContainerCard = (container: Container): ReactElement => {
   }
 
   return (
-    <Card elevation={0} sx={{ display: 'flex', padding: theme.spacing(1), borderRadius: theme.spacing(1) }}>
+    <Card
+      elevation={0}
+      sx={{
+        display: 'flex',
+        paddingLeft: theme.spacing(1),
+        borderRadius: theme.spacing(1),
+      }}
+    >
       <Box sx={{ display: 'flex' }} justifyContent="center" alignItems="center">
         <Avatar src={recipientSrc} sizes="30px" />
         <CardContent sx={{ flex: '1 0 auto' }}>
           <Typography component="div" variant="h5">
             {container.name}
           </Typography>
-          <Button variant="contained" onClick={() => moveContainer(container, 'store_001')}>
-            transfer
-          </Button>
+          <Confirmation title="Are you sure?" question="Do you really want it?" intercept={['onClick']}>
+            <Button variant="contained" onClick={() => moveContainer(container, 'store_001')}>
+              transfer
+            </Button>
+          </Confirmation>
         </CardContent>
       </Box>
     </Card>
