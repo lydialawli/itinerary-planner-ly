@@ -1,5 +1,5 @@
 import { AppStore } from './appContext'
-import { Route, Switch, BrowserRouter } from 'react-router-dom'
+import { Route, Switch, BrowserRouter, Redirect } from 'react-router-dom'
 import { Welcome, About, NotFound, Home } from './pages'
 import { PrivateLayout } from './routes/Layout'
 
@@ -20,7 +20,10 @@ const App = () => {
             <BrowserRouter>
               <PrivateLayout>
                 <Switch>
-                  <Route path="/" exact component={Home} />
+                  <Route exact path="/">
+                    <Redirect to="/dashboard" />
+                  </Route>
+                  <Route path="/dashboard/:shopId?" exact component={Home} />
                   <Route path="/welcome" component={Welcome} />
                   <Route path="/about" component={About} />,
                   <Route component={NotFound} />
