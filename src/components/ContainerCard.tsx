@@ -1,6 +1,7 @@
 import React, { ReactElement } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
-import { Paper, Typography, Grid, Box, Card, CardContent, CardMedia, Button, Avatar } from '@mui/material'
+import { StoreState } from '../interactions/reducers/containerReducer'
+import { Typography, Grid, Box, Card, CardContent, Button, Avatar } from '@mui/material'
 import { Theme, useTheme } from '@mui/material/styles'
 import makeStyles from '@mui/styles/makeStyles'
 import { Container } from '../interactions/reducers/containerReducer'
@@ -14,8 +15,11 @@ const ContainerCard = (container: Container): ReactElement => {
   const theme = useTheme()
   const dispatch = useDispatch()
   const recipientSrc = container.format === '1' ? recipient1 : container.format === '5' ? recipient5 : recipient6
-  const moveContainer = (container: Container, shopId?: string) => {
-    dispatch({ type: 'transferToStore', payload: { container, shopId } })
+  const selectedStore = useSelector<StoreState, string>((state) => state.selectedStore)
+
+  const moveContainer = (container: Container, shopId: string) => {
+    if (shopId !== '') dispatch({ type: 'transferToStore', payload: { container, shopId } })
+    // else dispatch({ type: 'backToBikeStock', payload: { container, shopId: shopId } })
   }
 
   return (
@@ -34,7 +38,7 @@ const ContainerCard = (container: Container): ReactElement => {
             {container.name}
           </Typography>
           <Confirmation title="Where to?" intercept={['onClick']}>
-            <Button variant="contained" onClick={() => moveContainer(container, 'store_001')}>
+            <Button variant="contained" onClick={() => moveContainer(container, selectedStore)}>
               transfer
             </Button>
           </Confirmation>

@@ -44,7 +44,7 @@ export const containerReducer = (state: StoreState = initialState, action: Actio
 
         return shop
       })
-      return { ...state, bikeStock: newBikeStock, stores: newStores }
+      return { bikeStock: newBikeStock, stores: newStores, selectedStore: '' }
     }
     case 'backToBikeStock': {
       // TODO: add logic

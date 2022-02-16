@@ -20,6 +20,7 @@ const SelectShop = (): ReactElement => {
       sx={{ width: 300 }}
       options={stores}
       onChange={(_e, shop) => setSelectedStore(shop?.id || '')}
+      // TODO: fix bug visited
       groupBy={(shop) => (shop.isVisited ? 'Visited' : 'Not visited yet')}
       autoHighlight
       getOptionLabel={(shop) => shop.name}

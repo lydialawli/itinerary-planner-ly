@@ -175,6 +175,7 @@ function ConfirmationDialog({
             color="inherit"
             onClick={(event: MouseEvent<HTMLButtonElement>) => {
               onCancel?.(event)
+              //TODO: dispatch unselect shop
               closeDialog()
             }}
           >
