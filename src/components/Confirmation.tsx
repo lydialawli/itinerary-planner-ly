@@ -10,7 +10,7 @@ import {
   DialogContentText,
   TextField,
 } from '@mui/material'
-
+import SuggestionShop from './SuggestionsShop'
 import { DialogActions } from '@material-ui/core'
 
 export type ConfirmationProps = Omit<
@@ -119,10 +119,6 @@ type ConfirmationDialogProps = {
    * optional title to use as dialog title
    */
   title?: string
-  /**
-   * String for the question in the dialog content area
-   */
-  question: string
 
   /**
    * String for the confirmation button label
@@ -147,7 +143,6 @@ type ConfirmationDialogProps = {
 function ConfirmationDialog({
   closeDialog,
   title,
-  question,
   level,
   userInput,
   error,
@@ -171,12 +166,9 @@ function ConfirmationDialog({
     <>
       <Dialog open onClose={() => closeDialog} TransitionComponent={Transition}>
         {title && <DialogTitle>{title}</DialogTitle>}
-        {question && (
-          <DialogContent>
-            <DialogContentText id="alert-dialog-slide-description">{question}</DialogContentText>
-          </DialogContent>
-        )}
-
+        <Box margin="20px">
+          <SuggestionShop />
+        </Box>
         <DialogActions>
           <Button
             variant="text"
@@ -209,7 +201,6 @@ export default forwardRef<JSX.Element, ConfirmationProps>(function Confirmation(
     stopPropagation = false,
     title,
     onCancel,
-    question,
     children,
   }: ConfirmationProps,
   ref,
@@ -265,7 +256,6 @@ export default forwardRef<JSX.Element, ConfirmationProps>(function Confirmation(
   } = {
     closeDialog,
     title,
-    question,
     level,
     userInput,
     error,

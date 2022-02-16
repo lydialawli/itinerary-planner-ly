@@ -33,7 +33,7 @@ const ContainerCard = (container: Container): ReactElement => {
           <Typography component="div" variant="h5">
             {container.name}
           </Typography>
-          <Confirmation title="Are you sure?" question="Do you really want it?" intercept={['onClick']}>
+          <Confirmation title="Where to?" intercept={['onClick']}>
             <Button variant="contained" onClick={() => moveContainer(container, 'store_001')}>
               transfer
             </Button>
