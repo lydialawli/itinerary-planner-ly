@@ -14,9 +14,11 @@ import {
   Avatar,
   Chip,
   Divider,
+  IconButton,
 } from '@mui/material'
 import { Theme, useTheme } from '@mui/material/styles'
 import makeStyles from '@mui/styles/makeStyles'
+import { Close as CloseIcon } from '@mui/icons-material'
 import storePng from '../assets/store-icon.png'
 import recipient1 from '../assets/Container-format-1.png'
 import ContainerCard from '../components/ContainerCard'
@@ -47,7 +49,13 @@ const ShopOverlay = ({ shop, onClose }: ShopOverlayProps): ReactElement => {
       open={true}
     >
       <div className={classes.root} style={{ minWidth: isDesktop ? '40vw' : 300 }}>
-        <Typography variant="h6">{shop.name}</Typography>
+        <Grid container alignItems="center">
+          <IconButton>
+            <CloseIcon fontSize="small" />
+          </IconButton>
+
+          <Typography variant="h4">{shop.name}</Typography>
+        </Grid>
         <Divider />
 
         <Typography variant="h6">containers ({shop.containers.length}):</Typography>
