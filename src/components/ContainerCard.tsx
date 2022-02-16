@@ -26,7 +26,7 @@ const ContainerCard = (container: Container): ReactElement => {
             {container.name}
           </Typography>
           <Button variant="contained" onClick={() => moveContainer(container, 'store_001')}>
-            press me
+            transfer
           </Button>
         </CardContent>
       </Box>

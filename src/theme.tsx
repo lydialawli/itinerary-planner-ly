@@ -54,6 +54,7 @@ const DARK_THEME: ThemeOptions = {
     },
     ...FRONT_COLORS,
   },
+
   // typography: {
   //   h1: {
   //     fontSize: '3rem',
