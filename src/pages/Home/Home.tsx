@@ -5,6 +5,7 @@ import { Theme, useTheme } from '@mui/material/styles'
 import makeStyles from '@mui/styles/makeStyles'
 import { StoreState, Container, Store } from '../../interactions/reducers/containerReducer'
 import ShopCard from '../../components/ShopCard'
+import ContainerCard from '../../components/ContainerCard'
 
 const Home = (): ReactElement => {
   const classes = useStyles()
@@ -15,30 +16,14 @@ const Home = (): ReactElement => {
   const stores = useSelector<StoreState, Store[]>((state) => state.stores)
   console.log(bikeStock, stores)
 
-  const moveContainer = (container: Container, shopId?: string) => {
-    dispatch({ type: 'MOVE_TO_STORE', payload: { container, shopId } })
-  }
-
   return (
     <Grid container>
       <Box margin={theme.spacing(2)}>
         <Typography variant="h6">BIKE STOCK ({bikeStock.length || 0})</Typography>
-        <Paper className={classes.paper}>
-          <Grid container direction={'column'}>
-            {bikeStock &&
-              bikeStock.length > 0 &&
-              bikeStock.map((n, i) => (
-                <Grid container key={n.id}>
-                  <Typography variant="h6">
-                    container {i + 1}: {n.name}
-                  </Typography>
-                  <Button variant="contained" onClick={() => moveContainer(n, 'store_001')}>
-                    press me
-                  </Button>
-                </Grid>
-              ))}
-          </Grid>
-        </Paper>
+
+        <Grid container>
+          {bikeStock && bikeStock.length > 0 && bikeStock.map((container) => <ContainerCard {...container} />)}
+        </Grid>
       </Box>
       <Box margin={theme.spacing(2)}>
         <Typography variant="h6">SHOPS</Typography>

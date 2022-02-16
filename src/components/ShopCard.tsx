@@ -12,7 +12,7 @@ const ShopCard = (shop: Store): ReactElement => {
   const theme = useTheme()
 
   return (
-    <Card sx={{ display: 'flex', maxWidth: '250px', padding: theme.spacing(1) }}>
+    <Card elevation={0} sx={{ display: 'flex', maxWidth: '250px', padding: theme.spacing(1) }}>
       <Box sx={{ display: 'flex', flexDirection: 'column' }}>
         <CardMedia component="img" sx={{ width: 60 }} image={storePng} alt="shop" />
         <CardContent sx={{ flex: '1 0 auto' }}>
