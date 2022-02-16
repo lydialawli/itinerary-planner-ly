@@ -10,7 +10,7 @@ import { ErrorBoundary } from '../../components'
 import SideBar from '../../components/SideBar/SideBar'
 import { LinkToPage } from '../../utils/type'
 
-const TITLE_PRIVATE = `Lydia's Vitamin Challenge app`
+const TITLE_PRIVATE = `Itinerary Planner`
 const MOBILE_SIDEBAR_ANCHOR = 'left' // 'right'
 const DESKTOP_SIDEBAR_ANCHOR = 'left' // 'right'
 export const SIDEBAR_WIDTH = 240 // 240px

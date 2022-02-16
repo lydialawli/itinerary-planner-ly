@@ -1,6 +1,6 @@
 import React, { ReactElement } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
-import { Paper, Typography, Grid, Button } from '@mui/material'
+import { Paper, Typography, Grid, Button, Box } from '@mui/material'
 import { Theme } from '@mui/material/styles'
 import makeStyles from '@mui/styles/makeStyles'
 import { StoreState, Container, Store } from '../../interactions/reducers/containerReducer'
@@ -13,49 +13,52 @@ const MainPaper = (): ReactElement => {
   console.log(bikeStock, stores)
 
   const moveContainer = (container: Container, shopId?: string) => {
-    // console.log(container, shopId);
     dispatch({ type: 'MOVE_TO_STORE', payload: { container, shopId } })
   }
 
   return (
-    <Grid container justifyContent="center" alignItems="center">
-      <Paper>
+    <Grid container>
+      <Box>
         <Typography variant="h6">BIKE STOCK ({bikeStock.length || 0})</Typography>
-        <Grid container direction={'column'}>
-          {bikeStock &&
-            bikeStock.length > 0 &&
-            bikeStock.map((n, i) => (
-              <Grid container key={n.id}>
-                <Typography variant="h6">
-                  container {i + 1}: {n.name}
-                </Typography>
-                <Button variant="contained" onClick={() => moveContainer(n, 'store_001')}>
-                  press me
-                </Button>
-              </Grid>
-            ))}
-        </Grid>
-      </Paper>
-      <Paper>
+        <Paper className={classes.paper}>
+          <Grid container direction={'column'}>
+            {bikeStock &&
+              bikeStock.length > 0 &&
+              bikeStock.map((n, i) => (
+                <Grid container key={n.id}>
+                  <Typography variant="h6">
+                    container {i + 1}: {n.name}
+                  </Typography>
+                  <Button variant="contained" onClick={() => moveContainer(n, 'store_001')}>
+                    press me
+                  </Button>
+                </Grid>
+              ))}
+          </Grid>
+        </Paper>
+      </Box>
+      <Box>
         <Typography variant="h6">SHOPS</Typography>
-        <Grid container direction={'column'}>
-          {stores &&
-            stores.length > 0 &&
-            stores.map((shop, i) => (
-              <Grid
-                container
-                key={shop.id}
-                alignItems="center"
-                style={{ backgroundColor: shop.isVisited ? 'pink' : undefined }}
-              >
-                <Typography variant="h6">
-                  store {i + 1}: {shop.name}
-                </Typography>
-                <Typography variant="body1">containers: {shop.containers?.length || 0}</Typography>
-              </Grid>
-            ))}
-        </Grid>
-      </Paper>
+        <Paper className={classes.paper}>
+          <Grid container direction={'column'}>
+            {stores &&
+              stores.length > 0 &&
+              stores.map((shop, i) => (
+                <Grid
+                  container
+                  key={shop.id}
+                  alignItems="center"
+                  style={{ backgroundColor: shop.isVisited ? 'pink' : undefined }}
+                >
+                  <Typography variant="h6">
+                    store {i + 1}: {shop.name}
+                  </Typography>
+                  <Typography variant="body1">containers: {shop.containers?.length || 0}</Typography>
+                </Grid>
+              ))}
+          </Grid>
+        </Paper>
+      </Box>
     </Grid>
   )
 }

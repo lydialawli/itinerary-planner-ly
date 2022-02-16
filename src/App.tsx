@@ -1,5 +1,8 @@
 import { AppStore } from './appContext'
-import { AppRouter, Routes } from './routes'
+import { Route, Switch, BrowserRouter } from 'react-router-dom'
+import { Welcome, About, NotFound, Home } from './views'
+import { PrivateLayout } from './routes/Layout'
+
 import { ErrorBoundary } from './components'
 import { AppThemeProvider } from './theme'
 import { Provider } from 'react-redux'
@@ -14,9 +17,16 @@ const App = () => {
       <AppStore>
         <Provider store={store}>
           <AppThemeProvider>
-            <AppRouter>
-              <Routes />
-            </AppRouter>
+            <BrowserRouter>
+              <PrivateLayout>
+                <Switch>
+                  <Route path="/" exact component={Home} />
+                  <Route path="/welcome" component={Welcome} />
+                  <Route path="/about" component={About} />,
+                  <Route component={NotFound} />
+                </Switch>
+              </PrivateLayout>
+            </BrowserRouter>
           </AppThemeProvider>
         </Provider>
       </AppStore>
