@@ -1,6 +1,5 @@
 import React, { ReactElement } from 'react'
-import { useSelector } from 'react-redux'
-import { StoreState, Container, Store } from '../interactions/reducers/containerReducer'
+import { Store } from '../interactions/reducers/containerReducer'
 import {
   useMediaQuery,
   Paper,
@@ -20,6 +19,7 @@ import { Theme, useTheme } from '@mui/material/styles'
 import makeStyles from '@mui/styles/makeStyles'
 import storePng from '../assets/store-icon.png'
 import recipient1 from '../assets/Container-format-1.png'
+import ContainerCard from '../components/ContainerCard'
 
 const transitionDuration = 1000
 
@@ -50,7 +50,10 @@ const ShopOverlay = ({ shop, onClose }: ShopOverlayProps): ReactElement => {
         <Typography variant="h6">{shop.name}</Typography>
         <Divider />
 
-        <Typography variant="h6">SHOPS</Typography>
+        <Typography variant="h6">containers ({shop.containers.length}):</Typography>
+        {shop.containers.map((container) => (
+          <ContainerCard {...container} key={container.id} />
+        ))}
       </div>
     </Drawer>
   )
@@ -59,7 +62,7 @@ const ShopOverlay = ({ shop, onClose }: ShopOverlayProps): ReactElement => {
 const useStyles = makeStyles((theme: Theme) => ({
   drawer: {
     '& .MuiBackdrop-root': {
-      backgroundColor: 'rgba(0,0,0,0.1)',
+      backgroundColor: 'rgba(0,0,0,0.2)',
     },
   },
   root: {

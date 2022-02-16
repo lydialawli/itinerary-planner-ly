@@ -13,7 +13,6 @@ const Home = (): ReactElement => {
 
   const bikeStock = useSelector<StoreState, Container[]>((state) => state.bikeStock)
   const stores = useSelector<StoreState, Store[]>((state) => state.stores)
-  console.log(bikeStock, stores)
 
   return (
     <Grid container spacing={theme.spacing(1)}>

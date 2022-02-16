@@ -17,8 +17,7 @@ const ShopCard = (shop: Store): ReactElement => {
   const history = useHistory()
   const theme = useTheme()
   const { shopId } = useParams<ParamTypes>()
-  console.log({ shopId })
-
+  console.log(shop)
   return (
     <Grid item xs={8} sm={4}>
       <Link to={`/dashboard/${shop.id}`} component={RouterLink}>
@@ -42,7 +41,7 @@ const ShopCard = (shop: Store): ReactElement => {
           </Box>
         </Card>
       </Link>
-      {shopId && <ShopOverlay shop={shop} onClose={() => history.push('/dashboard')} />}
+      {!!shopId && shopId === shop.id && <ShopOverlay shop={shop} onClose={() => history.push('/dashboard')} />}
     </Grid>
   )
 }
