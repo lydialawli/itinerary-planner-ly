@@ -1,37 +1,57 @@
-# Lydia's Vitamin Challenge
+TODO: 
+- [x]  initial store with bike and store data
+- [ ]  basic features
+  - [x]  show list containers
+  - [x]  show list stores
+    - [x]  if visited or not
+    - [x]  containers stock
+    - [x]  basic details like name
+- [x]  function addToStore
+- [ ]  function addToBikeStore
 
-## Getting started
+# Getting Started with Create React App
 
-1. Clone or download the repo
-2. `yarn` or `npm install` 
-3. `yarn start` or `yarn dev` or `npm start` or `npm run dev`
-4. Test the app in the browser.
-Runs the app in the development mode.<br />
-Open [http://localhost:3000](http://localhost:3000).
+This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
-If you accidently log out, type any (fake is fine, like 123@123.com) input and you will be redirected to Home page. 
+## Available Scripts
 
-## Notes
+In the project directory, you can run:
 
-- I used this to starter project for efficiency 
-https://github.com/karpolan/react-typescript-material-ui-with-auth-starter
+### `npm start`
 
+Runs the app in the development mode.\
+Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
 
+The page will reload if you make edits.\
+You will also see any lint errors in the console.
 
-### Things I would have done with more time
+### `npm test`
 
-- questionnaire to extract user info
-- save user info in AppContext or Redux
-- Make a proper Line Graph 
-- Remove unnecessary files 
-- handle loading 
-- add tests
-- ...
+Launches the test runner in the interactive watch mode.\
+See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
 
+### `npm run build`
 
-~~Please let me know if you need my **api key** from the financial market site.
-I put it inside an .env file for common practice.~~
+Builds the app for production to the `build` folder.\
+It correctly bundles React in production mode and optimizes the build for the best performance.
 
-## Screenshot
+The build is minified and the filenames include the hashes.\
+Your app is ready to be deployed!
 
-![screenshot](screenshot.png)
+See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+
+### `npm run eject`
+
+**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+
+If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+
+Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+
+You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+
+## Learn More
+
+You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+
+To learn React, check out the [React documentation](https://reactjs.org/).

@@ -1,18 +1,18 @@
-import { useCallback } from 'react';
-import clsx from 'clsx';
-import Divider from '@mui/material/Divider';
-import Drawer, { DrawerProps } from '@mui/material/Drawer';
-import FormControlLabel from '@mui/material/FormControlLabel';
-import Switch from '@mui/material/Switch';
-import Tooltip from '@mui/material/Tooltip';
-import { Theme } from '@mui/material/styles';
-import makeStyles from '@mui/styles/makeStyles';
-import { useAppStore } from '../../store/AppStore';
-import { AppIconButton } from '../../components';
-import UserInfo from '../UserInfo/UserInfo';
-import SideBarNavigation from './SideBarNavigation';
-import { SIDEBAR_WIDTH } from '../../routes/Layout/PrivateLayout';
-import { LinkToPage } from '../../utils/type';
+import { useCallback } from 'react'
+import clsx from 'clsx'
+import Divider from '@mui/material/Divider'
+import Drawer, { DrawerProps } from '@mui/material/Drawer'
+import FormControlLabel from '@mui/material/FormControlLabel'
+import Switch from '@mui/material/Switch'
+import Tooltip from '@mui/material/Tooltip'
+import { Theme } from '@mui/material/styles'
+import makeStyles from '@mui/styles/makeStyles'
+import { useAppStore } from '../../store/AppStore'
+import { AppIconButton } from '../../components'
+import UserInfo from '../UserInfo/UserInfo'
+import SideBarNavigation from './SideBarNavigation'
+import { SIDEBAR_WIDTH } from '../../routes/Layout/PrivateLayout'
+import { LinkToPage } from '../../utils/type'
 
 const useStyles = makeStyles((theme: Theme) => ({
   root: {
@@ -40,7 +40,7 @@ const useStyles = makeStyles((theme: Theme) => ({
     alignItems: 'center',
     marginTop: theme.spacing(2),
   },
-}));
+}))
 
 /**
  * Renders SideBar with Menu and User details
@@ -53,50 +53,43 @@ const useStyles = makeStyles((theme: Theme) => ({
  * @param {func} [props.onClose] - called when the Drawer is closing
  */
 interface Props extends Pick<DrawerProps, 'anchor' | 'className' | 'open' | 'variant' | 'onClose'> {
-  items: Array<LinkToPage>;
+  items: Array<LinkToPage>
 }
 const SideBar: React.FC<Props> = ({ anchor, className, open, variant, items, onClose, ...restOfProps }) => {
-  const [state, dispatch] = useAppStore();
-  const classes = useStyles();
+  const [state, dispatch] = useAppStore()
+  const classes = useStyles()
 
   const handleSwitchDarkMode = useCallback(() => {
     dispatch({
       type: 'DARK_MODE',
       darkMode: !state.darkMode,
       payload: !state.darkMode,
-    });
-  }, [state, dispatch]);
+    })
+  }, [state, dispatch])
 
   const handleOnLogout = useCallback(async () => {
     // await api.auth.logout();
-    dispatch({ type: 'LOG_OUT' });
-  }, [dispatch]);
+    dispatch({ type: 'LOG_OUT' })
+  }, [dispatch])
 
   const handleAfterLinkClick = useCallback(
     (event: React.MouseEvent) => {
       if (variant === 'temporary' && typeof onClose === 'function') {
-        onClose(event, 'backdropClick');
+        onClose(event, 'backdropClick')
       }
     },
-    [variant, onClose]
-  );
+    [variant, onClose],
+  )
 
   const drawerClasses = {
     // See: https://material-ui.com/api/drawer/#css
     paper: classes.paperInDrawer,
-  };
-  const classRoot = clsx(classes.root, className);
+  }
+  const classRoot = clsx(classes.root, className)
 
   return (
     <Drawer anchor={anchor} classes={drawerClasses} open={open} variant={variant} onClose={onClose}>
       <div className={classRoot} {...restOfProps} onClick={handleAfterLinkClick}>
-        {state.isAuthenticated /*&& state?.currentUser*/ && (
-          <>
-            <UserInfo className={classes.profile} user={state.currentUser} showAvatar />
-            <Divider />
-          </>
-        )}
-
         <SideBarNavigation className={classes.nav} items={items} showIcons />
         <Divider />
 
@@ -107,14 +100,10 @@ const SideBar: React.FC<Props> = ({ anchor, className, open, variant, items, onC
               control={<Switch checked={state.darkMode} onChange={handleSwitchDarkMode} />}
             />
           </Tooltip>
-
-          {state.isAuthenticated && (
-            <AppIconButton icon="logout" title="Logout Current User" onClick={handleOnLogout} />
-          )}
         </div>
       </div>
     </Drawer>
-  );
-};
+  )
+}
 
-export default SideBar;
+export default SideBar
