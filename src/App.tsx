@@ -1,6 +1,6 @@
 import { AppStore } from './appContext'
 import { Route, Switch, BrowserRouter } from 'react-router-dom'
-import { Welcome, About, NotFound, Home } from './views'
+import { Welcome, About, NotFound, Home } from './pages'
 import { PrivateLayout } from './routes/Layout'
 
 import { ErrorBoundary } from './components'

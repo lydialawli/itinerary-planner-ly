@@ -1,11 +1,13 @@
-import clsx from 'clsx';
-import { Theme, AppBar, Toolbar, Typography } from '@mui/material';
-import makeStyles from '@mui/styles/makeStyles';
-import AppIconButton from '../AppIconButton';
+import clsx from 'clsx'
+import { Theme, AppBar, Toolbar, Typography } from '@mui/material'
+import makeStyles from '@mui/styles/makeStyles'
+import AppIconButton from '../AppIconButton'
 
 const useStyles = makeStyles((theme: Theme) => ({
   root: {
     // boxShadow: 'none', // Uncomment to hide shadow
+    backgroundColor: '#0e0924',
+    color: '#fff',
     minWidth: '20rem',
     // backgroundColor: theme.palette.primary.main, // Uncomment if you also need colored background in dark mode
   },
@@ -24,17 +26,17 @@ const useStyles = makeStyles((theme: Theme) => ({
     whiteSpace: 'nowrap',
   },
   buttons: {},
-}));
+}))
 
 /**
  * Renders TopBar composition
  */
 interface Props {
-  className?: string;
-  title?: string;
-  isAuthenticated?: boolean;
-  onMenu?: () => void;
-  onNotifications?: () => void;
+  className?: string
+  title?: string
+  isAuthenticated?: boolean
+  onMenu?: () => void
+  onNotifications?: () => void
 }
 const TopBar: React.FC<Props> = ({
   className,
@@ -44,7 +46,7 @@ const TopBar: React.FC<Props> = ({
   onNotifications,
   ...restOfProps
 }) => {
-  const classes = useStyles();
+  const classes = useStyles()
   // const iconMenu = isAuthenticated ? 'account' : 'menu';
 
   return (
@@ -68,7 +70,7 @@ const TopBar: React.FC<Props> = ({
         </div>
       </Toolbar>
     </AppBar>
-  );
-};
+  )
+}
 
-export default TopBar;
+export default TopBar

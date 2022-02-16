@@ -1,8 +1,8 @@
 import { Route, Switch } from 'react-router-dom'
-import AuthRoutes from '../views/Auth'
-import { About, NotFound } from '../views'
+import AuthRoutes from '../pages/Auth'
+import { About, NotFound } from '../pages'
 import { PublicLayout } from './Layout'
-import LoginEmailView from '../views/Auth/Login/Email'
+import LoginEmailView from '../pages/Auth/Login/Email'
 
 /**
  * List of routes available only for anonymous users

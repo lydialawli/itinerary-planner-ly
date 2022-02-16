@@ -19,11 +19,11 @@ declare module '@mui/styles/defaultTheme' {
  */
 const FRONT_COLORS = {
   primary: {
-    main: '#64B5F6',
+    main: '#F8D348',
     contrastText: '#000000',
   },
   secondary: {
-    main: '#EF9A9A',
+    main: '#F50057',
     contrastText: '#000000',
   },
 }
@@ -35,7 +35,7 @@ const LIGHT_THEME: ThemeOptions = {
   palette: {
     mode: 'light',
     background: {
-      default: '#f5f5f5', // Gray 100 - Background of "Paper" based component
+      default: '#F6F9FF', // Gray 100 - Background of "Paper" based component
       paper: '#FFFFFF',
     },
     ...FRONT_COLORS,
