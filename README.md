@@ -1,13 +1,16 @@
 TODO: 
 - [x]  initial store with bike and store data
-- [ ]  basic features
+- [x]  basic features
   - [x]  show list containers
   - [x]  show list stores
     - [x]  if visited or not
     - [x]  containers stock
     - [x]  basic details like name
 - [x]  function addToStore
-- [ ]  function addToBikeStore
+- [x]  function addToBikeStore
+- [ ]  styling improvs
+- [ ]  visited as an icon
+- [ ]  multiple select? 
 
 # Getting Started with Create React App
 

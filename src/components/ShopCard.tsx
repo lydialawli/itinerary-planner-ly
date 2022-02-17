@@ -1,4 +1,4 @@
-import React, { ReactElement } from 'react'
+import React, { ReactElement, useState } from 'react'
 import { Link as RouterLink, useParams, useHistory } from 'react-router-dom'
 import {
   Paper,
@@ -39,7 +39,15 @@ const ShopCard = (shop: Store): ReactElement => {
   return (
     <>
       <Link to={`/dashboard/${shop.id}`} component={RouterLink} underline="none">
-        <Card elevation={0} sx={{ display: 'flex' }}>
+        <Card
+          elevation={0}
+          sx={{
+            display: 'flex',
+            ':hover': {
+              boxShadow: theme.shadows[20],
+            },
+          }}
+        >
           <Box justifyContent="center" height="300px">
             <ImageListItem key={shop.url}>
               <img
