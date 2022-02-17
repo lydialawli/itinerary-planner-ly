@@ -31,8 +31,8 @@ const ShopOverlay = ({ shop, onClose }: ShopOverlayProps): ReactElement => {
       onClose={onClose}
       open={true}
     >
-      <Box paddingY={theme.spacing(2)} minWidth={isDesktop ? '40vw' : 300}>
-        <Box paddingTop={theme.spacing(2)}>
+      <Box paddingY={theme.spacing(2)} minWidth={isDesktop ? '40vw' : '80vw'}>
+        <Box paddingTop={theme.spacing(2)} marginLeft={theme.spacing(2)}>
           <Grid container alignItems="center" justifyContent="flex-start">
             <IconButton onClick={onClose}>
               <CloseIcon fontSize="small" />

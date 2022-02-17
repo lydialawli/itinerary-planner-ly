@@ -39,9 +39,13 @@ export const containerReducer = (state: StoreState = initialState, action: Actio
     case 'transferToStore': {
       const newBikeStock = state.bikeStock.filter((b) => b.id !== action.payload.container.id)
       const newStores = state.stores.map((shop) => {
-        if (shop.id === action.payload.shopId) {
+        if (shop.id === action.payload.toShopId) {
           shop.containers?.push(action.payload.container)
           shop.isVisited = Visited.isVisited
+        }
+        if (!!action.payload.fromShopId && action.payload.fromShopId === shop.id) {
+          const newContainers = shop.containers.filter((c) => c.id !== action.payload.container.id)
+          return { ...shop, containers: newContainers }
         }
 
         return shop
@@ -50,7 +54,7 @@ export const containerReducer = (state: StoreState = initialState, action: Actio
     }
     case 'backToBikeStock': {
       const newStores = state.stores.map((shop) => {
-        if (shop.id === action.payload.shopId) {
+        if (shop.id === action.payload.fromShopId) {
           const newContainers = shop.containers.filter((c) => c.id !== action.payload.container.id)
           return { ...shop, containers: newContainers }
         }

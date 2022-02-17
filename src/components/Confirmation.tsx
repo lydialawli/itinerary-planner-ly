@@ -136,9 +136,13 @@ function ConfirmationDialog({
 
   const moveContainer = () => {
     if (shopId !== undefined && !!backToBike) {
-      dispatch({ type: 'backToBikeStock', payload: { container, shopId } })
+      dispatch({ type: 'backToBikeStock', payload: { container, fromShopId: shopId } })
     } else {
-      selectedStore !== '' && dispatch({ type: 'transferToStore', payload: { container, shopId: selectedStore } })
+      selectedStore !== '' &&
+        dispatch({
+          type: 'transferToStore',
+          payload: { container, toShopId: selectedStore, fromShopId: shopId || undefined },
+        })
     }
   }
 
