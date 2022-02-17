@@ -1,11 +1,12 @@
 import React, { ReactElement } from 'react'
 import { useSelector } from 'react-redux'
-import { Paper, Typography, Grid, Button, Box, Divider } from '@mui/material'
+import { Paper, Typography, Grid, Button, Box, Divider, Avatar } from '@mui/material'
 import { Theme, useTheme } from '@mui/material/styles'
 import makeStyles from '@mui/styles/makeStyles'
 import { StoreState, Container, Store } from '../../interactions/reducers/containerReducer'
 import ShopCard from '../../components/ShopCard'
 import ContainerCard from '../../components/ContainerCard'
+import storePng from '../../assets/store-icon.png'
 
 const Home = (): ReactElement => {
   const classes = useStyles()
@@ -31,16 +32,16 @@ const Home = (): ReactElement => {
             ))}
         </Grid>
         <Box paddingY={theme.spacing(4)}></Box>
-
-        <Typography paddingBottom={theme.spacing(2)} variant="h6">
-          SHOPS
-        </Typography>
+        <Grid container alignItems="center" justifyContent="flex-start">
+          <Avatar src={storePng} />
+          <Typography variant="h6">SHOPS</Typography>
+        </Grid>
         <Grid container spacing={2} justifyContent="flex-start">
           {stores &&
             stores.length > 0 &&
             stores.map((shop) => (
               <Grid item xs={8} md={4}>
-                <ShopCard {...shop} key={shop.id} />{' '}
+                <ShopCard {...shop} key={shop.id} />
               </Grid>
             ))}
         </Grid>
