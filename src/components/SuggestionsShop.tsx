@@ -8,7 +8,7 @@ import storePng from '../assets/store-icon.png'
 
 const SelectShop = ({ setSelectedStore }: { setSelectedStore: (shopId: string) => void }): ReactElement => {
   const theme = useTheme()
-  const isMobile = useMediaQuery(theme.breakpoints.up('xs'), { defaultMatches: true })
+  const isMobile = useMediaQuery(theme.breakpoints.down('xs'))
 
   const stores = useSelector<StoreState, Store[]>((state) => state.stores).sort((a, b) =>
     a.isVisited > b.isVisited ? 1 : -1,
