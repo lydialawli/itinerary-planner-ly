@@ -1,13 +1,17 @@
 import React, { ReactElement, useState } from 'react'
 import Lottie from 'react-lottie-player'
-import { Store } from '../../interactions/reducers/containerReducer'
-import { useMediaQuery, Drawer, Typography, Grid, Box, Divider, IconButton } from '@mui/material'
+import { useSelector } from 'react-redux'
+import { Store, Container, StoreState } from '../../interactions/reducers/containerReducer'
+import { useMediaQuery, Drawer, Typography, Box, Divider, Grid, Button, IconButton } from '@mui/material'
 import { Theme, useTheme } from '@mui/material/styles'
 import makeStyles from '@mui/styles/makeStyles'
-import { Close as CloseIcon } from '@mui/icons-material'
 import ContainerCard from '../ContainerCard'
 import LottieAstronaut from '../../assets/lottieAstronaut.json'
 import HeaderOverlay from './HeaderOverlay'
+import { CheckBoxOutlineBlank as Checkbox } from '@mui/icons-material'
+import { CheckBoxRounded as CheckboxChecked } from '@mui/icons-material'
+import { DeliveryDining } from '@mui/icons-material'
+import Confirmation from '../../components/Confirmation'
 
 const transitionDuration = 1000
 
@@ -21,6 +25,23 @@ const ShopOverlay = ({ shop, onClose }: ShopOverlayProps): ReactElement => {
   const theme = useTheme()
   const isDesktop = useMediaQuery(theme.breakpoints.up('md'), { defaultMatches: true })
   const [selectedContainers, setSelectedContainers] = useState<string[]>([])
+  const bikeStock = useSelector<StoreState, Container[]>((state) => state.bikeStock)
+
+  const handleSelect = (containerId: string) => {
+    if (selectedContainers.includes(containerId)) {
+      setSelectedContainers((sel) => sel.filter((s) => s !== containerId))
+    } else {
+      setSelectedContainers((sel) => [...sel, containerId])
+    }
+  }
+  const handleSelectAll = () => {
+    if (selectedContainers.length === bikeStock.length) {
+      setSelectedContainers([])
+    } else {
+      const containerIds = bikeStock.map((c) => c.id)
+      setSelectedContainers(containerIds)
+    }
+  }
 
   return (
     <Drawer
@@ -41,9 +62,39 @@ const ShopOverlay = ({ shop, onClose }: ShopOverlayProps): ReactElement => {
           <Divider color={theme.palette.background.paper} />
         </Box>
         <Box paddingX={theme.spacing(3)}>
-          <Typography variant="h6" paddingBottom={theme.spacing(2)}>
-            Containers ({shop.containers.length}):
-          </Typography>
+          <Grid container justifyContent="space-between">
+            <Typography variant="h6" paddingBottom={theme.spacing(2)}>
+              Containers ({shop.containers.length}):
+            </Typography>
+            <Grid item>
+              <Confirmation title="Where to?" intercept={['onClick']} containers={selectedContainers || []}>
+                <Button
+                  disabled={selectedContainers.length === 0}
+                  size="small"
+                  disableElevation
+                  className={classes.button}
+                  variant="contained"
+                  onClick={() => {
+                    setSelectedContainers([])
+                  }}
+                >
+                  <DeliveryDining /> &nbsp; transfer selected
+                </Button>
+              </Confirmation>
+
+              <IconButton size="small" onClick={handleSelectAll}>
+                <Typography variant="body1" color={theme.palette.grey[400]} marginRight={theme.spacing(1)}>
+                  Select all
+                </Typography>
+                {selectedContainers.length === bikeStock.length ? (
+                  <CheckboxChecked color="secondary" />
+                ) : (
+                  <Checkbox color="secondary" />
+                )}
+              </IconButton>
+            </Grid>
+          </Grid>
+
           <Box
             minHeight="50vh"
             padding={theme.spacing(2)}
@@ -60,7 +111,12 @@ const ShopOverlay = ({ shop, onClose }: ShopOverlayProps): ReactElement => {
             ) : (
               shop.containers.map((container) => (
                 <Box padding={theme.spacing(1)}>
-                  <ContainerCard container={container} key={container.id} handleSelect={console.log} />
+                  <ContainerCard
+                    container={container}
+                    key={container.id}
+                    selectedContainers={selectedContainers}
+                    handleSelect={handleSelect}
+                  />
                 </Box>
               ))
             )}
@@ -77,8 +133,9 @@ const useStyles = makeStyles((theme: Theme) => ({
       backgroundColor: 'rgba(0,0,0,0.2)',
     },
   },
-  whiteGradient: {
-    background: `linear-gradient(0deg, ${theme.palette.background.paper} 0%, rgba(255,255,255,0) 100%)`,
+  button: {
+    textTransform: 'none',
+    marginRight: theme.spacing(1),
   },
 }))
 
