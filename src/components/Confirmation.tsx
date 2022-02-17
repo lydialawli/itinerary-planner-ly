@@ -174,6 +174,7 @@ function ConfirmationDialog({
         </Box>
         <DialogActions>
           <Button
+            style={{ textTransform: 'none' }}
             variant="text"
             color="inherit"
             onClick={() => {
@@ -185,6 +186,7 @@ function ConfirmationDialog({
           </Button>
           <Button
             color="primary"
+            style={{ textTransform: 'none' }}
             variant="contained"
             onClick={(event: MouseEvent<HTMLButtonElement>) => {
               moveContainer()

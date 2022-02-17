@@ -13,6 +13,8 @@ import {
   Avatar,
   Chip,
 } from '@mui/material'
+import { useAppStore } from '../appContext/AppStore'
+
 import { Theme, useTheme } from '@mui/material/styles'
 import makeStyles from '@mui/styles/makeStyles'
 import { Store } from '../interactions/reducers/containerReducer'
@@ -48,17 +50,25 @@ const ShopCard = (shop: Store): ReactElement => {
             },
           }}
         >
-          <Box justifyContent="center" height="300px">
-            <ImageListItem key={shop.url}>
-              <img
-                src={`${shop.url || storePng}?w=164&h=164&fit=crop&auto=format`}
-                srcSet={`${shop.url || storePng}?w=164&h=164&fit=crop&auto=format&dpr=2 2x`}
-                alt={shop.name}
-                loading="lazy"
-              />
-            </ImageListItem>
+          <Box justifyContent="center" height="300px" width="100%">
+            <Grid
+              container
+              bgcolor="white"
+              height="50%"
+              style={{
+                background: `url("${shop.url || storePng}")`,
+                backgroundSize: 'cover',
+                backgroundRepeat: 'no-repeat',
+                backgroundPosition: 'center center',
+              }}
+            >
+              <Typography variant="subtitle1" color="text.secondary" component="div">
+                o
+              </Typography>
+            </Grid>
+
             <CardContent sx={{ flex: '1 0 auto', textAlign: 'center', alignItems: 'center' }}>
-              <Typography component="div" variant="h4">
+              <Typography component="div" variant="h4" fontWeight={600}>
                 {shop.name}
               </Typography>
               <Grid container alignItems="center" justifyContent="space-evenly">
@@ -70,12 +80,20 @@ const ShopCard = (shop: Store): ReactElement => {
                 </Typography>
               </Grid>
             </CardContent>
-            <Box justifyContent="center">
+            <Grid container justifyContent="center">
               {shop.containers.length > 0 &&
                 shop.containers.map((c) => (
-                  <Chip size="small" key={c.name} label={c.name} avatar={<Avatar src={getRecipient(c.format)} />} />
+                  <Grid item marginX={theme.spacing(0.2)}>
+                    <Chip
+                      className={classes.chip}
+                      size="small"
+                      key={c.name}
+                      label={c.name}
+                      avatar={<Avatar src={getRecipient(c.format)} />}
+                    />
+                  </Grid>
                 ))}
-            </Box>
+            </Grid>
           </Box>
         </Card>
       </Link>
@@ -91,6 +109,10 @@ const useStyles = makeStyles((theme: Theme) => ({
   },
   grey: {
     color: theme.palette.grey[400],
+  },
+  chip: {
+    color: theme.palette.grey[500],
+    backgroundColor: theme.palette.mode === 'light' ? '#F1F2F6' : undefined,
   },
 }))
 

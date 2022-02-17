@@ -36,8 +36,8 @@ const ContainerCard = (container: Container): ReactElement => {
             {container.name}
           </Typography>
           <Confirmation title="Where to?" intercept={['onClick']} container={container} shopId={shopId}>
-            <Button variant="contained" onClick={() => {}}>
-              transfer
+            <Button className={classes.button} variant="contained" onClick={() => {}}>
+              Transfer
             </Button>
           </Confirmation>
         </CardContent>
@@ -54,6 +54,7 @@ const useStyles = makeStyles((theme: Theme) => ({
   grey: {
     color: theme.palette.grey[400],
   },
+  button: { textTransform: 'none' },
 }))
 
 export default ContainerCard

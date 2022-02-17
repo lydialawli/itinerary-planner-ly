@@ -26,13 +26,13 @@ const Home = (): ReactElement => {
           {bikeStock &&
             bikeStock.length > 0 &&
             bikeStock.map((container) => (
-              <Grid item xs={8} md={3}>
+              <Grid item xs={6} md={3}>
                 <ContainerCard {...container} key={container.id} />
               </Grid>
             ))}
         </Grid>
         <Box paddingY={theme.spacing(4)}></Box>
-        <Grid container alignItems="center" justifyContent="flex-start">
+        <Grid container alignItems="center" justifyContent="flex-start" paddingBottom={theme.spacing(2)}>
           <Avatar src={storePng} />
           <Typography variant="h6">SHOPS</Typography>
         </Grid>
@@ -40,7 +40,7 @@ const Home = (): ReactElement => {
           {stores &&
             stores.length > 0 &&
             stores.map((shop) => (
-              <Grid item xs={8} md={4}>
+              <Grid item xs={4} md={3}>
                 <ShopCard {...shop} key={shop.id} />
               </Grid>
             ))}

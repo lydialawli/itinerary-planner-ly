@@ -6,6 +6,7 @@
 import { createTheme, ThemeProvider, Theme, StyledEngineProvider, ThemeOptions } from '@mui/material/styles'
 import CssBaseline from '@mui/material/CssBaseline'
 import { useAppStore } from './appContext/AppStore'
+import ThemeShadows from './ThemeShadows'
 
 // Note: Added by CodeMod when migrate form MUI 4.x to 5x
 declare module '@mui/styles/defaultTheme' {
@@ -20,7 +21,9 @@ declare module '@mui/styles/defaultTheme' {
 const FRONT_COLORS = {
   primary: {
     main: '#F8D348',
-    contrastText: '#000000',
+    light: '#FDF2BA',
+    dark: '#DEB313',
+    contrastText: '#0e0924',
   },
   secondary: {
     main: '#F50057',
@@ -56,6 +59,28 @@ const TYPOGRAPHY = {
   },
 }
 
+const GREY_COLORS = {
+  50: '#F7F9FF',
+  100: '#EEF2F8',
+  200: '#E6EAF0',
+  300: '#D3D9E1',
+  400: '#BDC4CD',
+  500: '#A1A8B0',
+  600: '#828994',
+  700: '#626871',
+  800: '#474C54',
+  900: '#1D2025',
+  A100: '#D5D5D5',
+  A200: '#AAAAAA',
+  A400: '#303030',
+  A700: '#616161',
+}
+
+const SUCCESS_COLORS = {
+  main: '#57D582',
+  light: '#6AE99C',
+  dark: '#30A46C',
+}
 /**
  * Material UI theme config for "Light Mode"
  */
@@ -67,8 +92,15 @@ const LIGHT_THEME: ThemeOptions = {
       paper: '#FFFFFF',
     },
     ...FRONT_COLORS,
+    ...GREY_COLORS,
+    ...SUCCESS_COLORS,
   },
   ...TYPOGRAPHY,
+  shape: {
+    borderRadius: 10,
+  },
+  spacing: 0,
+  shadows: ThemeShadows,
 }
 
 /**
@@ -82,8 +114,16 @@ const DARK_THEME: ThemeOptions = {
       default: '#1C1C1D',
     },
     ...FRONT_COLORS,
+    ...GREY_COLORS,
+    ...SUCCESS_COLORS,
   },
   ...TYPOGRAPHY,
+  shape: {
+    borderRadius: 10,
+  },
+  shadows: ThemeShadows,
+
+  spacing: 0,
 }
 
 /**
