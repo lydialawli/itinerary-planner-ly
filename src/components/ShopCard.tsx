@@ -1,13 +1,13 @@
 import React, { ReactElement } from 'react'
 import { Link as RouterLink, useParams, useHistory } from 'react-router-dom'
-import { Paper, Link, Typography, Grid, Box, Card, CardContent, Avatar, Chip, Tooltip } from '@mui/material'
+import { Link, Typography, Grid, Box, Card, CardContent, Avatar, Chip, Tooltip } from '@mui/material'
 import { CheckCircle as CheckIcon } from '@mui/icons-material'
 
 import { Theme, useTheme } from '@mui/material/styles'
 import makeStyles from '@mui/styles/makeStyles'
 import { Store, Visited } from '../interactions/reducers/containerReducer'
 import storePng from '../assets/store-icon.png'
-import ShopOverlay from './ShopDetailOverlay'
+import ShopOverlay from './ShopDetail/ShopDetailOverlay'
 import recipient1 from '../assets/Container-format-1.png'
 import recipient5 from '../assets/Container-format-5.png'
 import recipient6 from '../assets/Container-format-6.png'
@@ -87,13 +87,6 @@ const ShopCard = (shop: Store): ReactElement => {
 }
 
 const useStyles = makeStyles((theme: Theme) => ({
-  paper: {
-    borderRadius: theme.spacing(2),
-    padding: theme.spacing(2),
-  },
-  grey: {
-    color: theme.palette.grey[400],
-  },
   chip: {
     color: theme.palette.grey[500],
     backgroundColor: theme.palette.mode === 'light' ? '#F1F2F6' : undefined,

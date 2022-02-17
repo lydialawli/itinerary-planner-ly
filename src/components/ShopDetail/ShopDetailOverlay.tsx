@@ -1,12 +1,13 @@
-import React, { ReactElement } from 'react'
+import React, { ReactElement, useState } from 'react'
 import Lottie from 'react-lottie-player'
-import { Store } from '../interactions/reducers/containerReducer'
+import { Store } from '../../interactions/reducers/containerReducer'
 import { useMediaQuery, Drawer, Typography, Grid, Box, Divider, IconButton } from '@mui/material'
 import { Theme, useTheme } from '@mui/material/styles'
 import makeStyles from '@mui/styles/makeStyles'
 import { Close as CloseIcon } from '@mui/icons-material'
-import ContainerCard from '../components/ContainerCard'
-import LottieAstronaut from '../assets/lottieAstronaut.json'
+import ContainerCard from '../ContainerCard'
+import LottieAstronaut from '../../assets/lottieAstronaut.json'
+import HeaderOverlay from './HeaderOverlay'
 
 const transitionDuration = 1000
 
@@ -19,6 +20,7 @@ const ShopOverlay = ({ shop, onClose }: ShopOverlayProps): ReactElement => {
   const classes = useStyles()
   const theme = useTheme()
   const isDesktop = useMediaQuery(theme.breakpoints.up('md'), { defaultMatches: true })
+  const [selectedContainers, setSelectedContainers] = useState<string[]>([])
 
   return (
     <Drawer
@@ -34,34 +36,7 @@ const ShopOverlay = ({ shop, onClose }: ShopOverlayProps): ReactElement => {
       open={true}
     >
       <Box minWidth={isDesktop ? '40vw' : '80vw'}>
-        <Grid
-          container
-          paddingTop={theme.spacing(12)}
-          alignItems="center"
-          justifyContent="flex-start"
-          style={{
-            background: `url("${shop.url}")`,
-            backgroundSize: 'cover',
-            backgroundRepeat: 'no-repeat',
-            backgroundPosition: 'center center',
-          }}
-        >
-          <Grid
-            className={classes.whiteGradient}
-            container
-            paddingLeft={theme.spacing(2)}
-            bgcolor="white"
-            paddingY={theme.spacing(2)}
-          >
-            <IconButton onClick={onClose}>
-              <CloseIcon fontSize="small" />
-            </IconButton>
-            <Typography paddingLeft={theme.spacing(2)} variant="h3" fontWeight={700}>
-              {shop.name}
-            </Typography>
-          </Grid>
-        </Grid>
-
+        <HeaderOverlay onClose={onClose} shop={shop} />
         <Box paddingBottom={theme.spacing(3)}>
           <Divider color={theme.palette.background.paper} />
         </Box>
