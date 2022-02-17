@@ -1,7 +1,6 @@
 import React, { ReactElement, useState } from 'react'
 import Lottie from 'react-lottie-player'
-import { useSelector } from 'react-redux'
-import { Store, Container, StoreState } from '../../interactions/reducers/containerReducer'
+import { Store } from '../../interactions/reducers/containerReducer'
 import { useMediaQuery, Drawer, Typography, Box, Divider, Grid, Button, IconButton } from '@mui/material'
 import { Theme, useTheme } from '@mui/material/styles'
 import makeStyles from '@mui/styles/makeStyles'
@@ -25,7 +24,6 @@ const ShopOverlay = ({ shop, onClose }: ShopOverlayProps): ReactElement => {
   const theme = useTheme()
   const isDesktop = useMediaQuery(theme.breakpoints.up('md'), { defaultMatches: true })
   const [selectedContainers, setSelectedContainers] = useState<string[]>([])
-  const bikeStock = useSelector<StoreState, Container[]>((state) => state.bikeStock)
 
   const handleSelect = (containerId: string) => {
     if (selectedContainers.includes(containerId)) {
@@ -35,10 +33,10 @@ const ShopOverlay = ({ shop, onClose }: ShopOverlayProps): ReactElement => {
     }
   }
   const handleSelectAll = () => {
-    if (selectedContainers.length === bikeStock.length) {
+    if (selectedContainers.length === shop.containers.length) {
       setSelectedContainers([])
     } else {
-      const containerIds = bikeStock.map((c) => c.id)
+      const containerIds = shop.containers.map((c) => c.id)
       setSelectedContainers(containerIds)
     }
   }
@@ -62,39 +60,41 @@ const ShopOverlay = ({ shop, onClose }: ShopOverlayProps): ReactElement => {
           <Divider color={theme.palette.background.paper} />
         </Box>
         <Box paddingX={theme.spacing(3)}>
-          <Grid container justifyContent="space-between">
-            <Typography variant="h6" paddingBottom={theme.spacing(2)}>
-              Containers ({shop.containers.length}):
-            </Typography>
-            <Grid item>
-              <Confirmation title="Where to?" intercept={['onClick']} containers={selectedContainers || []}>
-                <Button
-                  disabled={selectedContainers.length === 0}
-                  size="small"
-                  disableElevation
-                  className={classes.button}
-                  variant="contained"
-                  onClick={() => {
-                    setSelectedContainers([])
-                  }}
-                >
-                  <DeliveryDining /> &nbsp; transfer selected
-                </Button>
-              </Confirmation>
+          {shop.containers.length > 0 && (
+            <Grid container justifyContent="space-between">
+              <Typography variant="h6" paddingBottom={theme.spacing(2)}>
+                Containers ({shop.containers.length}):
+              </Typography>
 
-              <IconButton size="small" onClick={handleSelectAll}>
-                <Typography variant="body1" color={theme.palette.grey[400]} marginRight={theme.spacing(1)}>
-                  Select all
-                </Typography>
-                {selectedContainers.length === bikeStock.length ? (
-                  <CheckboxChecked color="secondary" />
-                ) : (
-                  <Checkbox color="secondary" />
-                )}
-              </IconButton>
+              <Grid item>
+                <Confirmation title="Where to?" intercept={['onClick']} containers={selectedContainers || []}>
+                  <Button
+                    disabled={selectedContainers.length === 0}
+                    size="small"
+                    disableElevation
+                    className={classes.button}
+                    variant="contained"
+                    onClick={() => {
+                      setSelectedContainers([])
+                    }}
+                  >
+                    <DeliveryDining /> &nbsp; transfer selected
+                  </Button>
+                </Confirmation>
+
+                <IconButton size="small" onClick={handleSelectAll}>
+                  <Typography variant="body1" color={theme.palette.grey[400]} marginRight={theme.spacing(1)}>
+                    Select all
+                  </Typography>
+                  {selectedContainers.length === shop.containers.length ? (
+                    <CheckboxChecked color="secondary" />
+                  ) : (
+                    <Checkbox color="secondary" />
+                  )}
+                </IconButton>
+              </Grid>
             </Grid>
-          </Grid>
-
+          )}
           <Box
             minHeight="50vh"
             padding={theme.spacing(2)}
