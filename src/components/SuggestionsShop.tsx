@@ -7,12 +7,7 @@ import Autocomplete from '@mui/material/Autocomplete'
 import storePng from '../assets/store-icon.png'
 
 const SelectShop = ({ setSelectedStore }: { setSelectedStore: (shopId: string) => void }): ReactElement => {
-  // const dispatch = useDispatch()
   const stores = useSelector<StoreState, Store[]>((state) => state.stores)
-
-  // const setSelectedStore = (shopId: string) => {
-  //   dispatch({ type: 'selectStore', payload: shopId })
-  // }
 
   return (
     <Autocomplete
@@ -22,9 +17,7 @@ const SelectShop = ({ setSelectedStore }: { setSelectedStore: (shopId: string) =
       onChange={(_e, shop) => {
         setSelectedStore(shop?.id || '')
       }}
-      // onChange={(_e, shop) => setSelectedStore(!!shop?.id ? shop.id : '')}
-      // TODO: fix bug visited
-      groupBy={(shop) => (shop.isVisited ? 'Visited' : 'Not visited yet')}
+      groupBy={(shop) => shop.isVisited}
       autoHighlight
       getOptionLabel={(shop) => shop.name}
       renderOption={(props, shop) => (

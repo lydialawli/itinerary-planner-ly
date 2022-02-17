@@ -14,17 +14,22 @@ export interface StoreState {
   selectedStore: string
 }
 
+export enum Visited {
+  isVisited = 'Visited',
+  notVisited = 'Not visited yet',
+}
+
 export type Store = {
   id: string
   name: string
   containers: Container[]
-  isVisited?: boolean
+  isVisited: Visited
 }
 
 const initialState = {
   bikeStock: BikeStock.containers,
   stores: Shops.stores.map((shop) => {
-    return { ...shop, containers: [] }
+    return { ...shop, containers: [], isVisited: Visited.notVisited }
   }),
   selectedStore: '',
 }
@@ -40,7 +45,7 @@ export const containerReducer = (state: StoreState = initialState, action: Actio
       const newStores = state.stores.map((shop) => {
         if (shop.id === action.payload.shopId) {
           shop.containers?.push(action.payload.container)
-          shop.isVisited = true
+          shop.isVisited = Visited.isVisited
         }
 
         return shop

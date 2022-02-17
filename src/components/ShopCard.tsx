@@ -35,7 +35,7 @@ const ShopCard = (shop: Store): ReactElement => {
                 {shop.name}
               </Typography>
               <Typography variant="subtitle1" color="text.secondary" component="div">
-                {shop.isVisited ? 'visited' : 'not visited'}
+                {shop.isVisited}
               </Typography>
               <Typography variant="subtitle1" color="text.secondary" component="div">
                 {shop.id}
