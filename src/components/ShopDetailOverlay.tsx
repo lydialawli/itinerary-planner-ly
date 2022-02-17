@@ -41,8 +41,9 @@ const ShopOverlay = ({ shop, onClose }: ShopOverlayProps): ReactElement => {
           justifyContent="flex-start"
           style={{
             background: `url("${shop.url}")`,
-            backgroundSize: 'auto',
+            backgroundSize: 'cover',
             backgroundRepeat: 'no-repeat',
+            backgroundPosition: 'center center',
           }}
         >
           <IconButton onClick={onClose}>

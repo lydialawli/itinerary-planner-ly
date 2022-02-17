@@ -1,12 +1,14 @@
 import React, { ReactElement } from 'react'
 import { useSelector } from 'react-redux'
 import { StoreState, Store } from '../interactions/reducers/containerReducer'
-import Box from '@mui/material/Box'
-import TextField from '@mui/material/TextField'
-import Autocomplete from '@mui/material/Autocomplete'
+import { TextField, Autocomplete, Box, Avatar, Typography } from '@mui/material'
+import { useTheme } from '@mui/material/styles'
+
 import storePng from '../assets/store-icon.png'
 
 const SelectShop = ({ setSelectedStore }: { setSelectedStore: (shopId: string) => void }): ReactElement => {
+  const theme = useTheme()
+
   const stores = useSelector<StoreState, Store[]>((state) => state.stores).sort((a, b) =>
     a.isVisited > b.isVisited ? 1 : -1,
   )
@@ -24,8 +26,11 @@ const SelectShop = ({ setSelectedStore }: { setSelectedStore: (shopId: string) =
       getOptionLabel={(shop) => shop.name}
       renderOption={(props, shop) => (
         <Box component="li" sx={{ '& > img': { mr: 2, flexShrink: 0 } }} {...props}>
-          <img loading="lazy" width="20" src={storePng} alt="" />
-          {shop.name}
+          <Avatar src={shop.url || storePng} />
+
+          <Typography paddingLeft={theme.spacing(1)} variant="h6">
+            {shop.name}
+          </Typography>
         </Box>
       )}
       renderInput={(params) => <TextField {...params} label="Choose a shop" />}
