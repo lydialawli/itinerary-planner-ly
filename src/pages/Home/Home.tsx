@@ -1,16 +1,19 @@
 import React, { ReactElement, useState } from 'react'
 import { useSelector } from 'react-redux'
-import { Typography, Grid, Box, Avatar, IconButton } from '@mui/material'
+import makeStyles from '@mui/styles/makeStyles'
+import { Typography, Grid, Box, Avatar, IconButton, Button } from '@mui/material'
 import { CheckBoxOutlineBlank as Checkbox } from '@mui/icons-material'
 import { CheckBoxRounded as CheckboxChecked } from '@mui/icons-material'
+import { DeliveryDining } from '@mui/icons-material'
 
-import { useTheme } from '@mui/material/styles'
+import { useTheme, Theme } from '@mui/material/styles'
 import { StoreState, Container, Store } from '../../interactions/reducers/containerReducer'
 import ShopCard from '../../components/ShopCard'
 import ContainerCard from '../../components/ContainerCard'
 import storePng from '../../assets/store-icon.png'
 
 const Home = (): ReactElement => {
+  const classes = useStyles()
   const theme = useTheme()
   const [selectedContainers, setSelectedContainers] = useState<string[]>([])
   const bikeStock = useSelector<StoreState, Container[]>((state) => state.bikeStock)
@@ -39,16 +42,27 @@ const Home = (): ReactElement => {
           <Typography paddingBottom={theme.spacing(2)} variant="h6">
             BIKE STOCK ({bikeStock.length || 0})
           </Typography>
-          <IconButton size="small" onClick={handleSelectAll}>
-            <Typography variant="body1" color={theme.palette.grey[400]} marginRight={theme.spacing(1)}>
-              Select all
-            </Typography>
-            {selectedContainers.length === bikeStock.length ? (
-              <CheckboxChecked color="secondary" />
-            ) : (
-              <Checkbox color="secondary" />
-            )}
-          </IconButton>
+          <Grid item>
+            <Button
+              disabled={selectedContainers.length === 0}
+              size="small"
+              disableElevation
+              className={classes.button}
+              variant="contained"
+            >
+              <DeliveryDining /> &nbsp; transfer selected
+            </Button>
+            <IconButton size="small" onClick={handleSelectAll}>
+              <Typography variant="body1" color={theme.palette.grey[400]} marginRight={theme.spacing(1)}>
+                Select all
+              </Typography>
+              {selectedContainers.length === bikeStock.length ? (
+                <CheckboxChecked color="secondary" />
+              ) : (
+                <Checkbox color="secondary" />
+              )}
+            </IconButton>
+          </Grid>
         </Grid>
         <Grid container spacing={2} paddingBottom={theme.spacing(6)}>
           {bikeStock &&
@@ -81,5 +95,12 @@ const Home = (): ReactElement => {
     </Grid>
   )
 }
+
+const useStyles = makeStyles((theme: Theme) => ({
+  button: {
+    textTransform: 'none',
+    marginRight: theme.spacing(1),
+  },
+}))
 
 export default Home

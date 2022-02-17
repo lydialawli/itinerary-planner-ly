@@ -73,13 +73,6 @@ const ContainerCard = ({ container, handleSelect, selectedContainers }: Containe
 }
 
 const useStyles = makeStyles((theme: Theme) => ({
-  paper: {
-    borderRadius: theme.spacing(2),
-    padding: theme.spacing(2),
-  },
-  grey: {
-    color: theme.palette.grey[400],
-  },
   button: { textTransform: 'none' },
 }))
 
