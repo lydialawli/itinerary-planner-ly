@@ -1,15 +1,13 @@
 import React, { ReactElement } from 'react'
 import { useSelector } from 'react-redux'
-import { Paper, Typography, Grid, Button, Box, Divider, Avatar } from '@mui/material'
-import { Theme, useTheme } from '@mui/material/styles'
-import makeStyles from '@mui/styles/makeStyles'
+import { Typography, Grid, Box, Avatar } from '@mui/material'
+import { useTheme } from '@mui/material/styles'
 import { StoreState, Container, Store } from '../../interactions/reducers/containerReducer'
 import ShopCard from '../../components/ShopCard'
 import ContainerCard from '../../components/ContainerCard'
 import storePng from '../../assets/store-icon.png'
 
 const Home = (): ReactElement => {
-  const classes = useStyles()
   const theme = useTheme()
 
   const bikeStock = useSelector<StoreState, Container[]>((state) => state.bikeStock)
@@ -48,20 +46,5 @@ const Home = (): ReactElement => {
     </Grid>
   )
 }
-
-const useStyles = makeStyles((theme: Theme) => ({
-  paper: {
-    padding: theme.spacing(4),
-    boxShadow: 'rgba(99, 99, 99, 0.2) 0px 2px 8px 0px',
-    margin: theme.spacing(2),
-  },
-
-  centered: {
-    textAlign: 'center',
-  },
-  grey: {
-    color: theme.palette.grey[400],
-  },
-}))
 
 export default Home

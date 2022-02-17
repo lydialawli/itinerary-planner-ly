@@ -1,6 +1,6 @@
 import React, { ReactElement } from 'react'
 import { useParams } from 'react-router-dom'
-import { Typography, Grid, Box, Card, CardContent, Button, Avatar } from '@mui/material'
+import { Typography, Grid, Card, Button, Avatar } from '@mui/material'
 import { Theme, useTheme } from '@mui/material/styles'
 import makeStyles from '@mui/styles/makeStyles'
 import { Container } from '../interactions/reducers/containerReducer'
@@ -28,10 +28,12 @@ const ContainerCard = (container: Container): ReactElement => {
       }}
     >
       <Grid container justifyContent="space-between" alignItems="center" padding={theme.spacing(2)}>
-        <Avatar src={recipientSrc} sizes="30px" />
-        <Typography component="div" variant="h5" fontWeight={600} flexShrink={2}>
-          {container.name}
-        </Typography>
+        <Grid container md={12} lg={8} alignItems="center">
+          <Avatar src={recipientSrc} sizes="30px" />
+          <Typography marginLeft={theme.spacing(1)} component="div" variant="h5" fontWeight={600} flexShrink={2}>
+            {container.name}
+          </Typography>
+        </Grid>
         <Grid item xs={12} md={12} lg={3}>
           <Confirmation title="Where to?" intercept={['onClick']} container={container} shopId={shopId}>
             <Button size="small" disableElevation className={classes.button} variant="contained" onClick={() => {}}>
