@@ -35,8 +35,6 @@ const ShopOverlay = ({ shop, onClose }: ShopOverlayProps): ReactElement => {
         <Grid
           container
           paddingTop={theme.spacing(12)}
-          paddingBottom={theme.spacing(2)}
-          paddingLeft={theme.spacing(2)}
           alignItems="center"
           justifyContent="flex-start"
           style={{
@@ -46,16 +44,24 @@ const ShopOverlay = ({ shop, onClose }: ShopOverlayProps): ReactElement => {
             backgroundPosition: 'center center',
           }}
         >
-          <IconButton onClick={onClose}>
-            <CloseIcon fontSize="small" />
-          </IconButton>
-          <Typography paddingLeft={theme.spacing(2)} variant="h3">
-            {shop.name}
-          </Typography>
+          <Grid
+            className={classes.whiteGradient}
+            container
+            paddingLeft={theme.spacing(2)}
+            bgcolor="white"
+            paddingY={theme.spacing(2)}
+          >
+            <IconButton onClick={onClose}>
+              <CloseIcon fontSize="small" />
+            </IconButton>
+            <Typography paddingLeft={theme.spacing(2)} variant="h3">
+              {shop.name}
+            </Typography>
+          </Grid>
         </Grid>
 
         <Box paddingBottom={theme.spacing(3)}>
-          <Divider />
+          <Divider color={theme.palette.background.paper} />
         </Box>
         <Box paddingX={theme.spacing(3)}>
           <Typography variant="h6" paddingBottom={theme.spacing(2)}>
@@ -92,6 +98,9 @@ const useStyles = makeStyles((theme: Theme) => ({
     '& .MuiBackdrop-root': {
       backgroundColor: 'rgba(0,0,0,0.2)',
     },
+  },
+  whiteGradient: {
+    background: `linear-gradient(0deg, ${theme.palette.background.paper} 0%, rgba(255,255,255,0) 100%)`,
   },
 }))
 
