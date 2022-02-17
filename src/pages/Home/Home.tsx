@@ -19,7 +19,9 @@ const Home = (): ReactElement => {
   return (
     <Grid container spacing={theme.spacing(1)} overflow="none">
       <Box margin={theme.spacing(2)} width="80vw">
-        <Typography variant="h6">BIKE STOCK ({bikeStock.length || 0})</Typography>
+        <Typography paddingBottom={theme.spacing(2)} variant="h6">
+          BIKE STOCK ({bikeStock.length || 0})
+        </Typography>
 
         <Grid container spacing={2}>
           {bikeStock &&
@@ -32,7 +34,9 @@ const Home = (): ReactElement => {
         </Grid>
         <Box paddingY={theme.spacing(4)}></Box>
 
-        <Typography variant="h6">SHOPS</Typography>
+        <Typography paddingBottom={theme.spacing(2)} variant="h6">
+          SHOPS
+        </Typography>
         <Grid container spacing={2} justifyContent="flex-start">
           {stores &&
             stores.length > 0 &&

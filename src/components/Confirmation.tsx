@@ -1,16 +1,8 @@
 import React, { useState, SyntheticEvent, forwardRef, useMemo, MouseEvent } from 'react'
 import { useDispatch } from 'react-redux'
-import {
-  Box,
-  Typography,
-  Slide as Transition,
-  Button,
-  Dialog,
-  DialogTitle,
-  DialogContent,
-  DialogContentText,
-  TextField,
-} from '@mui/material'
+import { Box, Typography, Slide as Transition, Button, Dialog, DialogTitle, Checkbox, Grid } from '@mui/material'
+import { useTheme } from '@mui/material/styles'
+
 import SuggestionShop from './SuggestionsShop'
 import { DialogActions } from '@material-ui/core'
 import { Container } from '../interactions/reducers/containerReducer'
@@ -136,6 +128,8 @@ function ConfirmationDialog({
 }): JSX.Element {
   const dispatch = useDispatch()
   const [selectedStore, setSelectedStore] = useState<string>('')
+  const [backToBike, setBackToBike] = useState<boolean>(false)
+  const theme = useTheme()
 
   const moveContainer = () => {
     if (selectedStore !== '') dispatch({ type: 'transferToStore', payload: { container, shopId: selectedStore } })
@@ -148,6 +142,13 @@ function ConfirmationDialog({
         {title && <DialogTitle>{title}</DialogTitle>}
         <Box margin="20px">
           <SuggestionShop setSelectedStore={setSelectedStore} />
+          <Typography paddingY={theme.spacing(1)} textAlign="center" variant="body1" color={theme.palette.grey[500]}>
+            or
+          </Typography>
+          <Grid container alignItems="center">
+            <Checkbox checked={backToBike} color="primary" onClick={() => setBackToBike(!backToBike)} />
+            <Typography variant="body1">back to bike storage</Typography>
+          </Grid>
         </Box>
         <DialogActions>
           <Button

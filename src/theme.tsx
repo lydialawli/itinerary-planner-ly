@@ -28,6 +28,34 @@ const FRONT_COLORS = {
   },
 }
 
+const TYPOGRAPHY = {
+  typography: {
+    h1: {
+      fontSize: '3rem',
+    },
+    h2: {
+      fontSize: '2.5rem',
+    },
+    h3: {
+      fontSize: '1.8rem',
+    },
+    h4: {
+      fontSize: '1.6rem',
+    },
+    h5: {
+      fontSize: '1.3rem',
+    },
+    h6: {
+      fontSize: '1.25rem',
+    },
+    fontWeightRegular: 400,
+    fontWeightLight: 300,
+    fontWeightBold: 900,
+    fontWeightMedium: 700,
+    fontFamily: 'Lato',
+  },
+}
+
 /**
  * Material UI theme config for "Light Mode"
  */
@@ -40,6 +68,7 @@ const LIGHT_THEME: ThemeOptions = {
     },
     ...FRONT_COLORS,
   },
+  ...TYPOGRAPHY,
 }
 
 /**
@@ -54,32 +83,7 @@ const DARK_THEME: ThemeOptions = {
     },
     ...FRONT_COLORS,
   },
-
-  // typography: {
-  //   h1: {
-  //     fontSize: '3rem',
-  //   },
-  //   h2: {
-  //     fontSize: '2.5rem',
-  //   },
-  //   h3: {
-  //     fontSize: '1.8rem',
-  //   },
-  //   h4: {
-  //     fontSize: '1.6rem',
-  //   },
-  //   h5: {
-  //     fontSize: '1.3rem',
-  //   },
-  //   h6: {
-  //     fontSize: '1.25rem',
-  //   },
-  //   fontWeightRegular: 400,
-  //   fontWeightLight: 300,
-  //   fontWeightBold: 900,
-  //   fontWeightMedium: 700,
-  //   fontFamily: 'Lato',
-  // },
+  ...TYPOGRAPHY,
 }
 
 /**
