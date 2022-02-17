@@ -1,10 +1,12 @@
 import React, { ReactElement } from 'react'
+import Lottie from 'react-lottie-player'
 import { Store } from '../interactions/reducers/containerReducer'
 import { useMediaQuery, Drawer, Typography, Grid, Box, Divider, IconButton } from '@mui/material'
 import { Theme, useTheme } from '@mui/material/styles'
 import makeStyles from '@mui/styles/makeStyles'
 import { Close as CloseIcon } from '@mui/icons-material'
 import ContainerCard from '../components/ContainerCard'
+import LottieAstronaut from '../assets/lottieAstronaut.json'
 
 const transitionDuration = 1000
 
@@ -74,10 +76,11 @@ const ShopOverlay = ({ shop, onClose }: ShopOverlayProps): ReactElement => {
             borderRadius={theme.spacing(1)}
           >
             {shop.containers.length === 0 ? (
-              <Box textAlign="center" paddingTop={theme.spacing(4)}>
-                <Typography color={theme.palette.grey[400]} variant="body2">
-                  No containers in this store
+              <Box textAlign="center" paddingTop={theme.spacing(4)} justifyContent="space-between">
+                <Typography color={theme.palette.grey[400]} variant="body1">
+                  No containers found in this store
                 </Typography>
+                <Lottie loop animationData={LottieAstronaut} play />
               </Box>
             ) : (
               shop.containers.map((container) => (
@@ -86,7 +89,7 @@ const ShopOverlay = ({ shop, onClose }: ShopOverlayProps): ReactElement => {
                 </Box>
               ))
             )}
-          </Box>{' '}
+          </Box>
         </Box>
       </Box>
     </Drawer>

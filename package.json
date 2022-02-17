@@ -29,6 +29,7 @@
     "date-fns": "latest",
     "react": "latest",
     "react-dom": "latest",
+    "react-lottie-player": "^1.4.1",
     "react-redux": "^7.2.6",
     "react-router-dom": "latest",
     "react-scripts": "latest",
