@@ -1,7 +1,7 @@
 import React, { ReactElement } from 'react'
 import Lottie from 'react-lottie-player'
 import { Store } from '../interactions/reducers/containerReducer'
-import { useMediaQuery, Drawer, Typography, Grid, Box, Divider, IconButton, Paper } from '@mui/material'
+import { useMediaQuery, Drawer, Typography, Grid, Box, Divider, IconButton } from '@mui/material'
 import { Theme, useTheme } from '@mui/material/styles'
 import makeStyles from '@mui/styles/makeStyles'
 import { Close as CloseIcon } from '@mui/icons-material'
