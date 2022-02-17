@@ -35,6 +35,7 @@ export const containerReducer = (state: StoreState = initialState, action: Actio
       return { ...state, selectedStore: action.payload }
     }
     case 'transferToStore': {
+      console.log({ a: action.payload })
       const newBikeStock = state.bikeStock.filter((b) => b.id !== action.payload.container.id)
       const newStores = state.stores.map((shop) => {
         if (shop.id === action.payload.shopId) {

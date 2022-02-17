@@ -138,7 +138,7 @@ function ConfirmationDialog({
   const [selectedStore, setSelectedStore] = useState<string>('')
 
   const moveContainer = () => {
-    if (selectedStore !== '') dispatch({ type: 'transferToStore', payload: { container, selectedStore } })
+    if (selectedStore !== '') dispatch({ type: 'transferToStore', payload: { container, shopId: selectedStore } })
     // if (selectedStore !== '') dispatch({ type: 'transferToStore', payload: { container, selectedStore } })
   }
 

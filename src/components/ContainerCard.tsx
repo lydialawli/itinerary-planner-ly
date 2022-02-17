@@ -18,7 +18,7 @@ const ContainerCard = (container: Container): ReactElement => {
   const selectedStore = useSelector<StoreState, string>((state) => state.selectedStore)
 
   const moveContainer = (container: Container, shopId: string) => {
-    console.log({ selectedStore })
+    // console.log({ selectedStore })
     // if (selectedStore !== '') dispatch({ type: 'transferToStore', payload: { container, selectedStore } })
     // else dispatch({ type: 'backToBikeStock', payload: { container, shopId: shopId } })
   }

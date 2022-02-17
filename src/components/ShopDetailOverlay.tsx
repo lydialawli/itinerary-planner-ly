@@ -31,24 +31,44 @@ const ShopOverlay = ({ shop, onClose }: ShopOverlayProps): ReactElement => {
       onClose={onClose}
       open={true}
     >
-      <Box padding={theme.spacing(2)} minWidth={isDesktop ? '40vw' : 300}>
-        <Box padding={theme.spacing(1)}>
+      <Box paddingY={theme.spacing(2)} minWidth={isDesktop ? '40vw' : 300}>
+        <Box paddingTop={theme.spacing(2)}>
           <Grid container alignItems="center" justifyContent="flex-start">
-            <IconButton>
+            <IconButton onClick={onClose}>
               <CloseIcon fontSize="small" />
             </IconButton>
-            <Typography variant="h4">{shop.name}</Typography>
+            <Typography paddingLeft={theme.spacing(2)} variant="h4">
+              {shop.name}
+            </Typography>
           </Grid>
         </Box>
-        <Divider />
-
-        <Typography variant="h6">Containers ({shop.containers.length}):</Typography>
-        <Box padding={theme.spacing(2)} bgcolor={theme.palette.background.default} borderRadius={theme.spacing(1)}>
-          {shop.containers.map((container) => (
-            <Box padding={theme.spacing(1)}>
-              <ContainerCard {...container} key={container.id} />
-            </Box>
-          ))}
+        <Box paddingY={theme.spacing(3)}>
+          <Divider />
+        </Box>
+        <Box paddingX={theme.spacing(3)}>
+          <Typography variant="h6" paddingBottom={theme.spacing(2)}>
+            Containers ({shop.containers.length}):
+          </Typography>
+          <Box
+            minHeight="50vh"
+            padding={theme.spacing(2)}
+            bgcolor={theme.palette.background.default}
+            borderRadius={theme.spacing(1)}
+          >
+            {shop.containers.length === 0 ? (
+              <Box textAlign="center" paddingTop={theme.spacing(4)}>
+                <Typography color={theme.palette.grey[400]} variant="body2">
+                  No containers in this store
+                </Typography>
+              </Box>
+            ) : (
+              shop.containers.map((container) => (
+                <Box padding={theme.spacing(1)}>
+                  <ContainerCard {...container} key={container.id} />
+                </Box>
+              ))
+            )}
+          </Box>{' '}
         </Box>
       </Box>
     </Drawer>
