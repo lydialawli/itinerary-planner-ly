@@ -1,9 +1,8 @@
 import React, { useState, SyntheticEvent, forwardRef, useMemo, MouseEvent } from 'react'
 import { useDispatch } from 'react-redux'
-import { useParams } from 'react-router-dom'
 import { Box, Typography, Slide as Transition, Button, Dialog, DialogTitle, Checkbox, Grid } from '@mui/material'
 import { useTheme } from '@mui/material/styles'
-
+import { DirectionsBike as BikeIcon } from '@mui/icons-material'
 import SuggestionShop from './SuggestionsShop'
 import { DialogActions } from '@material-ui/core'
 import { Container } from '../interactions/reducers/containerReducer'
@@ -79,6 +78,7 @@ function InterceptChildren({
 }
 
 type ConfirmationDialogProps = {
+  shopId?: string
   container: Container
   /**
    * optional title to use as dialog title
@@ -105,14 +105,11 @@ type ConfirmationDialogProps = {
   level?: /*'normal' | 'hard'*/ string
 }
 
-interface ParamTypes {
-  shopId: string
-}
-
 function ConfirmationDialog({
   closeDialog,
   title,
   container,
+  shopId,
   level,
   userInput,
   error,
@@ -125,6 +122,7 @@ function ConfirmationDialog({
 }: ConfirmationDialogProps & {
   closeDialog: () => void
   container: Container
+  shopId?: string
   handleConfirmation: (event: MouseEvent<HTMLButtonElement>) => void
   setUserInput: (value: string) => void
   userInput: string
@@ -132,7 +130,6 @@ function ConfirmationDialog({
   error: boolean
 }): JSX.Element {
   const dispatch = useDispatch()
-  const { shopId } = useParams<ParamTypes>()
   const [selectedStore, setSelectedStore] = useState<string>('')
   const [backToBike, setBackToBike] = useState<boolean>(false)
   const theme = useTheme()
@@ -151,13 +148,25 @@ function ConfirmationDialog({
         {title && <DialogTitle>{title}</DialogTitle>}
         <Box margin="20px">
           <SuggestionShop setSelectedStore={setSelectedStore} />
-          <Typography paddingY={theme.spacing(1)} textAlign="center" variant="body1" color={theme.palette.grey[500]}>
-            or
-          </Typography>
-          <Grid container alignItems="center">
-            <Checkbox checked={backToBike} color="primary" onClick={() => setBackToBike(!backToBike)} />
-            <Typography variant="body1">back to bike storage</Typography>
-          </Grid>
+          {shopId !== undefined && (
+            <>
+              <Typography
+                paddingY={theme.spacing(1)}
+                textAlign="center"
+                variant="body1"
+                color={theme.palette.grey[500]}
+              >
+                or
+              </Typography>
+              <Grid container alignItems="center">
+                <Checkbox checked={backToBike} color="primary" onClick={() => setBackToBike(!backToBike)} />
+                <Typography paddingRight={theme.spacing(1)} variant="body1">
+                  back to bike storage
+                </Typography>
+                <BikeIcon />
+              </Grid>
+            </>
+          )}
         </Box>
         <DialogActions>
           <Button
@@ -198,6 +207,7 @@ export default forwardRef<JSX.Element, ConfirmationProps>(function Confirmation(
     stopPropagation = false,
     title,
     container,
+    shopId,
     onCancel,
     children,
   }: ConfirmationProps,
@@ -237,6 +247,7 @@ export default forwardRef<JSX.Element, ConfirmationProps>(function Confirmation(
     closeDialog,
     title,
     container,
+    shopId,
     level,
     userInput,
     error,

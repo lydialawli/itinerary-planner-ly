@@ -1,4 +1,5 @@
 import React, { ReactElement } from 'react'
+import { useParams } from 'react-router-dom'
 import { useSelector, useDispatch } from 'react-redux'
 import { StoreState } from '../interactions/reducers/containerReducer'
 import { Typography, Grid, Box, Card, CardContent, Button, Avatar } from '@mui/material'
@@ -9,19 +10,15 @@ import recipient1 from '../assets/Container-format-1.png'
 import recipient5 from '../assets/Container-format-5.png'
 import recipient6 from '../assets/Container-format-6.png'
 import Confirmation from './Confirmation'
+interface ParamTypes {
+  shopId: string
+}
 
 const ContainerCard = (container: Container): ReactElement => {
   const classes = useStyles()
   const theme = useTheme()
-  const dispatch = useDispatch()
   const recipientSrc = container.format === '1' ? recipient1 : container.format === '5' ? recipient5 : recipient6
-  const selectedStore = useSelector<StoreState, string>((state) => state.selectedStore)
-
-  const moveContainer = (container: Container, shopId: string) => {
-    // console.log({ selectedStore })
-    // if (selectedStore !== '') dispatch({ type: 'transferToStore', payload: { container, selectedStore } })
-    // else dispatch({ type: 'backToBikeStock', payload: { container, shopId: shopId } })
-  }
+  const { shopId } = useParams<ParamTypes>()
 
   return (
     <Card
@@ -38,13 +35,8 @@ const ContainerCard = (container: Container): ReactElement => {
           <Typography component="div" variant="h5">
             {container.name}
           </Typography>
-          <Confirmation title="Where to?" intercept={['onClick']} container={container}>
-            <Button
-              variant="contained"
-              onClick={() => {
-                moveContainer(container, selectedStore)
-              }}
-            >
+          <Confirmation title="Where to?" intercept={['onClick']} container={container} shopId={shopId}>
+            <Button variant="contained" onClick={() => {}}>
               transfer
             </Button>
           </Confirmation>
