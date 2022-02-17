@@ -1,5 +1,6 @@
 import React, { useState, SyntheticEvent, forwardRef, useMemo, MouseEvent } from 'react'
 import { useDispatch } from 'react-redux'
+import { useParams } from 'react-router-dom'
 import { Box, Typography, Slide as Transition, Button, Dialog, DialogTitle, Checkbox, Grid } from '@mui/material'
 import { useTheme } from '@mui/material/styles'
 
@@ -104,6 +105,10 @@ type ConfirmationDialogProps = {
   level?: /*'normal' | 'hard'*/ string
 }
 
+interface ParamTypes {
+  shopId: string
+}
+
 function ConfirmationDialog({
   closeDialog,
   title,
@@ -127,13 +132,17 @@ function ConfirmationDialog({
   error: boolean
 }): JSX.Element {
   const dispatch = useDispatch()
+  const { shopId } = useParams<ParamTypes>()
   const [selectedStore, setSelectedStore] = useState<string>('')
   const [backToBike, setBackToBike] = useState<boolean>(false)
   const theme = useTheme()
 
   const moveContainer = () => {
-    if (selectedStore !== '') dispatch({ type: 'transferToStore', payload: { container, shopId: selectedStore } })
-    // if (selectedStore !== '') dispatch({ type: 'transferToStore', payload: { container, selectedStore } })
+    if (shopId !== undefined && !!backToBike) {
+      dispatch({ type: 'backToBikeStock', payload: { container, shopId } })
+    } else {
+      selectedStore !== '' && dispatch({ type: 'transferToStore', payload: { container, shopId: selectedStore } })
+    }
   }
 
   return (

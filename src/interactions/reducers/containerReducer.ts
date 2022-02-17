@@ -36,11 +36,7 @@ const initialState = {
 
 export const containerReducer = (state: StoreState = initialState, action: Action) => {
   switch (action.type) {
-    case 'selectStore': {
-      return { ...state, selectedStore: action.payload }
-    }
     case 'transferToStore': {
-      console.log({ a: action.payload })
       const newBikeStock = state.bikeStock.filter((b) => b.id !== action.payload.container.id)
       const newStores = state.stores.map((shop) => {
         if (shop.id === action.payload.shopId) {
@@ -53,8 +49,17 @@ export const containerReducer = (state: StoreState = initialState, action: Actio
       return { bikeStock: newBikeStock, stores: newStores, selectedStore: '' }
     }
     case 'backToBikeStock': {
-      // TODO: add logic
-      return { ...state, selectedStore: '' }
+      const newStores = state.stores.map((shop) => {
+        if (shop.id === action.payload.shopId) {
+          const newContainers = shop.containers.filter((c) => c.id !== action.payload.container.id)
+          return { ...shop, containers: newContainers }
+        }
+        return shop
+      })
+      const newBikeStock = state.bikeStock
+      newBikeStock.push(action.payload.container)
+
+      return { bikeStock: newBikeStock, stores: newStores, selectedStore: '' }
     }
     default:
       return state

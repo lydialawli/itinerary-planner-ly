@@ -12,10 +12,8 @@ const Home = (): ReactElement => {
   const theme = useTheme()
 
   const bikeStock = useSelector<StoreState, Container[]>((state) => state.bikeStock)
-  const stores = useSelector<StoreState, Store[]>((state) => state.stores)
-  const selectedStore = useSelector<StoreState, string>((state) => state.selectedStore)
+  const stores = useSelector<StoreState, Store[]>((state) => state.stores).sort((a, b) => (a.id > b.id ? 1 : -1))
 
-  console.log({ bikeStock, stores, selectedStore })
   return (
     <Grid container spacing={theme.spacing(1)} overflow="none">
       <Box margin={theme.spacing(2)} width="80vw">

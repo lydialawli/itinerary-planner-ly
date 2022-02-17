@@ -1,10 +1,5 @@
 import { Container } from '../reducers/containerReducer'
 
-interface SelectStoreAction {
-  type: 'selectStore'
-  payload: string
-}
-
 interface TransferToStoreAction {
   type: 'transferToStore'
   payload: { container: Container; shopId: string }
@@ -15,4 +10,4 @@ interface BackToBikeStockAction {
   payload: { container: Container; shopId: string }
 }
 
-export type Action = SelectStoreAction | TransferToStoreAction | BackToBikeStockAction
+export type Action = TransferToStoreAction | BackToBikeStockAction
