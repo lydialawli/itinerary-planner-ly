@@ -1,4 +1,4 @@
-import React, { ReactElement } from 'react'
+import React, { ReactElement, useState } from 'react'
 import { useSelector } from 'react-redux'
 import { Typography, Grid, Box, Avatar } from '@mui/material'
 import { useTheme } from '@mui/material/styles'
@@ -9,9 +9,17 @@ import storePng from '../../assets/store-icon.png'
 
 const Home = (): ReactElement => {
   const theme = useTheme()
-
+  const [selectedContainers, setSelectedContainers] = useState<string[]>([])
   const bikeStock = useSelector<StoreState, Container[]>((state) => state.bikeStock)
   const stores = useSelector<StoreState, Store[]>((state) => state.stores).sort((a, b) => (a.id > b.id ? 1 : -1))
+
+  const handleSelect = (containerId: string) => {
+    if (selectedContainers.includes(containerId)) {
+      setSelectedContainers((sel) => sel.filter((s) => s !== containerId))
+    } else {
+      setSelectedContainers((sel) => [...sel, containerId])
+    }
+  }
 
   return (
     <Grid container spacing={theme.spacing(1)} overflow="none">
@@ -25,7 +33,12 @@ const Home = (): ReactElement => {
             bikeStock.length > 0 &&
             bikeStock.map((container) => (
               <Grid item xs={6} md={3}>
-                <ContainerCard {...container} key={container.id} />
+                <ContainerCard
+                  selectedContainers={selectedContainers}
+                  container={container}
+                  key={container.id}
+                  handleSelect={handleSelect}
+                />
               </Grid>
             ))}
         </Grid>

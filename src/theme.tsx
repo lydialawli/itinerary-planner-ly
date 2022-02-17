@@ -55,7 +55,7 @@ const DEFAULT_COLORS = {
     contrastText: '#0e0924',
   },
   secondary: {
-    main: '#F50057',
+    main: '#12e6c8',
     contrastText: '#000000',
   },
   success: { main: '#57D582', light: '#6AE99C', dark: '#30A46C' },

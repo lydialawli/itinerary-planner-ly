@@ -8,8 +8,8 @@ TODO:
     - [x]  basic details like name
 - [x]  function addToStore
 - [x]  function addToBikeStore
-- [ ]  styling improvs
-- [ ]  visited as an icon
+- [x]  styling improvs
+- [x]  visited as an icon
 - [ ]  multiple select? 
 
 # Getting Started with Create React App

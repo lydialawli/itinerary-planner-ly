@@ -33,9 +33,6 @@ const ShopCard = (shop: Store): ReactElement => {
           elevation={0}
           sx={{
             display: 'flex',
-            ':hover': {
-              boxShadow: theme.shadows[20],
-            },
           }}
         >
           <Box justifyContent="center" height="300px" width="100%">

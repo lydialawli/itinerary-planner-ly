@@ -85,7 +85,7 @@ const ShopOverlay = ({ shop, onClose }: ShopOverlayProps): ReactElement => {
             ) : (
               shop.containers.map((container) => (
                 <Box padding={theme.spacing(1)}>
-                  <ContainerCard {...container} key={container.id} />
+                  <ContainerCard container={container} key={container.id} handleSelect={console.log} />
                 </Box>
               ))
             )}
