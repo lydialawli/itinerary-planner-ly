@@ -41,16 +41,20 @@ const ContainerCard = ({ container, handleSelect, selectedContainers }: Containe
       <Grid container justifyContent="space-between" alignItems="center" padding={theme.spacing(2)}>
         <Grid container item xs={8} md={12} lg={8} alignItems="center">
           <Avatar src={recipientSrc} sizes="30px" />
-          <Typography
-            textOverflow="ellipsis"
-            marginLeft={theme.spacing(1)}
-            component="div"
-            variant="h5"
-            fontWeight={600}
-            flexShrink={2}
-          >
-            {container.name}
-          </Typography>
+          <Grid item xs={8}>
+            <Typography
+              textOverflow="ellipsis"
+              overflow="hidden"
+              whiteSpace="nowrap"
+              marginLeft={theme.spacing(1)}
+              component="div"
+              variant="h5"
+              fontWeight={600}
+              flexShrink={2}
+            >
+              {container.name}
+            </Typography>
+          </Grid>
         </Grid>
         <Grid item xs={3} sm={12} md={12} lg={3}>
           <Confirmation title="Where to?" intercept={['onClick']} containers={selectedContainers || []}>
