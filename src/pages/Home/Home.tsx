@@ -22,7 +22,7 @@ const Home = (): ReactElement => {
           BIKE STOCK ({bikeStock.length || 0})
         </Typography>
 
-        <Grid container spacing={2}>
+        <Grid container spacing={2} paddingBottom={theme.spacing(6)}>
           {bikeStock &&
             bikeStock.length > 0 &&
             bikeStock.map((container) => (
@@ -31,7 +31,6 @@ const Home = (): ReactElement => {
               </Grid>
             ))}
         </Grid>
-        <Box paddingY={theme.spacing(4)}></Box>
         <Grid container alignItems="center" justifyContent="flex-start" paddingBottom={theme.spacing(2)}>
           <Avatar src={storePng} />
           <Typography variant="h6">SHOPS</Typography>

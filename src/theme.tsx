@@ -18,18 +18,6 @@ declare module '@mui/styles/defaultTheme' {
  * Material UI theme "front" colors, "back" colors are different for Light and Dark modes
  * Material Color Tool: https://material.io/resources/color/#!/?view.left=0&view.right=0&secondary.color=EF9A9A&primary.color=64B5F6
  */
-const FRONT_COLORS = {
-  primary: {
-    main: '#F8D348',
-    light: '#FDF2BA',
-    dark: '#DEB313',
-    contrastText: '#0e0924',
-  },
-  secondary: {
-    main: '#F50057',
-    contrastText: '#000000',
-  },
-}
 
 const TYPOGRAPHY = {
   typography: {
@@ -59,25 +47,34 @@ const TYPOGRAPHY = {
   },
 }
 
-const GREY_COLORS = {
-  50: '#F7F9FF',
-  100: '#EEF2F8',
-  200: '#E6EAF0',
-  300: '#D3D9E1',
-  400: '#BDC4CD',
-  500: '#A1A8B0',
-  600: '#828994',
-  700: '#626871',
-  800: '#474C54',
-  900: '#1D2025',
-  A100: '#D5D5D5',
-  A200: '#AAAAAA',
-  A400: '#303030',
-  A700: '#616161',
-}
-
-const SUCCESS_COLORS = {
+const DEFAULT_COLORS = {
+  primary: {
+    main: '#F8D348',
+    light: '#FDF2BA',
+    dark: '#DEB313',
+    contrastText: '#0e0924',
+  },
+  secondary: {
+    main: '#F50057',
+    contrastText: '#000000',
+  },
   success: { main: '#57D582', light: '#6AE99C', dark: '#30A46C' },
+  grey: {
+    50: '#F7F9FF',
+    100: '#EEF2F8',
+    200: '#E6EAF0',
+    300: '#D3D9E1',
+    400: '#BDC4CD',
+    500: '#A1A8B0',
+    600: '#828994',
+    700: '#626871',
+    800: '#474C54',
+    900: '#1D2025',
+    A100: '#D5D5D5',
+    A200: '#AAAAAA',
+    A400: '#303030',
+    A700: '#616161',
+  },
 }
 /**
  * Material UI theme config for "Light Mode"
@@ -89,9 +86,7 @@ const LIGHT_THEME: ThemeOptions = {
       default: '#F6F9FF', // Gray 100 - Background of "Paper" based component
       paper: '#FFFFFF',
     },
-    ...FRONT_COLORS,
-    ...GREY_COLORS,
-    ...SUCCESS_COLORS,
+    ...DEFAULT_COLORS,
   },
   ...TYPOGRAPHY,
   shape: {
@@ -111,9 +106,7 @@ const DARK_THEME: ThemeOptions = {
       paper: '#2E3035', // Gray 800 - Background of "Paper" based component
       default: '#1C1C1D',
     },
-    ...FRONT_COLORS,
-    ...GREY_COLORS,
-    ...SUCCESS_COLORS,
+    ...DEFAULT_COLORS,
   },
   ...TYPOGRAPHY,
   shape: {

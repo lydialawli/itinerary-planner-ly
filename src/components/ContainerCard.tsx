@@ -1,7 +1,5 @@
 import React, { ReactElement } from 'react'
 import { useParams } from 'react-router-dom'
-import { useSelector, useDispatch } from 'react-redux'
-import { StoreState } from '../interactions/reducers/containerReducer'
 import { Typography, Grid, Box, Card, CardContent, Button, Avatar } from '@mui/material'
 import { Theme, useTheme } from '@mui/material/styles'
 import makeStyles from '@mui/styles/makeStyles'
@@ -29,19 +27,19 @@ const ContainerCard = (container: Container): ReactElement => {
         borderRadius: theme.spacing(1),
       }}
     >
-      <Box sx={{ display: 'flex' }} justifyContent="center" alignItems="center">
+      <Grid container justifyContent="space-between" alignItems="center" padding={theme.spacing(2)}>
         <Avatar src={recipientSrc} sizes="30px" />
-        <CardContent sx={{ flex: '1 0 auto' }}>
-          <Typography component="div" variant="h5">
-            {container.name}
-          </Typography>
+        <Typography component="div" variant="h5" fontWeight={600} flexShrink={2}>
+          {container.name}
+        </Typography>
+        <Grid item xs={12} md={12} lg={3}>
           <Confirmation title="Where to?" intercept={['onClick']} container={container} shopId={shopId}>
-            <Button className={classes.button} variant="contained" onClick={() => {}}>
+            <Button size="small" disableElevation className={classes.button} variant="contained" onClick={() => {}}>
               Transfer
             </Button>
           </Confirmation>
-        </CardContent>
-      </Box>
+        </Grid>
+      </Grid>
     </Card>
   )
 }

@@ -1,7 +1,7 @@
 import React, { ReactElement } from 'react'
 import Lottie from 'react-lottie-player'
 import { Store } from '../interactions/reducers/containerReducer'
-import { useMediaQuery, Drawer, Typography, Grid, Box, Divider, IconButton } from '@mui/material'
+import { useMediaQuery, Drawer, Typography, Grid, Box, Divider, IconButton, Paper } from '@mui/material'
 import { Theme, useTheme } from '@mui/material/styles'
 import makeStyles from '@mui/styles/makeStyles'
 import { Close as CloseIcon } from '@mui/icons-material'
@@ -56,7 +56,7 @@ const ShopOverlay = ({ shop, onClose }: ShopOverlayProps): ReactElement => {
             <IconButton onClick={onClose}>
               <CloseIcon fontSize="small" />
             </IconButton>
-            <Typography paddingLeft={theme.spacing(2)} variant="h3">
+            <Typography paddingLeft={theme.spacing(2)} variant="h3" fontWeight={700}>
               {shop.name}
             </Typography>
           </Grid>
@@ -76,8 +76,8 @@ const ShopOverlay = ({ shop, onClose }: ShopOverlayProps): ReactElement => {
             borderRadius={theme.spacing(1)}
           >
             {shop.containers.length === 0 ? (
-              <Box textAlign="center" paddingTop={theme.spacing(4)} justifyContent="space-between">
-                <Typography color={theme.palette.grey[400]} variant="body1">
+              <Box textAlign="center" justifyContent="space-between">
+                <Typography paddingY={theme.spacing(4)} color={theme.palette.grey[400]} variant="body1">
                   No containers found in this store
                 </Typography>
                 <Lottie loop animationData={LottieAstronaut} play />
