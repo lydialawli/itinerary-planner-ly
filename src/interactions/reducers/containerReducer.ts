@@ -38,14 +38,16 @@ const initialState = {
 export const containerReducer = (state: StoreState = initialState, action: Action) => {
   switch (action.type) {
     case 'transferToStore': {
-      const newBikeStock = state.bikeStock.filter((b) => b.id !== action.payload.container.id)
+      const newBikeStock = state.bikeStock.filter((b) => action.payload.containers.includes(b.id) === false)
       const newStores = state.stores.map((shop) => {
         if (shop.id === action.payload.toShopId) {
-          shop.containers?.push(action.payload.container)
+          const selectedContainers = initialState.bikeStock.filter((b) => action.payload.containers.includes(b.id))
+          const newContainers = shop.containers.concat(selectedContainers)
           shop.isVisited = Visited.isVisited
+          return { ...shop, containers: newContainers }
         }
         if (!!action.payload.fromShopId && action.payload.fromShopId === shop.id) {
-          const newContainers = shop.containers.filter((c) => c.id !== action.payload.container.id)
+          const newContainers = shop.containers.filter((c) => action.payload.containers.includes(c.id) === false)
           return { ...shop, containers: newContainers }
         }
 
@@ -56,13 +58,14 @@ export const containerReducer = (state: StoreState = initialState, action: Actio
     case 'backToBikeStock': {
       const newStores = state.stores.map((shop) => {
         if (shop.id === action.payload.fromShopId) {
-          const newContainers = shop.containers.filter((c) => c.id !== action.payload.container.id)
+          const newContainers = shop.containers.filter((c) => action.payload.containers.includes(c.id) === false)
           return { ...shop, containers: newContainers }
         }
         return shop
       })
-      const newBikeStock = state.bikeStock
-      newBikeStock.push(action.payload.container)
+      const selectedContainers = initialState.bikeStock.filter((b) => action.payload.containers.includes(b.id))
+
+      const newBikeStock = state.bikeStock.concat(selectedContainers)
 
       return { bikeStock: newBikeStock, stores: newStores, selectedStore: '' }
     }

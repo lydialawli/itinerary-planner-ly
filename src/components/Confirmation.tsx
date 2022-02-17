@@ -79,7 +79,7 @@ function InterceptChildren({
 
 type ConfirmationDialogProps = {
   shopId?: string
-  container: Container
+  containers: string[]
   /**
    * optional title to use as dialog title
    */
@@ -108,7 +108,7 @@ type ConfirmationDialogProps = {
 function ConfirmationDialog({
   closeDialog,
   title,
-  container,
+  containers,
   shopId,
   level,
   userInput,
@@ -121,7 +121,7 @@ function ConfirmationDialog({
   handleConfirmation,
 }: ConfirmationDialogProps & {
   closeDialog: () => void
-  container: Container
+  containers: string[]
   shopId?: string
   handleConfirmation: (event: MouseEvent<HTMLButtonElement>) => void
   setUserInput: (value: string) => void
@@ -136,12 +136,12 @@ function ConfirmationDialog({
 
   const moveContainer = () => {
     if (shopId !== undefined && !!backToBike) {
-      dispatch({ type: 'backToBikeStock', payload: { container, fromShopId: shopId } })
+      dispatch({ type: 'backToBikeStock', payload: { containers, fromShopId: shopId } })
     } else {
       selectedStore !== '' &&
         dispatch({
           type: 'transferToStore',
-          payload: { container, toShopId: selectedStore, fromShopId: shopId || undefined },
+          payload: { containers, toShopId: selectedStore, fromShopId: shopId || undefined },
         })
     }
   }
@@ -212,7 +212,7 @@ export default forwardRef<JSX.Element, ConfirmationProps>(function Confirmation(
     level = 'normal',
     stopPropagation = false,
     title,
-    container,
+    containers,
     shopId,
     onCancel,
     children,
@@ -252,7 +252,7 @@ export default forwardRef<JSX.Element, ConfirmationProps>(function Confirmation(
   } = {
     closeDialog,
     title,
-    container,
+    containers,
     shopId,
     level,
     userInput,

@@ -50,18 +50,14 @@ const ContainerCard = ({ container, handleSelect, selectedContainers }: Containe
           </Typography>
         </Grid>
         <Grid item xs={12} md={12} lg={3}>
-          <Confirmation title="Where to?" intercept={['onClick']} container={container} shopId={shopId}>
+          <Confirmation title="Where to?" intercept={['onClick']} containers={selectedContainers || []} shopId={shopId}>
             <Button
               disabled={selectedContainers && selectedContainers.length > 0}
               size="small"
               disableElevation
               className={classes.button}
               variant="contained"
-              onClick={(event: MouseEvent<HTMLButtonElement>) => {
-                if (event.stopPropagation) {
-                  event.stopPropagation()
-                }
-              }}
+              onClick={() => {}}
             >
               Transfer
             </Button>

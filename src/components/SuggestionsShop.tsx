@@ -27,7 +27,6 @@ const SelectShop = ({ setSelectedStore }: { setSelectedStore: (shopId: string) =
       renderOption={(props, shop) => (
         <Box component="li" sx={{ '& > img': { mr: 2, flexShrink: 0 } }} {...props}>
           <Avatar src={shop.url || storePng} />
-
           <Typography paddingLeft={theme.spacing(1)} variant="h6">
             {shop.name}
           </Typography>

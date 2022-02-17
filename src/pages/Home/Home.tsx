@@ -11,6 +11,7 @@ import { StoreState, Container, Store } from '../../interactions/reducers/contai
 import ShopCard from '../../components/ShopCard'
 import ContainerCard from '../../components/ContainerCard'
 import storePng from '../../assets/store-icon.png'
+import Confirmation from '../../components/Confirmation'
 
 const Home = (): ReactElement => {
   const classes = useStyles()
@@ -43,15 +44,21 @@ const Home = (): ReactElement => {
             BIKE STOCK ({bikeStock.length || 0})
           </Typography>
           <Grid item>
-            <Button
-              disabled={selectedContainers.length === 0}
-              size="small"
-              disableElevation
-              className={classes.button}
-              variant="contained"
-            >
-              <DeliveryDining /> &nbsp; transfer selected
-            </Button>
+            <Confirmation title="Where to?" intercept={['onClick']} containers={selectedContainers || []}>
+              <Button
+                disabled={selectedContainers.length === 0}
+                size="small"
+                disableElevation
+                className={classes.button}
+                variant="contained"
+                onClick={() => {
+                  setSelectedContainers([])
+                }}
+              >
+                <DeliveryDining /> &nbsp; transfer selected
+              </Button>
+            </Confirmation>
+
             <IconButton size="small" onClick={handleSelectAll}>
               <Typography variant="body1" color={theme.palette.grey[400]} marginRight={theme.spacing(1)}>
                 Select all
