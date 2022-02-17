@@ -7,7 +7,9 @@ import Autocomplete from '@mui/material/Autocomplete'
 import storePng from '../assets/store-icon.png'
 
 const SelectShop = ({ setSelectedStore }: { setSelectedStore: (shopId: string) => void }): ReactElement => {
-  const stores = useSelector<StoreState, Store[]>((state) => state.stores)
+  const stores = useSelector<StoreState, Store[]>((state) => state.stores).sort((a, b) =>
+    a.isVisited > b.isVisited ? 1 : -1,
+  )
 
   return (
     <Autocomplete
