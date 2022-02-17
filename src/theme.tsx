@@ -77,9 +77,7 @@ const GREY_COLORS = {
 }
 
 const SUCCESS_COLORS = {
-  main: '#57D582',
-  light: '#6AE99C',
-  dark: '#30A46C',
+  success: { main: '#57D582', light: '#6AE99C', dark: '#30A46C' },
 }
 /**
  * Material UI theme config for "Light Mode"

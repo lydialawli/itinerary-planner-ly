@@ -1,23 +1,11 @@
-import React, { ReactElement, useState } from 'react'
+import React, { ReactElement } from 'react'
 import { Link as RouterLink, useParams, useHistory } from 'react-router-dom'
-import {
-  Paper,
-  Link,
-  Typography,
-  Grid,
-  ImageListItem,
-  Box,
-  Card,
-  CardContent,
-  CardMedia,
-  Avatar,
-  Chip,
-} from '@mui/material'
-import { useAppStore } from '../appContext/AppStore'
+import { Paper, Link, Typography, Grid, Box, Card, CardContent, Avatar, Chip, Tooltip } from '@mui/material'
+import { CheckCircle as CheckIcon } from '@mui/icons-material'
 
 import { Theme, useTheme } from '@mui/material/styles'
 import makeStyles from '@mui/styles/makeStyles'
-import { Store } from '../interactions/reducers/containerReducer'
+import { Store, Visited } from '../interactions/reducers/containerReducer'
 import storePng from '../assets/store-icon.png'
 import ShopOverlay from './ShopDetailOverlay'
 import recipient1 from '../assets/Container-format-1.png'
@@ -62,9 +50,11 @@ const ShopCard = (shop: Store): ReactElement => {
                 backgroundPosition: 'center center',
               }}
             >
-              <Typography variant="subtitle1" color="text.secondary" component="div">
-                o
-              </Typography>
+              <Tooltip title={shop.isVisited} arrow>
+                <Grid item padding={theme.spacing(1)}>
+                  <CheckIcon color={shop.isVisited === Visited.isVisited ? 'success' : 'disabled'} />
+                </Grid>
+              </Tooltip>
             </Grid>
 
             <CardContent sx={{ flex: '1 0 auto', textAlign: 'center', alignItems: 'center' }}>
@@ -72,9 +62,6 @@ const ShopCard = (shop: Store): ReactElement => {
                 {shop.name}
               </Typography>
               <Grid container alignItems="center" justifyContent="space-evenly">
-                <Typography variant="subtitle1" color="text.secondary" component="div">
-                  {shop.isVisited}
-                </Typography>
                 <Typography variant="subtitle1" color="text.secondary" component="div">
                   {shop.id}
                 </Typography>
