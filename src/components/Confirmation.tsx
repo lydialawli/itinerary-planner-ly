@@ -1,4 +1,5 @@
 import React, { useState, SyntheticEvent, forwardRef, useMemo, MouseEvent } from 'react'
+import { useParams } from 'react-router-dom'
 import { useDispatch } from 'react-redux'
 import { Box, Typography, Slide as Transition, Button, Dialog, DialogTitle, Checkbox, Grid } from '@mui/material'
 import { useTheme } from '@mui/material/styles'
@@ -78,7 +79,6 @@ function InterceptChildren({
 }
 
 type ConfirmationDialogProps = {
-  shopId?: string
   containers: string[]
   /**
    * optional title to use as dialog title
@@ -105,11 +105,14 @@ type ConfirmationDialogProps = {
   level?: /*'normal' | 'hard'*/ string
 }
 
+interface ParamTypes {
+  shopId: string
+}
+
 function ConfirmationDialog({
   closeDialog,
   title,
   containers,
-  shopId,
   level,
   userInput,
   error,
@@ -122,7 +125,6 @@ function ConfirmationDialog({
 }: ConfirmationDialogProps & {
   closeDialog: () => void
   containers: string[]
-  shopId?: string
   handleConfirmation: (event: MouseEvent<HTMLButtonElement>) => void
   setUserInput: (value: string) => void
   userInput: string
@@ -133,6 +135,7 @@ function ConfirmationDialog({
   const [selectedStore, setSelectedStore] = useState<string>('')
   const [backToBike, setBackToBike] = useState<boolean>(false)
   const theme = useTheme()
+  const { shopId } = useParams<ParamTypes>()
 
   const moveContainer = () => {
     if (shopId !== undefined && !!backToBike) {
@@ -213,7 +216,6 @@ export default forwardRef<JSX.Element, ConfirmationProps>(function Confirmation(
     stopPropagation = false,
     title,
     containers,
-    shopId,
     onCancel,
     children,
   }: ConfirmationProps,
@@ -253,7 +255,6 @@ export default forwardRef<JSX.Element, ConfirmationProps>(function Confirmation(
     closeDialog,
     title,
     containers,
-    shopId,
     level,
     userInput,
     error,

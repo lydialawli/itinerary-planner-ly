@@ -1,5 +1,4 @@
 import React, { ReactElement, MouseEvent } from 'react'
-import { useParams } from 'react-router-dom'
 import { Typography, Grid, Card, Button, Avatar } from '@mui/material'
 import { Theme, useTheme } from '@mui/material/styles'
 import makeStyles from '@mui/styles/makeStyles'
@@ -8,21 +7,17 @@ import recipient1 from '../assets/Container-format-1.png'
 import recipient5 from '../assets/Container-format-5.png'
 import recipient6 from '../assets/Container-format-6.png'
 import Confirmation from './Confirmation'
-interface ParamTypes {
-  shopId: string
-}
 
 type ContainerCardProps = {
   container: Container
   handleSelect: (containerId: string) => void
-  selectedContainers?: string[]
+  selectedContainers: string[]
 }
 
 const ContainerCard = ({ container, handleSelect, selectedContainers }: ContainerCardProps): ReactElement => {
   const classes = useStyles()
   const theme = useTheme()
   const recipientSrc = container.format === '1' ? recipient1 : container.format === '5' ? recipient5 : recipient6
-  const { shopId } = useParams<ParamTypes>()
   const isSelected = selectedContainers?.includes(container.id)
 
   return (
@@ -50,7 +45,7 @@ const ContainerCard = ({ container, handleSelect, selectedContainers }: Containe
           </Typography>
         </Grid>
         <Grid item xs={12} md={12} lg={3}>
-          <Confirmation title="Where to?" intercept={['onClick']} containers={selectedContainers || []} shopId={shopId}>
+          <Confirmation title="Where to?" intercept={['onClick']} containers={selectedContainers || []}>
             <Button
               disabled={selectedContainers && selectedContainers.length > 0}
               size="small"
