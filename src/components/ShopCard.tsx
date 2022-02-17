@@ -67,11 +67,10 @@ const ShopCard = (shop: Store): ReactElement => {
             <Grid container justifyContent="center">
               {shop.containers.length > 0 &&
                 shop.containers.map((c) => (
-                  <Grid item marginX={theme.spacing(0.2)}>
+                  <Grid item marginX={theme.spacing(0.2)} key={c.name}>
                     <Chip
                       className={classes.chip}
                       size="small"
-                      key={c.name}
                       label={c.name}
                       avatar={<Avatar src={getRecipient(c.format)} />}
                     />

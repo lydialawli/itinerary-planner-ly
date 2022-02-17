@@ -39,7 +39,7 @@ const Home = (): ReactElement => {
   return (
     <Grid container spacing={theme.spacing(1)} overflow="none">
       <Box margin={theme.spacing(2)} width="80vw">
-        <Grid container justifyContent="space-between">
+        <Grid container justifyContent="space-between" marginBottom={theme.spacing(1)}>
           <Typography paddingBottom={theme.spacing(2)} variant="h6">
             BIKE STOCK ({bikeStock.length || 0})
           </Typography>
@@ -75,7 +75,7 @@ const Home = (): ReactElement => {
           {bikeStock &&
             bikeStock.length > 0 &&
             bikeStock.map((container) => (
-              <Grid item xs={6} md={3}>
+              <Grid item xs={12} sm={6} md={3} key={container.id}>
                 <ContainerCard
                   selectedContainers={selectedContainers}
                   container={container}
@@ -93,8 +93,8 @@ const Home = (): ReactElement => {
           {stores &&
             stores.length > 0 &&
             stores.map((shop) => (
-              <Grid item xs={4} md={3}>
-                <ShopCard {...shop} key={shop.id} />
+              <Grid item xs={6} sm={4} md={3} key={shop.id}>
+                <ShopCard {...shop} />
               </Grid>
             ))}
         </Grid>

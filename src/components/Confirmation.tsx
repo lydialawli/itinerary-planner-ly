@@ -6,7 +6,6 @@ import { useTheme } from '@mui/material/styles'
 import { DirectionsBike as BikeIcon } from '@mui/icons-material'
 import SuggestionShop from './SuggestionsShop'
 import { DialogActions } from '@material-ui/core'
-import { Container } from '../interactions/reducers/containerReducer'
 
 export type ConfirmationProps = Omit<
   InterceptChildrenProps,
@@ -115,7 +114,6 @@ function ConfirmationDialog({
   containers,
   level,
   userInput,
-  error,
   confirmationTitle,
   equation,
   setUserInput,
@@ -129,7 +127,6 @@ function ConfirmationDialog({
   setUserInput: (value: string) => void
   userInput: string
   equation: string
-  error: boolean
 }): JSX.Element {
   const dispatch = useDispatch()
   const [selectedStore, setSelectedStore] = useState<string>('')
@@ -225,7 +222,6 @@ export default forwardRef<JSX.Element, ConfirmationProps>(function Confirmation(
   const [currentFunction, setCurrentFunction] = useState<CurrentFunction>(null)
   const [currentEvent, setCurrentEvent] = useState<CurrentEvent>(null)
   const [userInput, setUserInput] = useState('')
-  const [error, setError] = useState(false)
 
   const leftNumber = useMemo(() => Math.floor(Math.random() * 100 + 1), [])
   const rightNumber = useMemo(() => Math.floor(Math.random() * 100 + 1), [])
@@ -249,7 +245,6 @@ export default forwardRef<JSX.Element, ConfirmationProps>(function Confirmation(
     handleConfirmation: (event: MouseEvent<HTMLButtonElement>) => void
     setUserInput: (value: string) => void
     userInput: string
-    error: boolean
     equation: string
   } = {
     closeDialog,
@@ -257,7 +252,6 @@ export default forwardRef<JSX.Element, ConfirmationProps>(function Confirmation(
     containers,
     level,
     userInput,
-    error,
     equation: `${leftNumber} ${operator} ${rightNumber}`,
     confirmationTitle,
     setUserInput,

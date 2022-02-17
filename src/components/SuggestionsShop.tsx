@@ -1,13 +1,14 @@
 import React, { ReactElement } from 'react'
 import { useSelector } from 'react-redux'
 import { StoreState, Store } from '../interactions/reducers/containerReducer'
-import { TextField, Autocomplete, Box, Avatar, Typography } from '@mui/material'
+import { useMediaQuery, TextField, Autocomplete, Box, Avatar, Typography } from '@mui/material'
 import { useTheme } from '@mui/material/styles'
 
 import storePng from '../assets/store-icon.png'
 
 const SelectShop = ({ setSelectedStore }: { setSelectedStore: (shopId: string) => void }): ReactElement => {
   const theme = useTheme()
+  const isMobile = useMediaQuery(theme.breakpoints.up('xs'), { defaultMatches: true })
 
   const stores = useSelector<StoreState, Store[]>((state) => state.stores).sort((a, b) =>
     a.isVisited > b.isVisited ? 1 : -1,
@@ -16,7 +17,7 @@ const SelectShop = ({ setSelectedStore }: { setSelectedStore: (shopId: string) =
   return (
     <Autocomplete
       id="shops-list"
-      sx={{ width: 300 }}
+      sx={{ width: isMobile ? '60vw' : 300 }}
       options={stores}
       onChange={(_e, shop) => {
         setSelectedStore(shop?.id || '')

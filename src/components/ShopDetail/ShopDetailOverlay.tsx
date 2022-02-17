@@ -66,7 +66,7 @@ const ShopOverlay = ({ shop, onClose }: ShopOverlayProps): ReactElement => {
                 Containers ({shop.containers.length}):
               </Typography>
 
-              <Grid item>
+              <Grid item marginBottom={theme.spacing(2)}>
                 <Confirmation title="Where to?" intercept={['onClick']} containers={selectedContainers || []}>
                   <Button
                     disabled={selectedContainers.length === 0}

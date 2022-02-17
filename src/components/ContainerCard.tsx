@@ -1,4 +1,4 @@
-import React, { ReactElement, MouseEvent } from 'react'
+import React, { ReactElement } from 'react'
 import { Typography, Grid, Card, Button, Avatar } from '@mui/material'
 import { Theme, useTheme } from '@mui/material/styles'
 import makeStyles from '@mui/styles/makeStyles'
@@ -31,6 +31,7 @@ const ContainerCard = ({ container, handleSelect, selectedContainers }: Containe
         paddingLeft: theme.spacing(1),
         borderRadius: theme.spacing(1),
         borderColor: theme.palette.secondary.main,
+        opacity: isSelected ? '0.6' : '1',
         borderStyle: isSelected ? 'solid' : 'none',
         ':hover': {
           boxShadow: theme.shadows[20],
@@ -38,13 +39,20 @@ const ContainerCard = ({ container, handleSelect, selectedContainers }: Containe
       }}
     >
       <Grid container justifyContent="space-between" alignItems="center" padding={theme.spacing(2)}>
-        <Grid container md={12} lg={8} alignItems="center">
+        <Grid container item xs={8} md={12} lg={8} alignItems="center">
           <Avatar src={recipientSrc} sizes="30px" />
-          <Typography marginLeft={theme.spacing(1)} component="div" variant="h5" fontWeight={600} flexShrink={2}>
+          <Typography
+            textOverflow="ellipsis"
+            marginLeft={theme.spacing(1)}
+            component="div"
+            variant="h5"
+            fontWeight={600}
+            flexShrink={2}
+          >
             {container.name}
           </Typography>
         </Grid>
-        <Grid item xs={12} md={12} lg={3}>
+        <Grid item xs={3} sm={12} md={12} lg={3}>
           <Confirmation title="Where to?" intercept={['onClick']} containers={selectedContainers || []}>
             <Button
               disabled={selectedContainers && selectedContainers.length > 0}

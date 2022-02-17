@@ -40,14 +40,17 @@ export const containerReducer = (state: StoreState = initialState, action: Actio
     case 'transferToStore': {
       const newBikeStock = state.bikeStock.filter((b) => action.payload.containers.includes(b.id) === false)
       const newStores = state.stores.map((shop) => {
+        //  if it comes from a shop, the containers must be removed
+        if (!!action.payload.fromShopId && action.payload.fromShopId === shop.id) {
+          const newContainers = shop.containers.filter((c) => action.payload.containers.includes(c.id) === false)
+          return { ...shop, containers: newContainers }
+        }
+
+        // bellow we send the containers to the new shop
         if (shop.id === action.payload.toShopId) {
           const selectedContainers = initialState.bikeStock.filter((b) => action.payload.containers.includes(b.id))
           const newContainers = shop.containers.concat(selectedContainers)
           shop.isVisited = Visited.isVisited
-          return { ...shop, containers: newContainers }
-        }
-        if (!!action.payload.fromShopId && action.payload.fromShopId === shop.id) {
-          const newContainers = shop.containers.filter((c) => action.payload.containers.includes(c.id) === false)
           return { ...shop, containers: newContainers }
         }
 
@@ -56,6 +59,7 @@ export const containerReducer = (state: StoreState = initialState, action: Actio
       return { bikeStock: newBikeStock, stores: newStores, selectedStore: '' }
     }
     case 'backToBikeStock': {
+      // remove containers from the shop
       const newStores = state.stores.map((shop) => {
         if (shop.id === action.payload.fromShopId) {
           const newContainers = shop.containers.filter((c) => action.payload.containers.includes(c.id) === false)
@@ -63,8 +67,9 @@ export const containerReducer = (state: StoreState = initialState, action: Actio
         }
         return shop
       })
-      const selectedContainers = initialState.bikeStock.filter((b) => action.payload.containers.includes(b.id))
 
+      //bring containers back to bike store
+      const selectedContainers = initialState.bikeStock.filter((b) => action.payload.containers.includes(b.id))
       const newBikeStock = state.bikeStock.concat(selectedContainers)
 
       return { bikeStock: newBikeStock, stores: newStores, selectedStore: '' }
