@@ -1,25 +1,28 @@
 import React, { ReactElement } from 'react'
-import { useSelector, useDispatch } from 'react-redux'
+import { useSelector } from 'react-redux'
 import { StoreState, Store } from '../interactions/reducers/containerReducer'
 import Box from '@mui/material/Box'
 import TextField from '@mui/material/TextField'
 import Autocomplete from '@mui/material/Autocomplete'
 import storePng from '../assets/store-icon.png'
 
-const SelectShop = (): ReactElement => {
-  const dispatch = useDispatch()
+const SelectShop = ({ setSelectedStore }: { setSelectedStore: (shopId: string) => void }): ReactElement => {
+  // const dispatch = useDispatch()
   const stores = useSelector<StoreState, Store[]>((state) => state.stores)
 
-  const setSelectedStore = (shopId: string) => {
-    dispatch({ type: 'selectStore', payload: shopId })
-  }
+  // const setSelectedStore = (shopId: string) => {
+  //   dispatch({ type: 'selectStore', payload: shopId })
+  // }
 
   return (
     <Autocomplete
       id="country-select-demo"
       sx={{ width: 300 }}
       options={stores}
-      onChange={(_e, shop) => setSelectedStore(shop?.id || '')}
+      onChange={(_e, shop) => {
+        setSelectedStore(shop?.id || '')
+      }}
+      // onChange={(_e, shop) => setSelectedStore(!!shop?.id ? shop.id : '')}
       // TODO: fix bug visited
       groupBy={(shop) => (shop.isVisited ? 'Visited' : 'Not visited yet')}
       autoHighlight

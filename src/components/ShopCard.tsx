@@ -37,6 +37,9 @@ const ShopCard = (shop: Store): ReactElement => {
               <Typography variant="subtitle1" color="text.secondary" component="div">
                 {shop.isVisited ? 'visited' : 'not visited'}
               </Typography>
+              <Typography variant="subtitle1" color="text.secondary" component="div">
+                {shop.id}
+              </Typography>
               <Box>
                 {shop.containers.length > 0 &&
                   shop.containers.map((c) => (

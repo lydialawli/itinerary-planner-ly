@@ -1,4 +1,5 @@
 import React, { useState, SyntheticEvent, forwardRef, useMemo, MouseEvent } from 'react'
+import { useDispatch } from 'react-redux'
 import {
   Box,
   Typography,
@@ -12,43 +13,13 @@ import {
 } from '@mui/material'
 import SuggestionShop from './SuggestionsShop'
 import { DialogActions } from '@material-ui/core'
+import { Container } from '../interactions/reducers/containerReducer'
 
 export type ConfirmationProps = Omit<
   InterceptChildrenProps,
   'setCurrentEvent' | 'setCurrentFunction' | 'setShowDialog'
 > &
   ConfirmationDialogProps
-
-function LevelPresentation({
-  error,
-  userInput,
-  equation,
-  setUserInput,
-}: {
-  userInput: string
-  error: boolean
-  equation: string
-  setUserInput: (value: string) => void
-}) {
-  return (
-    <>
-      <DialogContent>
-        <Typography variant="body1">Solve the following problem: ${equation}</Typography>
-        <Box paddingTop={2}>
-          <TextField
-            error={error}
-            variant="outlined"
-            defaultValue={userInput}
-            label="Type your solution"
-            onChange={(e) => {
-              setUserInput(e.target.value)
-            }}
-          />
-        </Box>
-      </DialogContent>
-    </>
-  )
-}
 
 type InterceptChildrenProps = {
   /**
@@ -115,6 +86,7 @@ function InterceptChildren({
 }
 
 type ConfirmationDialogProps = {
+  container: Container
   /**
    * optional title to use as dialog title
    */
@@ -143,10 +115,10 @@ type ConfirmationDialogProps = {
 function ConfirmationDialog({
   closeDialog,
   title,
+  container,
   level,
   userInput,
   error,
-  isValid,
   confirmationTitle,
   equation,
   setUserInput,
@@ -155,33 +127,47 @@ function ConfirmationDialog({
   handleConfirmation,
 }: ConfirmationDialogProps & {
   closeDialog: () => void
+  container: Container
   handleConfirmation: (event: MouseEvent<HTMLButtonElement>) => void
   setUserInput: (value: string) => void
   userInput: string
   equation: string
   error: boolean
-  isValid: boolean
 }): JSX.Element {
+  const dispatch = useDispatch()
+  const [selectedStore, setSelectedStore] = useState<string>('')
+
+  const moveContainer = () => {
+    if (selectedStore !== '') dispatch({ type: 'transferToStore', payload: { container, selectedStore } })
+    // if (selectedStore !== '') dispatch({ type: 'transferToStore', payload: { container, selectedStore } })
+  }
+
   return (
     <>
       <Dialog open onClose={() => closeDialog} TransitionComponent={Transition}>
         {title && <DialogTitle>{title}</DialogTitle>}
         <Box margin="20px">
-          <SuggestionShop />
+          <SuggestionShop setSelectedStore={setSelectedStore} />
         </Box>
         <DialogActions>
           <Button
             variant="text"
             color="inherit"
-            onClick={(event: MouseEvent<HTMLButtonElement>) => {
-              onCancel?.(event)
-              //TODO: dispatch unselect shop
+            onClick={() => {
+              setSelectedStore('')
               closeDialog()
             }}
           >
             {cancelTitle}
           </Button>
-          <Button color="primary" variant="contained" onClick={handleConfirmation} disabled={isValid === false}>
+          <Button
+            color="primary"
+            variant="contained"
+            onClick={(event: MouseEvent<HTMLButtonElement>) => {
+              moveContainer()
+              handleConfirmation(event)
+            }}
+          >
             {confirmationTitle}
           </Button>
         </DialogActions>
@@ -201,6 +187,7 @@ export default forwardRef<JSX.Element, ConfirmationProps>(function Confirmation(
     level = 'normal',
     stopPropagation = false,
     title,
+    container,
     onCancel,
     children,
   }: ConfirmationProps,
@@ -219,31 +206,14 @@ export default forwardRef<JSX.Element, ConfirmationProps>(function Confirmation(
   function closeDialog() {
     setShowDialog(false)
   }
-  function validateLevel() {
-    if (level === 'hard') {
-      const userNumber = parseInt(userInput, 10)
-      switch (operator) {
-        case '+':
-          return userNumber === leftNumber + rightNumber
-        case '-':
-          return userNumber === leftNumber - rightNumber
-        case '*':
-          return userNumber === leftNumber * rightNumber
-      }
-    }
-    return true
-  }
 
   function handleConfirmation(event: MouseEvent<HTMLButtonElement>) {
     if (event && stopPropagation && event.stopPropagation) {
       event.stopPropagation()
     }
-    if (validateLevel()) {
-      currentFunction?.(currentEvent)
-      closeDialog()
-    } else {
-      setError(true)
-    }
+
+    currentFunction?.(currentEvent)
+    closeDialog()
   }
 
   const confirmationDialogProps: ConfirmationDialogProps & {
@@ -253,14 +223,13 @@ export default forwardRef<JSX.Element, ConfirmationProps>(function Confirmation(
     userInput: string
     error: boolean
     equation: string
-    isValid: boolean
   } = {
     closeDialog,
     title,
+    container,
     level,
     userInput,
     error,
-    isValid: validateLevel(),
     equation: `${leftNumber} ${operator} ${rightNumber}`,
     confirmationTitle,
     setUserInput,

@@ -48,7 +48,7 @@ export const containerReducer = (state: StoreState = initialState, action: Actio
     }
     case 'backToBikeStock': {
       // TODO: add logic
-      return { ...state }
+      return { ...state, selectedStore: '' }
     }
     default:
       return state

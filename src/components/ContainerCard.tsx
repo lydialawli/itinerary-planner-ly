@@ -18,7 +18,8 @@ const ContainerCard = (container: Container): ReactElement => {
   const selectedStore = useSelector<StoreState, string>((state) => state.selectedStore)
 
   const moveContainer = (container: Container, shopId: string) => {
-    if (shopId !== '') dispatch({ type: 'transferToStore', payload: { container, shopId } })
+    console.log({ selectedStore })
+    // if (selectedStore !== '') dispatch({ type: 'transferToStore', payload: { container, selectedStore } })
     // else dispatch({ type: 'backToBikeStock', payload: { container, shopId: shopId } })
   }
 
@@ -37,8 +38,13 @@ const ContainerCard = (container: Container): ReactElement => {
           <Typography component="div" variant="h5">
             {container.name}
           </Typography>
-          <Confirmation title="Where to?" intercept={['onClick']}>
-            <Button variant="contained" onClick={() => moveContainer(container, selectedStore)}>
+          <Confirmation title="Where to?" intercept={['onClick']} container={container}>
+            <Button
+              variant="contained"
+              onClick={() => {
+                moveContainer(container, selectedStore)
+              }}
+            >
               transfer
             </Button>
           </Confirmation>
