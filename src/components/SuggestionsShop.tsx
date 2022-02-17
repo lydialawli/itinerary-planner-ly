@@ -15,7 +15,7 @@ const SelectShop = ({ setSelectedStore }: { setSelectedStore: (shopId: string) =
 
   return (
     <Autocomplete
-      id="country-select-demo"
+      id="shops-list"
       sx={{ width: 300 }}
       options={stores}
       onChange={(_e, shop) => {

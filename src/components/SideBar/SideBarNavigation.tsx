@@ -1,12 +1,12 @@
-import clsx from 'clsx';
-import Button from '@mui/material/Button';
-import List from '@mui/material/List';
-import ListItem from '@mui/material/ListItem';
-import { Theme } from '@mui/material/styles';
-import makeStyles from '@mui/styles/makeStyles';
-import AppIcon from '../AppIcon';
-import SideBarLink from './SideBarLink';
-import { LinkToPage } from '../../utils/type';
+import clsx from 'clsx'
+import Button from '@mui/material/Button'
+import List from '@mui/material/List'
+import ListItem from '@mui/material/ListItem'
+import { Theme } from '@mui/material/styles'
+import makeStyles from '@mui/styles/makeStyles'
+import AppIcon from '../AppIcon'
+import SideBarLink from './SideBarLink'
+import { LinkToPage } from '../../utils/type'
 
 const useStyles = makeStyles((theme: Theme) => ({
   root: {},
@@ -16,7 +16,7 @@ const useStyles = makeStyles((theme: Theme) => ({
     paddingBottom: 0,
   },
   button: {
-    // color: theme.palette.button,
+    color: 'white',
     padding: '10px 8px',
     justifyContent: 'flex-start',
     textTransform: 'none',
@@ -33,7 +33,7 @@ const useStyles = makeStyles((theme: Theme) => ({
     alignItems: 'center',
     marginRight: theme.spacing(1),
   },
-}));
+}))
 
 /**
  * Renders list of Navigation Items inside SideBar
@@ -43,10 +43,10 @@ const useStyles = makeStyles((theme: Theme) => ({
  * @param {func} [props.afterLinkClink] - optional callback called when some link was clicked
  */
 interface Props {
-  className?: string;
-  items: Array<LinkToPage>;
-  showIcons?: boolean;
-  afterLinkClick?: React.MouseEventHandler;
+  className?: string
+  items: Array<LinkToPage>
+  showIcons?: boolean
+  afterLinkClick?: React.MouseEventHandler
 }
 const SideBarNavigation: React.FC<Props> = ({
   className,
@@ -55,8 +55,8 @@ const SideBarNavigation: React.FC<Props> = ({
   afterLinkClick,
   ...restOfProps
 }) => {
-  const classes = useStyles();
-  const classRoot = clsx(classes.root, className);
+  const classes = useStyles()
+  const classRoot = clsx(classes.root, className)
   return (
     <nav>
       <List className={classRoot} {...restOfProps}>
@@ -75,7 +75,7 @@ const SideBarNavigation: React.FC<Props> = ({
         ))}
       </List>
     </nav>
-  );
-};
+  )
+}
 
-export default SideBarNavigation;
+export default SideBarNavigation

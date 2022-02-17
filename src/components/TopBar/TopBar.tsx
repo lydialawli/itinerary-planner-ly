@@ -1,12 +1,13 @@
 import clsx from 'clsx'
-import { Theme, AppBar, Toolbar, Typography } from '@mui/material'
+import { Theme, AppBar, Toolbar, Typography, Grid } from '@mui/material'
 import makeStyles from '@mui/styles/makeStyles'
 import AppIconButton from '../AppIconButton'
+import { DeliveryDiningTwoTone as DeliveryIcon } from '@mui/icons-material'
 
 const useStyles = makeStyles((theme: Theme) => ({
   root: {
     // boxShadow: 'none', // Uncomment to hide shadow
-    backgroundColor: '#0e0924',
+    backgroundColor: 'black',
     color: '#fff',
     minWidth: '20rem',
     // backgroundColor: theme.palette.primary.main, // Uncomment if you also need colored background in dark mode
@@ -52,15 +53,12 @@ const TopBar: React.FC<Props> = ({
   return (
     <AppBar {...restOfProps} className={clsx(classes.root, className)} component="div">
       <Toolbar className={classes.toolbar} disableGutters>
-        <AppIconButton
-          icon="logo"
-          // color="primary"
-          onClick={onMenu}
-        />
-
-        <Typography variant="h6" className={classes.title}>
-          {title}
-        </Typography>
+        <Grid container alignItems="center">
+          <DeliveryIcon color="primary" />
+          <Typography variant="h6" className={classes.title}>
+            {title}
+          </Typography>
+        </Grid>
 
         <div className={classes.buttons}>
           {isAuthenticated && (

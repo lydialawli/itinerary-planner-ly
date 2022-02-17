@@ -21,7 +21,9 @@ const useStyles = makeStyles((theme: Theme) => ({
     padding: theme.spacing(2),
   },
   paperInDrawer: {
+    color: 'white',
     width: SIDEBAR_WIDTH,
+    backgroundColor: '#0e0924',
     [theme.breakpoints.up('md')]: {
       marginTop: 64,
       height: 'calc(100% - 64px)',
