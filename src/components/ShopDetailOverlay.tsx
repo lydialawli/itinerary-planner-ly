@@ -31,18 +31,29 @@ const ShopOverlay = ({ shop, onClose }: ShopOverlayProps): ReactElement => {
       onClose={onClose}
       open={true}
     >
-      <Box paddingY={theme.spacing(2)} minWidth={isDesktop ? '40vw' : '80vw'}>
-        <Box paddingTop={theme.spacing(2)} marginLeft={theme.spacing(2)}>
-          <Grid container alignItems="center" justifyContent="flex-start">
-            <IconButton onClick={onClose}>
-              <CloseIcon fontSize="small" />
-            </IconButton>
-            <Typography paddingLeft={theme.spacing(2)} variant="h4">
-              {shop.name}
-            </Typography>
-          </Grid>
-        </Box>
-        <Box paddingY={theme.spacing(3)}>
+      <Box minWidth={isDesktop ? '40vw' : '80vw'}>
+        <Grid
+          container
+          paddingTop={theme.spacing(12)}
+          paddingBottom={theme.spacing(2)}
+          paddingLeft={theme.spacing(2)}
+          alignItems="center"
+          justifyContent="flex-start"
+          style={{
+            background: `url("${shop.url}")`,
+            backgroundSize: 'auto',
+            backgroundRepeat: 'no-repeat',
+          }}
+        >
+          <IconButton onClick={onClose}>
+            <CloseIcon fontSize="small" />
+          </IconButton>
+          <Typography paddingLeft={theme.spacing(2)} variant="h3">
+            {shop.name}
+          </Typography>
+        </Grid>
+
+        <Box paddingBottom={theme.spacing(3)}>
           <Divider />
         </Box>
         <Box paddingX={theme.spacing(3)}>

@@ -22,6 +22,7 @@ export enum Visited {
 export type Store = {
   id: string
   name: string
+  url: string
   containers: Container[]
   isVisited: Visited
 }

@@ -1,6 +1,18 @@
 import React, { ReactElement } from 'react'
 import { Link as RouterLink, useParams, useHistory } from 'react-router-dom'
-import { Paper, Link, Typography, Grid, Box, Card, CardContent, CardMedia, Avatar, Chip } from '@mui/material'
+import {
+  Paper,
+  Link,
+  Typography,
+  Grid,
+  ImageListItem,
+  Box,
+  Card,
+  CardContent,
+  CardMedia,
+  Avatar,
+  Chip,
+} from '@mui/material'
 import { Theme, useTheme } from '@mui/material/styles'
 import makeStyles from '@mui/styles/makeStyles'
 import { Store } from '../interactions/reducers/containerReducer'
@@ -27,26 +39,35 @@ const ShopCard = (shop: Store): ReactElement => {
   return (
     <>
       <Link to={`/dashboard/${shop.id}`} component={RouterLink} underline="none">
-        <Card elevation={0} sx={{ display: 'flex', padding: theme.spacing(1) }}>
-          <Box justifyContent="center">
-            <CardMedia component="img" sx={{ width: 60 }} image={storePng} alt="shop" />
-            <CardContent sx={{ flex: '1 0 auto' }}>
-              <Typography component="div" variant="h5">
+        <Card elevation={0} sx={{ display: 'flex' }}>
+          <Box justifyContent="center" height="300px">
+            <ImageListItem key={shop.url}>
+              <img
+                src={`${shop.url || storePng}?w=164&h=164&fit=crop&auto=format`}
+                srcSet={`${shop.url || storePng}?w=164&h=164&fit=crop&auto=format&dpr=2 2x`}
+                alt={shop.name}
+                loading="lazy"
+              />
+            </ImageListItem>
+            <CardContent sx={{ flex: '1 0 auto', textAlign: 'center', alignItems: 'center' }}>
+              <Typography component="div" variant="h4">
                 {shop.name}
               </Typography>
-              <Typography variant="subtitle1" color="text.secondary" component="div">
-                {shop.isVisited}
-              </Typography>
-              <Typography variant="subtitle1" color="text.secondary" component="div">
-                {shop.id}
-              </Typography>
-              <Box>
-                {shop.containers.length > 0 &&
-                  shop.containers.map((c) => (
-                    <Chip size="small" key={c.name} label={c.name} avatar={<Avatar src={getRecipient(c.format)} />} />
-                  ))}
-              </Box>
+              <Grid container alignItems="center" justifyContent="space-evenly">
+                <Typography variant="subtitle1" color="text.secondary" component="div">
+                  {shop.isVisited}
+                </Typography>
+                <Typography variant="subtitle1" color="text.secondary" component="div">
+                  {shop.id}
+                </Typography>
+              </Grid>
             </CardContent>
+            <Box justifyContent="center">
+              {shop.containers.length > 0 &&
+                shop.containers.map((c) => (
+                  <Chip size="small" key={c.name} label={c.name} avatar={<Avatar src={getRecipient(c.format)} />} />
+                ))}
+            </Box>
           </Box>
         </Card>
       </Link>
