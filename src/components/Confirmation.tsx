@@ -1,11 +1,11 @@
 import React, { useState, SyntheticEvent, forwardRef, useMemo, MouseEvent } from 'react'
 import { useParams } from 'react-router-dom'
-import { useDispatch } from 'react-redux'
 import { Box, Typography, Slide as Transition, Button, Dialog, DialogTitle, Checkbox, Grid } from '@mui/material'
 import { useTheme } from '@mui/material/styles'
 import { DirectionsBike as BikeIcon } from '@mui/icons-material'
 import SuggestionShop from './SuggestionsShop'
 import { DialogActions } from '@material-ui/core'
+import { useAppDispatch } from '../interactions/hooks'
 
 export type ConfirmationProps = Omit<
   InterceptChildrenProps,
@@ -128,7 +128,7 @@ function ConfirmationDialog({
   userInput: string
   equation: string
 }): JSX.Element {
-  const dispatch = useDispatch()
+  const dispatch = useAppDispatch()
   const [selectedStore, setSelectedStore] = useState<string>('')
   const [backToBike, setBackToBike] = useState<boolean>(false)
   const theme = useTheme()
