@@ -9,8 +9,9 @@ import { Theme } from '@mui/material/styles'
 import makeStyles from '@mui/styles/makeStyles'
 import { useAppStore } from '../../appContext/AppStore'
 import SideBarNavigation from './SideBarNavigation'
-import { SIDEBAR_WIDTH } from '../../routes/Layout/PrivateLayout'
 import { LinkToPage } from '../../utils/type'
+
+export const SIDEBAR_WIDTH = 240 // 240px
 
 const useStyles = makeStyles((theme: Theme) => ({
   root: {
@@ -23,7 +24,7 @@ const useStyles = makeStyles((theme: Theme) => ({
   paperInDrawer: {
     color: 'white',
     width: SIDEBAR_WIDTH,
-    backgroundColor: '#0e0924',
+    backgroundColor: '#14111f',
     [theme.breakpoints.up('md')]: {
       marginTop: 64,
       height: 'calc(100% - 64px)',

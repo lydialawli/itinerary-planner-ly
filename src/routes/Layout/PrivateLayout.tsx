@@ -7,13 +7,8 @@ import { Grid, useMediaQuery } from '@mui/material'
 import { useAppStore } from '../../appContext'
 import TopBar from '../../components/TopBar'
 import { ErrorBoundary } from '../../components'
-import SideBar from '../../components/SideBar/SideBar'
-import { LinkToPage } from '../../utils/type'
 
 const TITLE_PRIVATE = `Itinerary Planner`
-const MOBILE_SIDEBAR_ANCHOR = 'left' // 'right'
-const DESKTOP_SIDEBAR_ANCHOR = 'left' // 'right'
-export const SIDEBAR_WIDTH = 240 // 240px
 
 const useStyles = makeStyles((theme: Theme) => ({
   root: {
@@ -25,8 +20,9 @@ const useStyles = makeStyles((theme: Theme) => ({
   },
   header: {},
   shiftContent: {
-    paddingLeft: DESKTOP_SIDEBAR_ANCHOR.includes('left') ? SIDEBAR_WIDTH : 0,
-    paddingRight: DESKTOP_SIDEBAR_ANCHOR.includes('right') ? SIDEBAR_WIDTH : 0,
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center',
   },
   content: {
     flexGrow: 1, // Takes all possible space
@@ -51,32 +47,6 @@ function updateDocumentTitle(title = '') {
 }
 
 /**
- * "Link to Page" items in Sidebar
- */
-const SIDE_BAR_PRIVATE_ITEMS: Array<LinkToPage> = [
-  {
-    title: 'Home',
-    path: '/',
-    icon: 'home',
-  },
-  {
-    title: 'Profile',
-    path: '/user',
-    icon: 'account',
-  },
-  {
-    title: 'About',
-    path: '/about',
-    icon: 'info',
-  },
-  {
-    title: 'Dev Tools',
-    path: '/dev',
-    icon: 'settings',
-  },
-]
-
-/**
  * Renders "Private Layout" composition
  */
 const PrivateLayout: React.FC = ({ children }) => {
@@ -96,10 +66,6 @@ const PrivateLayout: React.FC = ({ children }) => {
     if (!openSideBar) setOpenSideBar(true)
   }, [openSideBar])
 
-  const handleSideBarClose = useCallback(() => {
-    if (openSideBar) setOpenSideBar(false)
-  }, [openSideBar])
-
   const classRoot = clsx({
     [classes.root]: true,
     [classes.shiftContent]: isDesktop,
@@ -114,14 +80,6 @@ const PrivateLayout: React.FC = ({ children }) => {
           isAuthenticated={state.isAuthenticated}
           title={title}
           onMenu={shouldOpenSideBar ? handleLogoClick : handleSideBarOpen}
-        />
-
-        <SideBar
-          anchor={isDesktop ? DESKTOP_SIDEBAR_ANCHOR : MOBILE_SIDEBAR_ANCHOR}
-          open={shouldOpenSideBar}
-          variant={isDesktop ? 'persistent' : 'temporary'}
-          items={SIDE_BAR_PRIVATE_ITEMS}
-          onClose={handleSideBarClose}
         />
       </Grid>
 

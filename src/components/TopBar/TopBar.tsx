@@ -1,8 +1,10 @@
 import clsx from 'clsx'
-import { Theme, AppBar, Toolbar, Typography, Grid } from '@mui/material'
+import { useCallback } from 'react'
+import { Theme, AppBar, Toolbar, Typography, Grid, Tooltip, Switch } from '@mui/material'
 import makeStyles from '@mui/styles/makeStyles'
-import AppIconButton from '../AppIconButton'
 import { DeliveryDiningTwoTone as DeliveryIcon } from '@mui/icons-material'
+import { useAppStore } from '../../appContext/AppStore'
+import { Brightness1, Nightlight } from '@mui/icons-material'
 
 const useStyles = makeStyles((theme: Theme) => ({
   root: {
@@ -48,7 +50,15 @@ const TopBar: React.FC<Props> = ({
   ...restOfProps
 }) => {
   const classes = useStyles()
-  // const iconMenu = isAuthenticated ? 'account' : 'menu';
+  const [state, dispatch] = useAppStore()
+
+  const handleSwitchDarkMode = useCallback(() => {
+    dispatch({
+      type: 'DARK_MODE',
+      darkMode: !state.darkMode,
+      payload: !state.darkMode,
+    })
+  }, [state, dispatch])
 
   return (
     <AppBar {...restOfProps} className={clsx(classes.root, className)} component="div">
@@ -61,10 +71,13 @@ const TopBar: React.FC<Props> = ({
         </Grid>
 
         <div className={classes.buttons}>
-          {isAuthenticated && (
-            <AppIconButton icon="notifications" color="inherit" title="User Notifications" onClick={onNotifications} />
-          )}
-          {/* <AppIconButton icon={iconMenu} color="inherit" title="Open Menu" onClick={onMenu} /> */}
+          <Tooltip title={state.darkMode ? 'Switch to Light mode' : 'Switch to Dark mode'}>
+            <Grid container width={150} alignItems="center">
+              <Brightness1 color={'primary'} />
+              <Switch checked={state.darkMode} color="secondary" onChange={handleSwitchDarkMode} />
+              <Nightlight />
+            </Grid>
+          </Tooltip>
         </div>
       </Toolbar>
     </AppBar>
