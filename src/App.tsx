@@ -26,7 +26,7 @@ const App = () => {
                   <Route path="/dashboard/:shopId?" exact component={Home} />
                   <Route path="/welcome" component={Welcome} />
                   <Route path="/about" component={About} />,
-                  <Route component={NotFound} />
+                  <Route component={Home} />
                 </Switch>
               </PrivateLayout>
             </BrowserRouter>
