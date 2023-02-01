@@ -1,7 +1,7 @@
 {
-  "homepage": "https://lydialawli.github.io/itinerary-planner-ly",
   "name": "Itinerary Planner",
   "version": "1.2.7",
+  "homepage": "https://lydialawli.github.io/itinerary-planner-ly",
   "description": "a simple React app that sorts/distributes containers (tapper wares) from/to stores to bike stock",
   "author": {
     "name": "Lydia",
