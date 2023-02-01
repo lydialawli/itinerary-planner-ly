@@ -1,8 +1,8 @@
 {
   "files": {
     "main.css": "/itinerary-planner-ly/static/css/main.8f75d093.chunk.css",
-    "main.js": "/itinerary-planner-ly/static/js/main.6d2c681d.chunk.js",
-    "main.js.map": "/itinerary-planner-ly/static/js/main.6d2c681d.chunk.js.map",
+    "main.js": "/itinerary-planner-ly/static/js/main.e19f40ed.chunk.js",
+    "main.js.map": "/itinerary-planner-ly/static/js/main.e19f40ed.chunk.js.map",
     "runtime-main.js": "/itinerary-planner-ly/static/js/runtime-main.53970470.js",
     "runtime-main.js.map": "/itinerary-planner-ly/static/js/runtime-main.53970470.js.map",
     "static/js/2.87b76b6f.chunk.js": "/itinerary-planner-ly/static/js/2.87b76b6f.chunk.js",
@@ -17,6 +17,6 @@
     "static/js/runtime-main.53970470.js",
     "static/js/2.87b76b6f.chunk.js",
     "static/css/main.8f75d093.chunk.css",
-    "static/js/main.6d2c681d.chunk.js"
+    "static/js/main.e19f40ed.chunk.js"
   ]
 }
