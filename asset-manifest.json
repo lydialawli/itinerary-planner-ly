@@ -1,0 +1,22 @@
+{
+  "files": {
+    "main.css": "/itinerary-planner-ly/static/css/main.8f75d093.chunk.css",
+    "main.js": "/itinerary-planner-ly/static/js/main.6d2c681d.chunk.js",
+    "main.js.map": "/itinerary-planner-ly/static/js/main.6d2c681d.chunk.js.map",
+    "runtime-main.js": "/itinerary-planner-ly/static/js/runtime-main.53970470.js",
+    "runtime-main.js.map": "/itinerary-planner-ly/static/js/runtime-main.53970470.js.map",
+    "static/js/2.87b76b6f.chunk.js": "/itinerary-planner-ly/static/js/2.87b76b6f.chunk.js",
+    "static/js/2.87b76b6f.chunk.js.map": "/itinerary-planner-ly/static/js/2.87b76b6f.chunk.js.map",
+    "index.html": "/itinerary-planner-ly/index.html",
+    "static/css/main.8f75d093.chunk.css.map": "/itinerary-planner-ly/static/css/main.8f75d093.chunk.css.map",
+    "static/js/2.87b76b6f.chunk.js.LICENSE.txt": "/itinerary-planner-ly/static/js/2.87b76b6f.chunk.js.LICENSE.txt",
+    "static/media/logo.5650a3bd.svg": "/itinerary-planner-ly/static/media/logo.5650a3bd.svg",
+    "static/media/store-icon.654b8349.png": "/itinerary-planner-ly/static/media/store-icon.654b8349.png"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.53970470.js",
+    "static/js/2.87b76b6f.chunk.js",
+    "static/css/main.8f75d093.chunk.css",
+    "static/js/main.6d2c681d.chunk.js"
+  ]
+}
