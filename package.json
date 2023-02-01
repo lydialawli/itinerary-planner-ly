@@ -1,11 +1,11 @@
 {
-  "name": "react-typescript-material",
+  "homepage": "https://lydialawli.github.io/itinerary-planner-ly",
+  "name": "Itinerary Planner",
   "version": "1.2.7",
-  "description": "React + Material UI + Auth starter using TypeScript",
+  "description": "a simple React app that sorts/distributes containers (tapper wares) from/to stores to bike stock",
   "author": {
-    "name": "Anton Karpenko",
-    "email": "i@karpolan.com",
-    "url": "https://karpolan.com"
+    "name": "Lydia",
+    "email": "lydialawli@gmail.com"
   },
   "private": true,
   "keywords": [
@@ -46,21 +46,24 @@
     "@types/react": "latest",
     "@types/react-dom": "latest",
     "@types/react-router-dom": "latest",
+    "gh-pages": "^5.0.0",
     "prettier": "latest"
-  },
-  "scripts": {
-    "start": "react-scripts start",
-    "dev": "yarn -s && react-scripts start",
-    "build": "react-scripts build",
-    "type": "tsc",
-    "format": "node_modules/.bin/prettier src --write",
-    "test": "react-scripts test"
   },
   "eslintConfig": {
     "extends": [
       "react-app",
       "react-app/jest"
     ]
+  },
+  "scripts": {
+    "predeploy": "npm run build",
+    "start": "react-scripts --openssl-legacy-provider start",
+    "deploy": "gh-pages -d build",
+    "dev": "yarn -s && react-scripts start",
+    "build": "react-scripts build",
+    "type": "tsc",
+    "format": "node_modules/.bin/prettier src --write",
+    "test": "react-scripts test"
   },
   "browserslist": {
     "production": [
